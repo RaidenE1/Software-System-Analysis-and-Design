@@ -66,7 +66,11 @@ public class UserController {
 		return resMap;
 	}
 
-
-
-
+	@PutMapping("create")
+	public R create(@RequestBody UserDTO userDTO) {
+		User user = User.builder().id(userDTO.getId()).password(userDTO.getPassword()).username(userDTO.getUsername()).build();
+		System.out.println(user);
+		userService.createUser(user);
+		return R.success(user.getId());
+	}
 }
