@@ -28,13 +28,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void test() {
-		for (int i = 20; i < 30; i++) {
-			userJPA.save(new User(i, "user" + i, "password" + i));
-		}
-	}
-
-	@Override
 	public void removeUser(int id) {
 		userJPA.deleteById(id);
 	}

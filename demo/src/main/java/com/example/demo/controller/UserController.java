@@ -41,10 +41,4 @@ public class UserController {
 		userService.createUser(user);
 		return R.success(user.getId());
 	}
-
-	@GetMapping("test")
-	public R test() {
-		userService.test();
-		return R.success();
-	}
 }
