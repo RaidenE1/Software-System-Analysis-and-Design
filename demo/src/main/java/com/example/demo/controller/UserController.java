@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-10-18 20:30:36
- * @LastEditTime: 2021-10-18 22:18:40
- * @LastEditors: your name
+ * @LastEditTime: 2021-10-18 23:20:41
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /demo/src/main/java/com/example/demo/controller/UserController.java
  */
@@ -80,5 +80,40 @@ public class UserController {
 		System.out.println(user);
 		userService.createUser(user);
 		return R.success(user.getId());
+	}
+
+	@PostMapping("/changeUsername")
+	public Map<String, Object> changeUsername(@RequestBody Map<String, String> remap){
+		String newUsername = remap.get("newUsername");
+		int id = Integer.parseInt(remap.get('userId'));
+		Map<String, Object> resMap = new HashMap<>();
+		try{
+			userService.changeUsername(id, newUsername);
+			resMap.put("res", true);
+			resMap.put("mes", "success");
+		} catch(Exception e){
+			resMap.put("res", false);
+			resMap.put("mes", "failed");
+		} finally{
+			return resMap;
+		}
+	}
+
+
+	@PostMapping("/changePassword")
+	public Map<String, Object> changeUserPasswrod(@RequestBody Map<String, String> remap){
+		String newPassword = remap.get("newPassword");
+		int id = Integer.parseInt(remap.get('userId'));
+		Map<String, Object> resMap = new HashMap<>();
+		try{
+			userService.changeUserPassword(id, newPassword);
+			resMap.put("res", true);
+			resMap.put("mes", "success");
+		} catch(Exception e){
+			resMap.put("res", false);
+			resMap.put("mes", "failed");
+		} finally{
+			return resMap;
+		}
 	}
 }
