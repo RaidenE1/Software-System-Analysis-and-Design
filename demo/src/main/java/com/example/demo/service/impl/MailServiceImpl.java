@@ -49,6 +49,4 @@ public class MailServiceImpl implements MailService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
-
 }

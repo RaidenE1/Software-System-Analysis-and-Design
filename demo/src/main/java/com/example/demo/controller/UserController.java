@@ -1,50 +1,72 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.common.R;
-import com.example.demo.domain.dto.UserDTO;
 import com.example.demo.domain.entity.User;
 import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@RequestMapping("user")
+@CrossOrigin
+//@RequestMapping("/user")
 @RestController
 public class UserController {
-	@Resource
+
+	@Autowired
 	private UserService userService;
 
-	@GetMapping("listAll")
-	public R listAll() {
-		List<User> users = userService.listAllUser();
-		return R.success(users);
+	@PostMapping("/login")
+	public Map<String, Object> userLogin(@RequestBody Map<String, String> remap){
+		String email = remap.get("email");
+		String password = remap.get("password");
+		Map<String, Object> resMap = new HashMap<>();
+		User u = userService.getUserByEmail(email);
+		if(u == null){
+			resMap.put("res", false);
+			resMap.put("mes", "not-registered");
+
+		} else{
+			if(password.equals(u.getPassword())){
+				resMap.put("res", true);
+				resMap.put("user", u);
+				resMap.put("mes", "success");
+			} else{
+				resMap.put("res", false);
+				resMap.put("mes", "wrong-password");
+			}
+		}
+		return resMap;
 	}
 
-	@DeleteMapping("remove")
-	public R remove(@RequestParam int id) {
-		userService.removeUser(id);
-		return R.success();
+	@PostMapping("/register")
+	public Map<String, Object> userRegister(@RequestBody Map<String, String> remap, HttpServletRequest request){
+		String email = remap.get("email");
+		String userName = remap.get("userName");
+		String password = remap.get("password");
+		String verifyCode = remap.get("verifyCode");
+		Map<String, Object> resMap = new HashMap<>();
+		User u = userService.getUserByEmail(email);
+		if(u != null){
+			resMap.put("res", false);
+			resMap.put("mes", "email-registered");
+			return resMap;
+		}
+		if(verifyCode.equals(request.getSession().getAttribute("verifyCode"))){
+			userService.createUser(new User(email, userName, password));
+			resMap.put("res", true);
+			resMap.put("mes", "success");
+		} else{
+			resMap.put("res", false);
+			resMap.put("mes", "wrong-verify-code");
+		}
+		return resMap;
 	}
 
-	@PostMapping("update")
-	public R update(@RequestBody UserDTO userDTO) {
-		User user = User.builder().id(userDTO.getId()).password(userDTO.getPassword()).username(userDTO.getUsername()).build();
-		userService.updateUser(user);
-		return R.success();
-	}
 
-	@PutMapping("create")
-	public R create(@RequestBody UserDTO userDTO) {
-		User user = User.builder().id(userDTO.getId()).password(userDTO.getPassword()).username(userDTO.getUsername()).build();
-		System.out.println(user);
-		userService.createUser(user);
-		return R.success(user.getId());
-	}
 
-	@GetMapping("test")
-	public R test() {
-		userService.test();
-		return R.success();
-	}
+
 }
