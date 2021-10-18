@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-10-18 20:30:36
+ * @LastEditTime: 2021-10-18 22:18:40
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /demo/src/main/java/com/example/demo/controller/UserController.java
+ */
 package com.example.demo.controller;
 
 import com.example.demo.domain.entity.User;
@@ -45,7 +53,7 @@ public class UserController {
 	@PostMapping("/register")
 	public Map<String, Object> userRegister(@RequestBody Map<String, String> remap, HttpServletRequest request){
 		String email = remap.get("email");
-		String userName = remap.get("userName");
+		String userName = remap.get("username");
 		String password = remap.get("password");
 		String verifyCode = remap.get("verifyCode");
 		Map<String, Object> resMap = new HashMap<>();
