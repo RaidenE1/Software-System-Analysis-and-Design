@@ -85,7 +85,7 @@ public class UserController {
 	@PostMapping("/changeUsername")
 	public Map<String, Object> changeUsername(@RequestBody Map<String, String> remap){
 		String newUsername = remap.get("newUsername");
-		int id = Integer.parseInt(remap.get('userId'));
+		int id = Integer.parseInt(remap.get("userId"));
 		Map<String, Object> resMap = new HashMap<>();
 		try{
 			userService.changeUsername(id, newUsername);
@@ -103,7 +103,7 @@ public class UserController {
 	@PostMapping("/changePassword")
 	public Map<String, Object> changeUserPasswrod(@RequestBody Map<String, String> remap){
 		String newPassword = remap.get("newPassword");
-		int id = Integer.parseInt(remap.get('userId'));
+		int id = Integer.parseInt(remap.get("userId"));
 		Map<String, Object> resMap = new HashMap<>();
 		try{
 			userService.changeUserPassword(id, newPassword);

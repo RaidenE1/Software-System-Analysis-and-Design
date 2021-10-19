@@ -14,4 +14,10 @@ public interface UserService {
 	void updateUser(User user);
 
 	int createUser(User user);
+
+	User getUserByEmail(String email);
+
+	void changeUsername(int id, String newUsername);
+
+	void changeUserPassword(int id, String newPassword);
 }

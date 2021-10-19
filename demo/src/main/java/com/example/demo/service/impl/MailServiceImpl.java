@@ -26,7 +26,7 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendSimpleMail(String tto, String subject, String reason, String verify_code){
+    public void sendSimpleMail(String tto, String subject, String reason, String verify_code) {
         MimeMessage mimeMessage;
         try {
             Map<String, Object> valueMap = new HashMap<>();
@@ -49,4 +49,5 @@ public class MailServiceImpl implements MailService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
 }

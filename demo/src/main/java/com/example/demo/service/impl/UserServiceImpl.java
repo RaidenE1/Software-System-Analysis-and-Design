@@ -41,4 +41,19 @@ public class UserServiceImpl implements UserService {
 				return userMapper.listAllUser();
 		}
 	}
+
+	@Override
+	public User getUserByEmail(String email){
+		return userMapper.getByEmail(email);
+	}
+
+	@Override
+	public void changeUsername(int id, String newUsername){
+		userMapper.changeUsername(id, newUsername);
+	}
+
+	@Override
+	public void changeUserPassword(int id, String newPassword){
+		userMapper.changeUserPassword(id, newPassword);
+	}
 }
