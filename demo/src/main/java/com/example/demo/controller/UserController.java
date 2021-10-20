@@ -13,14 +13,11 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-//@RequestMapping("/user")
 @RestController
 public class UserController {
 
@@ -64,7 +61,7 @@ public class UserController {
 			return resMap;
 		}
 		if(verifyCode.equals(request.getSession().getAttribute("verifyCode"))){
-			userService.createUser(new User(email, userName, password));
+			userService.createUser(new User(-1,userName, password,email));
 			resMap.put("res", true);
 			resMap.put("mes", "success");
 		} else{
@@ -72,14 +69,6 @@ public class UserController {
 			resMap.put("mes", "wrong-verify-code");
 		}
 		return resMap;
-	}
-
-	@PutMapping("create")
-	public R create(@RequestBody UserDTO userDTO) {
-		User user = User.builder().id(userDTO.getId()).password(userDTO.getPassword()).username(userDTO.getUsername()).build();
-		System.out.println(user);
-		userService.createUser(user);
-		return R.success(user.getId());
 	}
 
 	@PostMapping("/changeUsername")

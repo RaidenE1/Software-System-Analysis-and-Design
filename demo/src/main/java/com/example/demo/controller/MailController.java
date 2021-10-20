@@ -4,7 +4,6 @@ import com.example.demo.domain.entity.User;
 import com.example.demo.service.MailService;
 import com.example.demo.service.UserService;
 
-import io.netty.handler.codec.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
