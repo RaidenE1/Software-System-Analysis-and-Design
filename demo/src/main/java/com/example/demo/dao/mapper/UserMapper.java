@@ -9,8 +9,6 @@ public interface UserMapper {
 
 	int createUser(User user);
 
-	User getByEmail(String email);
-
 	void changeUsername(int id, String newUsername);
 
 	void changeUserPassword(int id, String newPassword);

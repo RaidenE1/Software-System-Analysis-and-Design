@@ -12,4 +12,14 @@
         select *
         from user
     </select>
+    <update id="changeUsername">
+        update user
+        set username = #{newUsername}
+        where id = #{id}
+    </update>
+    <update id="changeUserPassword">
+        update user
+        set password = #{newPassword}
+        where id = #{id}
+    </update>
 </mapper>
