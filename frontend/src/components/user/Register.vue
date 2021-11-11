@@ -1,6 +1,5 @@
 <template>
   <div class="register-container">
-    <p class="tips">注册成为问卷星球用户~</p>
     <el-tabs v-model="regType" class="register-form">
       <el-tab-pane label="邮箱注册" name="regEmail">
         <el-form :model="registerForm" :rules="rules" label-width="0px">

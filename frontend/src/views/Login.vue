@@ -1,8 +1,8 @@
 <template>
   <div class="login-container">
     <div class="logo-content">
-      <span class="hello">Hello ，</span>
-      <span class="tips">欢迎使用问卷星球！</span>
+      <!-- <span class="hello">Hello ，</span> -->
+      <!-- <span class="tips">欢迎使用问卷星球！</span> -->
       <div class="login-block" v-if="formType == 'login'">
         <el-tabs
           v-model="loginType"
@@ -14,7 +14,7 @@
                 <el-input
                   v-model="loginForm.username"
                   autocomplete="off"
-                  placeholder="请输入用户名/邮箱"
+                  placeholder="请输入邮箱"
                   prefix-icon="el-icon-user-solid"
                 />
               </el-form-item>
@@ -31,12 +31,8 @@
                 <el-button class="loginButton" type="primary" @click="loginHandle">登录</el-button>
               </el-form-item>
             </el-form>
-            <el-link class="link-btn-left" @click="formType = 'reset'"
-              >忘记密码？</el-link
-            >
-            <el-link class="link-btn-right" @click="formType = 'reg'"
-              >立即注册</el-link
-            >
+            <el-link class="link-btn-left" @click="formType = 'reset'">忘记密码？</el-link>
+            <el-link class="link-btn-right" @click="formType = 'reg'">立即注册</el-link>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -50,12 +46,8 @@
       </div>
 
       <p class="desc">
-        关于问卷星球登录 <br/><br/>
-        若登录出现问题，可通过如下邮箱联系制作人904231270@qq.com
+         <br/><br/>
       </p>
-<!--      <p class="desc">-->
-<!--        -->
-<!--      </p>-->
     </div>
   </div>
 </template>
@@ -152,7 +144,7 @@ export default {
   //align-items: center;
   text-align: center;
   min-height: 643px;
-  background: url("../assets/indexImage/index-login.png") left;
+  //background: url("../assets/indexImage/index-login.png") left;
   background-size: cover;
   // background-size: 1600px 690px;
 }
