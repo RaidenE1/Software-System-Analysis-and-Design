@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import Register from "../components/user/Register.vue";
-import ResetPsw from "../components/user/ResetPsw.vue";
+import Register from "../components/logins/Register.vue";
+import ResetPsw from "../components/logins/ResetPsw.vue";
 export default {
   name: "Login",
   components: {
