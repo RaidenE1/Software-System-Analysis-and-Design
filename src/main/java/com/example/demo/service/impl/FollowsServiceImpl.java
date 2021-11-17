@@ -15,12 +15,12 @@ public class FollowsServiceImpl  implements FollowsService {
     private FollowsMapper followsMapper;
 
     @Override
-    public List<Follows> getFollowsByUserid(Follows f) {
-        return followsMapper.getFollowsByUserid(f.getUserid());
+    public List<Follows> getFollowsByUserid(int userid) {
+        return followsMapper.getFollowsByUserid(userid);
     }
 
     @Override
-    public List<Follows> getFollowsByFollowerUserid(Follows f) {
-        return followsMapper.getFollowsByFollowerUserid(f.getFollower_userid());
+    public List<Follows> getFollowsByFollowerUserid(int userid) {
+        return followsMapper.getFollowsByFollowerUserid(userid);
     }
 }
