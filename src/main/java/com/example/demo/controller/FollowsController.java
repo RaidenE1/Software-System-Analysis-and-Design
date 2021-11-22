@@ -33,14 +33,15 @@ public class FollowsController {
             User follower = userService.getUserById(f.getFollower_userid());
             followers_list.add(follower);
         }
-        return followers_list;
+        resMap.put("followers_list",followers_list);
+        return resMap;
     }
 
     @PostMapping("/getFollowedUser")
     public Object getFollowedUser(@RequestBody Map<String, String> remap){
         Map<String, Object> resMap = new HashMap<>();
         int userid = Integer.parseInt(remap.get("userid"));
-        List<Follows> follow_list = followsService.getFollowsByFollowerUserid(userid)
+        List<Follows> follow_list = followsService.getFollowsByFollowerUserid(userid);
         List<User> follow_users_list = new ArrayList<>();
         for (Follows f : follow_list) {
             User follower = userService.getUserById(f.getFollower_userid());
