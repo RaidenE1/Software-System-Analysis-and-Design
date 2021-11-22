@@ -11,7 +11,10 @@ package com.example.demo.controller;
 import com.example.demo.domain.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -25,21 +28,21 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/login")
-	public Map<String, Object> userLogin(@RequestBody Map<String, String> remap){
+	public Map<String, Object> userLogin(@RequestBody Map<String, String> remap) {
 		String email = remap.get("email");
 		String password = remap.get("password");
 		Map<String, Object> resMap = new HashMap<>();
 		User u = userService.getUserByEmail(email);
-		if(u == null){
+		if (u == null) {
 			resMap.put("res", false);
 			resMap.put("mes", "not-registered");
 
-		} else{
-			if(password.equals(u.getPassword())){
+		} else {
+			if (password.equals(u.getPassword())) {
 				resMap.put("res", true);
 				resMap.put("user", u);
 				resMap.put("mes", "success");
-			} else{
+			} else {
 				resMap.put("res", false);
 				resMap.put("mes", "wrong-password");
 			}
@@ -48,23 +51,23 @@ public class UserController {
 	}
 
 	@PostMapping("/register")
-	public Map<String, Object> userRegister(@RequestBody Map<String, String> remap, HttpServletRequest request){
+	public Map<String, Object> userRegister(@RequestBody Map<String, String> remap, HttpServletRequest request) {
 		String email = remap.get("email");
 		String userName = remap.get("username");
 		String password = remap.get("password");
 		String verifyCode = remap.get("verifyCode");
 		Map<String, Object> resMap = new HashMap<>();
 		User u = userService.getUserByEmail(email);
-		if(u != null){
+		if (u != null) {
 			resMap.put("res", false);
 			resMap.put("mes", "email-registered");
 			return resMap;
 		}
-		if(verifyCode.equals(request.getSession().getAttribute("verifyCode"))){
-			userService.createUser(new User(-1,userName, password,email));
+		if (verifyCode.equals(request.getSession().getAttribute("verifyCode"))) {
+			userService.createUser(new User(-1, userName, password, email, "", "", ""));
 			resMap.put("res", true);
 			resMap.put("mes", "success");
-		} else{
+		} else {
 			resMap.put("res", false);
 			resMap.put("mes", "wrong-verify-code");
 		}
@@ -72,36 +75,36 @@ public class UserController {
 	}
 
 	@PostMapping("/changeUsername")
-	public Map<String, Object> changeUsername(@RequestBody Map<String, String> remap){
+	public Map<String, Object> changeUsername(@RequestBody Map<String, String> remap) {
 		String newUsername = remap.get("newUsername");
 		int id = Integer.parseInt(remap.get("userId"));
 		Map<String, Object> resMap = new HashMap<>();
-		try{
+		try {
 			userService.changeUsername(id, newUsername);
 			resMap.put("res", true);
 			resMap.put("mes", "success");
-		} catch(Exception e){
+		} catch (Exception e) {
 			resMap.put("res", false);
 			resMap.put("mes", "failed");
-		} finally{
+		} finally {
 			return resMap;
 		}
 	}
 
 
 	@PostMapping("/changePassword")
-	public Map<String, Object> changeUserPasswrod(@RequestBody Map<String, String> remap){
+	public Map<String, Object> changeUserPasswrod(@RequestBody Map<String, String> remap) {
 		String newPassword = remap.get("newPassword");
 		int id = Integer.parseInt(remap.get("userId"));
 		Map<String, Object> resMap = new HashMap<>();
-		try{
+		try {
 			userService.changeUserPassword(id, newPassword);
 			resMap.put("res", true);
 			resMap.put("mes", "success");
-		} catch(Exception e){
+		} catch (Exception e) {
 			resMap.put("res", false);
 			resMap.put("mes", "failed");
-		} finally{
+		} finally {
 			return resMap;
 		}
 	}

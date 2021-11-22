@@ -6,8 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto=update
-
+      ddl-auto: update
 
   mail:
     host: smtp.163.com
@@ -23,9 +22,7 @@ spring:
       mail.smtp.socketFactory.port: 465
       mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
       mail.smtp.socketFactory.fallback: false
-  jpa:
-    hibernate:
-      ddl-auto: update
+
 
 mybatis:
   mapper-locations: classpath:mapper/**Mapper.xml
