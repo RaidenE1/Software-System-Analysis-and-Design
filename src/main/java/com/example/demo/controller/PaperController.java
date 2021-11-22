@@ -25,24 +25,26 @@ public class PaperController {
 		List<Paper> papers = paperService.searchByKeyword(keyword);
 		return R.success(papers);
 	}
+
 	@GetMapping("/searchByAuthor")
 	public R searchByAuthor(String author) {
 		List<Paper> papers = paperService.searchByAuthor(author);
 		return R.success(papers);
 	}
+
 	@GetMapping("/searchByTitle")
 	public R searchByTitle(String title) {
 		List<Paper> papers = paperService.searchByTitle(title);
 		return R.success(papers);
 	}
 
-	@GetMapping("/add")
+	@PutMapping("/add")
 	public R add(@RequestBody Paper paper) {
 		paperService.add(paper);
 		return R.success();
 	}
 
-	@GetMapping("/update")
+	@PostMapping("/update")
 	public R update(@RequestBody Paper paper) {
 		paperService.update(paper);
 		return R.success();
