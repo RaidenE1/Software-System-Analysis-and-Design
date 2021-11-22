@@ -33,7 +33,8 @@ public class FollowsController {
             User follower = userService.getUserById(f.getFollower_userid());
             followers_list.add(follower);
         }
-        return followers_list;
+        resMap.put("followers_list",followers_list);
+        return resMap;
     }
 
     @PostMapping("/getFollowedUser")
