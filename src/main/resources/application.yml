@@ -4,6 +4,10 @@ spring:
     username: root
     password: 7427f7796d988436
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto=update
+
 
   mail:
     host: smtp.163.com
