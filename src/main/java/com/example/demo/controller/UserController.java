@@ -61,7 +61,7 @@ public class UserController {
 			return resMap;
 		}
 		if(verifyCode.equals(request.getSession().getAttribute("verifyCode"))){
-			userService.createUser(new User(-1,userName, password,email));
+			//userService.createUser(new User(-1,userName, password,email));
 			resMap.put("res", true);
 			resMap.put("mes", "success");
 		} else{
