@@ -24,7 +24,7 @@ public class FollowsController {
     private UserService userService;
 
     @PostMapping("/getFollowers")
-    public Map<String, Object> getFollowers(@RequestBody Map<String, String> remap){
+    public Object getFollowers(@RequestBody Map<String, String> remap){
         Map<String, Object> resMap = new HashMap<>();
         int userid = Integer.parseInt(remap.get("userid"));
         List<Follows> follows_list = followsService.getFollowsByUserid(userid);
