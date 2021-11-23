@@ -26,7 +26,7 @@ import javax.persistence.Id;
 @Data
 public class Follows {
     @Id
-    private int follow_id;
-    private int userid;
-    private int follower_userid;
+    private int followId;
+    private int userId;
+    private int followerUserid;
 }

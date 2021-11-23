@@ -15,11 +15,11 @@ import java.util.Date;
 @Data
 
 @Entity
-public class Commentshare {
+public class CommentShare {
     @Id
-    private int commentshareid;
-    private int shareid;                  //外键代表被链接
-    private Date commentsharecreatetime;  //评论时间
-    private String commentcontent;        //评论内容
+    private int commentShareId;
+    private int shareId;                  //外键代表被链接
+    private Date commentShareCreateTime;  //评论时间
+    private String commentContent;        //评论内容
 
 }

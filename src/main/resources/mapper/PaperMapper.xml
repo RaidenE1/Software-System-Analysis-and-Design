@@ -8,7 +8,6 @@
         select * from paper where author = #{author};
     </select>
     <select id="searchByKeyword" resultType="com.example.demo.domain.entity.Paper">
-#         select * from paper where keyword = #{keyword};
         select * from paper;
     </select>
 </mapper>

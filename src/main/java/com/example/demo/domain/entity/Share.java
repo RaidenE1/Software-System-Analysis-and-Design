@@ -17,10 +17,10 @@ import java.util.Date;
 @Entity
 public class Share {
     @Id
-    private int shareid;
-    private int shareruserid;
-    private String sharecontent;
-    private Date sharecreatetime;
-    private int supportcnt;
-    private int unsupportcnt;
+    private int shareId;
+    private int sharerUserId;
+    private String shareContent;
+    private Date shareCreateTime;
+    private int supportCnt;
+    private int unSupportCnt;
 }

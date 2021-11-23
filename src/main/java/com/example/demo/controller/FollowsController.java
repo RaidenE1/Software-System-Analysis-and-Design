@@ -30,7 +30,7 @@ public class FollowsController {
         List<Follows> follows_list = followsService.getFollowsByUserid(userid);
         List<User> followers_list = new ArrayList<>();
         for (Follows f : follows_list) {
-            User follower = userService.getUserById(f.getFollower_userid());
+            User follower = userService.getUserById(f.getFollowerUserid());
             followers_list.add(follower);
         }
         resMap.put("followers_list",followers_list);
@@ -44,7 +44,7 @@ public class FollowsController {
         List<Follows> follow_list = followsService.getFollowsByFollowerUserid(userid);
         List<User> follow_users_list = new ArrayList<>();
         for (Follows f : follow_list) {
-            User follower = userService.getUserById(f.getFollower_userid());
+            User follower = userService.getUserById(f.getFollowerUserid());
             follow_users_list.add(follower);
         }
         return follow_users_list;

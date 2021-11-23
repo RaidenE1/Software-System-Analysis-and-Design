@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PaperMapper {
 
-	List<Paper> searchByTitle(@Param("title") String title);
+	List<Paper> searchByTitle(String title);
 
 	List<Paper> searchByAuthor(String author);
 

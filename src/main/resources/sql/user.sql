@@ -10,9 +10,9 @@ create table user
 
 
 
-insert into user (username, password, email)
-values ('zou', 'zou', 'zou@qq.com'),
-       ('wen', 'wen', 'wen@qq.com');
+insert into user (id,username, password, email)
+values (1,'zou', 'zou', 'zou@qq.com'),
+       (2,'wen', 'wen', 'wen@qq.com');
 
 select *
 from user;
