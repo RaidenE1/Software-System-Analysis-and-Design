@@ -8,13 +8,17 @@
  */
 package com.example.demo.controller;
 
+import com.example.demo.domain.entity.Follows;
 import com.example.demo.domain.entity.User;
+import com.example.demo.service.FollowsService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
@@ -23,6 +27,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Resource
+	private FollowsService followsService;
 
 	@PostMapping("/login")
 	public Map<String, Object> userLogin(@RequestBody Map<String, String> remap){
@@ -104,5 +111,18 @@ public class UserController {
 		} finally{
 			return resMap;
 		}
+	}
+
+	@PostMapping("/getUserPage")
+	public Map<String, Object> getUserPage(@RequestBody Map<String, String> remap){
+		Map<String, Object> resMap = new HashMap<>();
+		int userid = Integer.parseInt(remap.get("userId"));
+		User u = userService.getUserById(userid);
+		List<Follows> followers_list = followsService.getFollowsByUserid(userid);
+		List<Follows> followed_user_list = followsService.getFollowsByFollowerUserid(userid);
+		resMap.put("user", u);
+		resMap.put("countFollowers", followers_list.size());
+		resMap.put("countFollowedUsers", followed_user_list.size());
+		return resMap;
 	}
 }
