@@ -4,11 +4,11 @@
         <span>{{ achievement.title }}</span>
     </el-row>
     <el-row id="otherinfo">
-        <el-col :span='5' class="singleinfo"> 发表日期: {{ achievement.date }} </el-col>
-        <el-col :span='5' class="singleinfo"> 类型: {{ achievement.type }} </el-col>
+        <el-col :span='6' class="singleinfo"> 发表日期: {{ achievement.date }} </el-col>
+        <el-col :span='4' class="singleinfo"> 类型: {{ achievement.type }} </el-col>
         <el-col :span='4' class="singleinfo"> 被引用量: {{ achievement.cites }} </el-col>
-        <el-col :span='6' class="singleinfo"> 领域: {{ achievement.field }} </el-col>
-        <el-col :span='3' class="operate"><el-button size="medium" type="text" @click="view_details">查看</el-button></el-col>
+        <el-col :span='7' class="singleinfo"> 领域: {{ achievement.field }} </el-col>
+        <el-col :span='3' class="operate"><el-button size="small" type="text" @click="view_details">查看</el-button></el-col>
     </el-row>
 </div>
 </template>
@@ -24,7 +24,7 @@ export default {
             field: "",
         },
     },
-    methods:{
+    methods: {
         view_details(){
 
         }
@@ -38,7 +38,6 @@ export default {
 }
 
 #titlecontainer{
-    margin-left: 10px;
     margin-top: 10px;
     span{
         font-size: 20px;
@@ -48,21 +47,16 @@ export default {
 }
 
 #otherinfo{
-    margin-bottom: 5px;
-    margin-left: 5px;
-    line-height: 36px;
+    line-height: 32px;
     .singleinfo{
         border: 1px solid green;
         display: flex;
         justify-self: left;
-        margin-left: 5px;
-        font-size:16px;
-        
+        font-size:10px;
         color: gray;
     }
     .operate{
         border: 1px solid green;
-        margin-left: 5px;
     }
 }
 
