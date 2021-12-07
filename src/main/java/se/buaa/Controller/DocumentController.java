@@ -34,7 +34,7 @@ public class DocumentController {
 //        orderList.add(order1);
         orderList.add(order2);
         Sort sort = Sort.by(orderList);
-        PageRequest page = PageRequest.of(0, 200000 );
+        PageRequest page = PageRequest.of(0, 100 );
         return es_documentService.findAll(page);
     }
 

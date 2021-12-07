@@ -12,7 +12,7 @@ public class EsConf {
     @Bean
     RestHighLevelClient elasticsearchClient() {
         ClientConfiguration configuration = ClientConfiguration.builder()
-                .connectedTo("49.232.157.22:9200")
+                .connectedTo("124.70.63.71:9200")
                 .build();
         RestHighLevelClient client = RestClients.create(configuration).rest();
 
