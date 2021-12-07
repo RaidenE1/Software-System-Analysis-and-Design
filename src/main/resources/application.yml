@@ -4,11 +4,6 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 
   mail:
     host: smtp.163.com
@@ -25,17 +20,10 @@ spring:
       mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
       mail.smtp.socketFactory.fallback: false
 
-
-mybatis:
-  mapper-locations: classpath:mapper/**Mapper.xml
-  configuration:
-    map-underscore-to-camel-case: true
-
+  jpa:
+    hibernate:
+      ddl-auto: update
+  main:
+    allow-bean-definition-overriding: true
 server:
-  port: 8001
-
-swagger:
-  enable: true
-  application-name: demo
-  application-version: 1.0
-  try-host: http://localhost:${server.port}
+  port: 8080
