@@ -24,14 +24,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install
-      run: |
-           cd frontend
-           npm install
+      run: npm install
 
     - name: Build
-      run: |
-           cd frontend
-           npm run build
+      run: npm run build
 
     - name: Deploy  # rsync推送文件
       uses: AEnterprise/rsync-deploy@v1.0  
@@ -39,7 +35,7 @@ jobs:
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         ARGS: '-avz --delete'   # rsync参数
         SERVER_PORT: '22'  # SSH端口
-        FOLDER: frontend/dist/*  # 文件夹，路径相对于代码仓库的根目录
+        FOLDER: dist/*  # 文件夹，路径相对于代码仓库的根目录
         SERVER_IP: ${{ secrets.SSH_HOST }}
         USERNAME: root
         SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
