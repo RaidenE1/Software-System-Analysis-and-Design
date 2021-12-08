@@ -24,15 +24,11 @@ public class MailController {
     UserRepository userRepository;
 
     @RequestMapping("/user/sendEmail")
-    public Result verifyFunc(@RequestBody Map<String, String> remap, HttpServletRequest request) {
-        Map<String, Object> map = new HashMap<>();
-        String email = remap.get("email");
+    public Result verifyFunc(@RequestParam String email) {
         int verification = 1921;
         try {
             verification = (int) Math.round((Math.random()) * 10000);
             mailService.sendSimpleMail(email, "BUAA-TECH ：请查收您的验证码", "注册新用户", String.valueOf(verification));
-            map.put("res", true);
-            map.put("message", "sent");
         } catch (Exception e) {
             e.printStackTrace();
             return Result.Error("201", "邮件发送异常，请联系管理员或重试。");

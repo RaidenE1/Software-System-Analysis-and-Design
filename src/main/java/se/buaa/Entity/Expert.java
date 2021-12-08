@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-12-08 01:45:21
+ * @LastEditTime: 2021-12-08 02:48:13
+ * @LastEditors: your name
+ * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @FilePath: /Software-System-Analysis-and-Design/src/main/java/se/buaa/Entity/Expert.java
+ */
 package se.buaa.Entity;
 
 
@@ -14,6 +22,8 @@ public class Expert {
     private String name;
     @Column(name = "org", length = 100)
     private String org;
+    @Column(name = "domain", length = 100)
+    private String domain;
     @Column(name = "cited_times")
     private Integer cited_Times;
     @Column(name = "achievements")//成果数
@@ -39,6 +49,10 @@ public class Expert {
 
     public String getOrg() {
         return org;
+    }
+
+    public String getDomain() {
+        return domain;
     }
 
     public String getName() {
