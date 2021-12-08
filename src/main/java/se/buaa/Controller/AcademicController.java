@@ -468,21 +468,10 @@ public class AcademicController {
     }
 
     @PostMapping("getSearchResult")
-    public Result<Data> getSearchResult(@RequestBody Post post//, String sort, String page, String userID, HttpServletRequest request
-//            @RequestParam String kw,//keyword
-//                                                         @RequestParam String experts,//author
-//                                                         @RequestParam String origin,
-//                                                         @RequestParam String startTime,
-//                                                         @RequestParam String endTime,
-//                                                         @RequestParam("sort") String sortWay, //排序方式
-//                                                         @RequestParam("page") Integer pageNumber //页数
-    ) {
+    public Result<Data> getSearchResult(@RequestBody Post post) {
         //判断输入是否合法，并处理相关数据
         CodeEnum result = checkAndHandleSearchInput(post);
         if(result != CodeEnum.success) return new Result<>(result.getCode(),result.toString(),new Data());
-
-//        System.out.println(post.toString());
-        //
         Date date1=new Date();
         //变量声明
         int pageNum;
@@ -522,25 +511,6 @@ public class AcademicController {
                 es_document.setIs_favor(res.isPresent());
             }
         }
-
-//        Iterable<ES_Document> searchResult = es_documentDao.findByTitleInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeInOrSummaryInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeInOrKeywordsInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeIn(
-//                page1,search_word.getKw(),search_word.getExperts(),search_word.getOrigin(),search_word.getStartTime(),search_word.getEndTime(),typeList,
-//                search_word.getKw(),search_word.getExperts(),search_word.getOrigin(),search_word.getStartTime(),search_word.getEndTime(),typeList,
-//                search_word.getKw(),search_word.getExperts(),search_word.getOrigin(),search_word.getStartTime(),search_word.getEndTime(),typeList
-//        );
-
-//        List<ES_Document> documentsList = new ArrayList<>();
-//        searchResult.forEach(single ->{documentsList.add(single);});
-//
-//        for (ES_Document es_document : documentsList) {
-//            String doc_id = es_document.getId();
-//            CollectionKey ck = new CollectionKey(Integer.parseInt(userID), doc_id);
-//            Optional<Collection> res = collectionRepository.findById(ck);
-//            es_document.setIs_favor(res.isPresent());
-//        }
-//
-//        data.setResult_list(documentsList);
-//        data.setTotal(total);
         data.filter_list.add(getTimeFilter(search_word,typeList));
         data.filter_list.add(getTypeFilter(search_word,typeList));
         Date date2=new Date();
