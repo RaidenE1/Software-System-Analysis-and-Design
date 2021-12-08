@@ -487,17 +487,6 @@ public class AcademicController {
 
         Data data = getSearchResult(search_word,sort,typeList,pageNum);
         int total = data.total;
-//        List<String> typeList = getTypeList(filterWords.getType());
-//
-//        Sort sort1 = getSort(sort);
-//        PageRequest page1 = PageRequest.of(pageNum - 1, pageSize, sort1);
-
-//        int total = es_documentDao.countByTitleInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeInOrSummaryInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeInOrKeywordsInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeIn(
-//                search_word.getKw(),search_word.getExperts(),search_word.getOrigin(),search_word.getStartTime(),search_word.getEndTime(),typeList,
-//                search_word.getKw(),search_word.getExperts(),search_word.getOrigin(),search_word.getStartTime(),search_word.getEndTime(),typeList,
-//                search_word.getKw(),search_word.getExperts(),search_word.getOrigin(),search_word.getStartTime(),search_word.getEndTime(),typeList
-//        );
-//        System.out.println(total);
         int totalPage = total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
         if(totalPage == 0&&data.getExpert_list().size()==0)
             return new Result<Data>(CodeEnum.noResult.getCode(),CodeEnum.noResult.toString(),new Data());

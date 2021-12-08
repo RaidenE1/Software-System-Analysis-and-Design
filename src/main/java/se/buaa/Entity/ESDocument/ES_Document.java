@@ -54,8 +54,7 @@ public class ES_Document {
     private String origin;
     @Field(analyzer = "ik_smart", type = FieldType.Integer)//link
     private int views;
-//    @Field(type = FieldType.Date)//link
-//    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
+
     private String time;
     private boolean is_favor=false;
 
