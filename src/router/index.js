@@ -79,6 +79,11 @@ Vue.use(VueRouter)
       path: '/myAchievement',
       name :"myAchievement",
       component: ()=> import('../views/user/MyAchievement.vue')
+    },
+    {
+      path:'/moments',
+      name : 'Moments',
+      component: ()=>import('../views/user/Moments.vue')
     }
 ]
 

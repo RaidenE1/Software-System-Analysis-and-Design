@@ -120,6 +120,10 @@
                   });
                 }
           })
+          .catch(err=>{
+            console.log("网络问题")
+            console.log(err)
+          })
         }
       },
       sendEmail(){
@@ -133,6 +137,7 @@
         else {
           var _this = this
           const TIME_COUNT = 60
+          console.log(_this.RegisterForm.email)
           if(!this.timer) {
             this.$api.user.sendEmail({
               email: _this.RegisterForm.email

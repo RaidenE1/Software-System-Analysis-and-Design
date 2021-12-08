@@ -15,7 +15,7 @@
         </el-menu-item>
         <el-menu-item index="/moments" @click="gotoMoments">
             <i class="el-icon-collection-tag"></i>
-            <div class="title">学术圈</div>
+            <div class="title">学术动态</div>
         </el-menu-item>
         <el-menu-item index="/myCollection" @click="gotoMyCollection">
             <i class="el-icon-star-off"></i>
