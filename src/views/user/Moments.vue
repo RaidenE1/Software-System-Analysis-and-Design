@@ -6,7 +6,7 @@
         <myaside>
         </myaside>
         <div>
-            <div v-for="i in moments" v-bind:key="i.index">
+            <div v-for="i in moments_to_show" v-bind:key="i.index">
                 <moment :moment=i>
                 </moment>
             </div>
@@ -28,7 +28,9 @@ export default {
             count: 0,
             moments:[
                 {},
-            ]
+            ],
+            moments_to_show:[],
+
         }
     },
     methods: {
