@@ -47,13 +47,13 @@ public class ES_Document {
     @Field(analyzer = "ik_smart", type = FieldType.Text)//摘要
     private String summary;
     @Field(analyzer = "ik_smart", type = FieldType.Integer)//被引次数
-    private int cited_quantity;
+    private Integer cited_quantity;
     @Field(analyzer = "ik_smart", type = FieldType.Text)//link
     private String link;
     @Field(analyzer = "ik_smart", type = FieldType.Text)//link
     private String origin;
     @Field(analyzer = "ik_smart", type = FieldType.Integer)//link
-    private int views;
+    private Integer views;
 
     private String time;
     private boolean is_favor=false;
