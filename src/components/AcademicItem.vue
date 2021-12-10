@@ -63,6 +63,7 @@
     methods: {
       toDetailPage() {
         console.log("跳转文章详情页！");
+        console.log(this.item)
         let url = window.location.origin + "/#/academicShow/"+this.item.id;
         if(window.open(url) === null){
           window.location.herf = url;

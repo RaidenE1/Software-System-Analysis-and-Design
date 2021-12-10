@@ -21,11 +21,7 @@ Vue.use(ElementUI);
 Vue.prototype.$md5 = md5;
 Vue.use(VueClipboard)
 
-Vue.prototype.requestUrl = "http://rap2api.taobao.org/app/mock/271178";
-/*Vue.config.productionTip = false;
-Vue.prototype.requestUrl = "http://localhost:8081";
-Vue.prototype.baseUrl = "http://39.97.126.242:8081/index.html#/";
-Vue.prototype.recentDoc = "";*/
+Vue.prototype.requestUrl = "http://localhost:8082";
 
 new Vue({
   el: '#app',
