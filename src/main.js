@@ -21,7 +21,7 @@ Vue.use(ElementUI);
 Vue.prototype.$md5 = md5;
 Vue.use(VueClipboard)
 
-Vue.prototype.requestUrl = "http://localhost:8082";
+// Vue.prototype.requestUrl = "http://localhost:8082";
 
 new Vue({
   el: '#app',
