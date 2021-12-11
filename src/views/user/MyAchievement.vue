@@ -17,7 +17,7 @@
                 暂无学术成果
             </div>
             <div class="content" v-else>
-                <infinityscroll :list="achievement" :component="'Achievement'">
+                <infinityscroll :list="achievement" :component="'./user/Achievement.vue'">
                 </infinityscroll>
             </div>
         </div>

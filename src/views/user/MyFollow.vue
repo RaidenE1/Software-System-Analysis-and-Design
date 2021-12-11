@@ -17,7 +17,7 @@
                 暂无关注
             </div>
             <div class="content" v-else>
-                <infinityscroll :list="follow" :component="'Person'"></infinityscroll>
+                <infinityscroll :list="follow" :component="'./user/Person.vue'"></infinityscroll>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@ export default {
             follow: [{
                     expertId: '1111',
                     name: 'ggg',
-                    
+
                 },
                 {
                     expertId: '1222',

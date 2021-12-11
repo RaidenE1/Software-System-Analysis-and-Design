@@ -1,4 +1,7 @@
 <template>
+<!-- 组件需要传入两个值，
+list:想要实现无限滚动的数据的Array，其内数据为对象Object
+component:一个String，为需要无限滚动的组件的url,!!!注意，无法识别@,默认路径为InfinityScroll.vue-->
 <div>
     <div v-for="i in to_show" v-bind:key="i.index">
         <component :is="used_component" :show_info="i"></component>
@@ -32,8 +35,8 @@ export default {
     },
     methods: {
         chooseComponent() {
-            this.used_component = () => import("./user/" + this.component + ".vue");
-            //this.used_component=()=>import('./user/Achievement.vue')
+            // this.used_component = () => import('./user/Achievement.vue');
+            this.used_component = () => import(''+this.component);
         },
         handleScroll() {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
