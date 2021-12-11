@@ -701,7 +701,7 @@ public class AcademicController {
 //            return new Result<>(CodeEnum.noUser.getCode(), CodeEnum.noUser.toString(),null);
         if(document_id == null)
             return new Result<>(CodeEnum.docIdNotExist.getCode(), CodeEnum.docIdNotExist.toString(),null);
-        ES_Document es_document = es_documentDao.findByDocumentid(document_id);
+        ES_Document es_document = es_documentDao.findById(document_id).get();
         if(es_document == null)
             return new Result<>(CodeEnum.documentNotExist.getCode(), CodeEnum.documentNotExist.toString(),null);
         else{

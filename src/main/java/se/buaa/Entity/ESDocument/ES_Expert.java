@@ -20,6 +20,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+@AllArgsConstructor
+@Builder
 @Data
 @Document(indexName = "expert",indexStoreType = "expert")
 public class ES_Expert {
@@ -35,4 +37,7 @@ public class ES_Expert {
     private String domain;
     @Field
     private int cooperationNum;
+
+    public ES_Expert() {
+    }
 }
