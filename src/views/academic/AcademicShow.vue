@@ -469,6 +469,7 @@
       this.academicID = this.$route.params.academicID
       console.log(this.academicID)
       let user_id = sessionStorage.getItem("userID")
+      console.log("userid is"+user_id);
       if(user_id == null){
         user_id = -1;
       }
