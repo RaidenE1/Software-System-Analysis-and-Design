@@ -61,13 +61,15 @@ export default {
         userheader,
         userinfo
     },
-    /*mounted() {
-        this.history_list = JSON.parse(localStorage.getItem(sessionStorage.getItem("userID")));
-        if (this.history_list==null){
-            this.history_list=[];
-        }
-        console.log(this.history_list);
-    },*/
+    mounted() {
+        // this.history_list = JSON.parse(localStorage.getItem(sessionStorage.getItem("userID")));
+        // if (this.history_list==null){
+        //     this.history_list=[];
+        // }
+        // console.log(this.history_list);
+        this.load();
+        window.addEventListener('scroll', this.handleScroll, true)
+    },
     data() {
         return {
             current_page: 1,

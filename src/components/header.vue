@@ -512,7 +512,6 @@ export default {
     min-width: 800px;
     /*width: 100%;*/
     background-color: #0099CC;
-    margin: -10px -8px 0 -8px;
     padding: 0;
   }
 

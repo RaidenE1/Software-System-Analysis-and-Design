@@ -78,6 +78,7 @@ export default {
         #hoveravatar:hover {
             opacity: 1;
             background-color: rgba(0, 0, 0, 0.4);
+            transition: opacity .2s, background-color .2s;
         }
     }
 

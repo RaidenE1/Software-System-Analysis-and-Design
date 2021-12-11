@@ -62,7 +62,7 @@ export default {
         }
     },
     destroyed() {
-        window.removeEventListener('scroll', this.handleScroll) //页面离开后销毁监听事件
+        window.removeEventListener('scroll', this.handleScroll)
     },
 }
 </script>

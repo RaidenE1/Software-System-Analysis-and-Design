@@ -50,19 +50,19 @@
           <div id="achievement">
             <div class="achievement-pie">
               <div class="pie_item">
-                <el-progress type="circle" text-inside="false" :percentage="Math.floor((paper1_count/real_total)*100)" :width="100"></el-progress>
+                <el-progress type="circle" :text-inside="false" :percentage="Math.floor((paper1_count/real_total)*100)" :width="100"></el-progress>
                 <p class="pie_title">{{ Math.floor((paper1_count/real_total)*100) + "%"}}<br/>期刊</p>
               </div>
               <div class="pie_item">
-                <el-progress type="circle" text-inside="false" :percentage="Math.floor((paper2_count/real_total)*100)" :width="100"></el-progress>
+                <el-progress type="circle" :text-inside="false" :percentage="Math.floor((paper2_count/real_total)*100)" :width="100"></el-progress>
                 <p class="pie_title">{{ Math.floor((paper2_count/real_total)*100) + "%" }}<br/>会议</p>
               </div>
               <div class="pie_item">
-                <el-progress type="circle" text-inside="false" :percentage="Math.floor((paper3_count/real_total)*100)" :width="100"></el-progress>
+                <el-progress type="circle" :text-inside="false" :percentage="Math.floor((paper3_count/real_total)*100)" :width="100"></el-progress>
                 <p class="pie_title">{{ Math.floor((paper3_count/real_total)*100) + "%"}}<br/>专著</p>
               </div>
               <div class="pie_item">
-                <el-progress type="circle" text-inside="false" :percentage="Math.floor(((real_total - paper1_count - paper2_count - paper3_count)/real_total)*100)" :width="100"></el-progress>
+                <el-progress type="circle" :text-inside="false" :percentage="Math.floor(((real_total - paper1_count - paper2_count - paper3_count)/real_total)*100)" :width="100"></el-progress>
                 <p class="pie_title">{{ Math.floor(((real_total - paper1_count - paper2_count - paper3_count)/real_total)*100) + "%"}}<br/>其他</p>
               </div>
               <div class="pie_total">
@@ -643,11 +643,13 @@ export default {
             message: res.message,
             type: "error"
           })
-          _this.$router.push('/404')
+          // _this.$router.push('/404')
+          this.$router.replace('/404')
         }
       }).catch(err => {
         console.log(err)
-        this.$router.push('/404')
+        // this.$router.push('/404')
+        this.$router.replace('/404')
       })
     },
     loadRelateSc(){

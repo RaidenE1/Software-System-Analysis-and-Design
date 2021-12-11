@@ -79,6 +79,12 @@ Vue.use(VueRouter)
       path:'/moments',
       name : 'Moments',
       component: ()=>import('../views/user/Moments.vue')
+    },
+    {
+      path:"*",
+      redirect:{
+        name:'NotFound'
+      }
     }
 ]
 

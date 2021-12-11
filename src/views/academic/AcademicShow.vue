@@ -500,13 +500,14 @@
               this.getRelation();
             }else{
               this.$message.error("文章不存在或已被删除")
-              this.$router.push('/404')
+              this.$router.replace('/404')
             }
           }
       ).catch(err=>{
         console.log(err)
         this.$message.error("文章不存在或已被删除")
-        this.$router.push('/404')
+        this.$router.replace('/404')
+        // this.$router.push('/404')
       })
     }
   }

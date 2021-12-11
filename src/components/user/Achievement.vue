@@ -1,14 +1,13 @@
 <template>
-<div id="achievement">
+<div id="achievement" @click="view_details">
     <el-row id="titlecontainer">
-        <span>{{ achievement.title }}</span>
+        <span>{{ show_info.title }}</span>
     </el-row>
     <el-row id="otherinfo">
-        <el-col :span='5' class="singleinfo"> 发表日期: {{ achievement.date }} </el-col>
-        <el-col :span='5' class="singleinfo"> 类型: {{ achievement.type }} </el-col>
-        <el-col :span='4' class="singleinfo"> 被引用量: {{ achievement.cites }} </el-col>
-        <el-col :span='6' class="singleinfo"> 领域: {{ achievement.field }} </el-col>
-        <el-col :span='3' class="operate"><el-button size="medium" @click="view_details">查看</el-button></el-col>
+        <el-col :span='6' class="singleinfo"> 发表日期: {{ show_info.date }} </el-col>
+        <el-col :span='6' class="singleinfo"> 类型: {{ show_info.type }} </el-col>
+        <el-col :span='6' class="singleinfo"> 被引用量: {{ show_info.cites }} </el-col>
+        <el-col :span='6' class="singleinfo"> 领域: {{ show_info.field }} </el-col>
     </el-row>
 </div>
 </template>
@@ -16,11 +15,11 @@
 <script>
 export default {
     props: {
-        achievement: Object,
+        show_info: Object,
     },
     methods:{
         view_details(){
-            
+            console.log("view_details")
         }
     }
 };
@@ -29,11 +28,14 @@ export default {
 <style lang="scss" scoped>
 #achievement {
     border: 1px solid #99CCFF;
-    border-radius: 10px;
     margin-top:2px;
     margin-bottom:2px;
     padding: 5px;
     background: #ffffff;
+}
+#achievement:hover{
+    box-shadow: 1px 2px 3px rgba(48,48,48,0.6);
+    transition:box-shadow .2s;
 }
 
 #titlecontainer{
@@ -53,7 +55,6 @@ export default {
     .singleinfo{
         display: flex;
         justify-self: left;
-        margin-left: 5px;
         font-size:16px;
         
         color: gray;
