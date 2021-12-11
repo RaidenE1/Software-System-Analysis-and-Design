@@ -465,6 +465,7 @@
     },
     mounted() {
       let vue = this;
+      console.log(this.$route.params)
       this.academicID = this.$route.params.academicID
       console.log(this.academicID)
       let user_id = sessionStorage.getItem("userID")
@@ -478,6 +479,7 @@
           }
       ).then(
           res =>{
+
             if(res.code == 200) {
               vue.academic = res.data;
               console.log(vue.academic);
