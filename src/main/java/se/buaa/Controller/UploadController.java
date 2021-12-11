@@ -26,7 +26,7 @@ public class UploadController {
             blob.data = file.getBytes();
             blobRepository.save(blob);
             UploadRes data = new UploadRes();
-            data.url = "http://49.232.157.22:8082/getImg?imgID="+blob.imgID;
+            data.url = "http://124.70.63.71:8082/getImg?imgID="+blob.imgID;
             return Result.Success(data);
         }catch (Exception e){
             return Result.Error("201","图片上传错误");

@@ -8,13 +8,13 @@ import java.util.List;
 public class Document {
     @Id
     private String documentID;
-    @Column(name = "title", length = 100)
+    @Column(name = "title", length = 500)
     private String title;
-    @Column(name = "experts", length = 100)
+    @Column(name = "experts", length = 500)
     private String experts;
-    @Column(name = "keywords", length = 100)
+    @Column(name = "keywords", length = 500)
     private String keywords;
-    @Column(name = "summary",length = 1000)//摘要
+    @Column(name = "summary",length = 5000)//摘要
     private String summary;
     @Column(name = "citedQuantity")//被引次数
     private Integer citedQuantity;
