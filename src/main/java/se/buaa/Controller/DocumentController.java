@@ -42,12 +42,6 @@ public class DocumentController {
     public Iterable<ES_Document> findByKeywordsIn(String keywords) {
         List<String> keyword = new ArrayList<String>();
         keyword.add(keywords);
-         return es_documentService.findByKeywordsIn(keyword);
+        return es_documentService.findByKeywordsIn(keyword);
     }
-
-//    @RequestMapping("findByKeywords")
-//    public Iterable<ES_Document> findByKeywords(String keyword) {
-//        return es_documentService.findByKeywords(keyword);
-//    }
-
 }

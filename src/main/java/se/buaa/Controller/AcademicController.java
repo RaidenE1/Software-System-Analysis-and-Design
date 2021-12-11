@@ -182,13 +182,6 @@ public class AcademicController {
         if(searchWords1 != null&& !searchWords1.equals("")){
                 QueryBuilder queryBuilder = QueryBuilders.matchPhrasePrefixQuery("title",searchWords1).slop(0);
                 boolQueryBuilder.must(queryBuilder);
-//                MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(searchWords1,"title","experts","keywords");
-////            QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery( "*"+searchWords1+ "*" ,
-////                    "title","keyword.keyword"//"*" + keywords + "*",
-////                    );
-//
-//                boolQueryBuilder.must(multiMatchQueryBuilder);
-
         }
         if(title != null&& !title.equals("")){
             QueryBuilder queryBuilder = QueryBuilders.matchPhrasePrefixQuery("title",title).slop(0);
@@ -312,9 +305,9 @@ public class AcademicController {
         if(type == null){
             typeList = typeListDefault;
         }
-        else
+        else {
             typeList.add(type);
-
+        }
         PageRequest page= PageRequest.of(pageNumber-1,10);
         List<ES_Document> documentsList = new ArrayList<>();
         Iterable<ES_Document> highCitedList = es_documentDao.findByTitleInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeInOrSummaryInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeInOrKeywordsInAndExpertsLikeAndOriginLikeAndTimeBetweenAndDtypeIn(
@@ -333,6 +326,11 @@ public class AcademicController {
         data.result_list=documentsList;
         Date date2=new Date();
         data.time= (int) (date2.getTime( )-date1.getTime());
+        ES_Keyword es_keyword = es_keywordDao.findByKeyword(keyword);
+        if(es_keyword != null){
+            es_keyword.setView(es_keyword.getView() + 1);
+            es_keywordDao.save(es_keyword);
+        }
         return new Result("200", CodeEnum.success.toString(), data);
 
     }
@@ -503,8 +501,6 @@ public class AcademicController {
         data.filter_list.add(getTimeFilter(search_word,typeList));
         data.filter_list.add(getTypeFilter(search_word,typeList));
         Date date2=new Date();
-
-
         data.time= (int) (date2.getTime()-date1.getTime());
 
         return new Result<>(CodeEnum.success.getCode(),CodeEnum.success.toString(),data);
@@ -697,8 +693,7 @@ public class AcademicController {
     }
     @RequestMapping("getById")
     public Result<ES_Document> getById(String document_id,int user_id){
-//        if(user_id == null)
-//            return new Result<>(CodeEnum.noUser.getCode(), CodeEnum.noUser.toString(),null);
+        System.out.println(user_id);
         if(document_id == null)
             return new Result<>(CodeEnum.docIdNotExist.getCode(), CodeEnum.docIdNotExist.toString(),null);
         ES_Document es_document = es_documentDao.findById(document_id).get();
@@ -746,50 +741,50 @@ public class AcademicController {
                 .withPageable(PageRequest.of(0, 20,sort1))
                 .build();
         Page<ES_Keyword> es_keywords = es_keywordDao.search(searchQuery);
-        ES_Keyword es_keyword=new ES_Keyword();
-        es_keyword.keyword="治疗";
-        es_keyword.citedNum=7472;
-        ES_Keyword es_keyword2=new ES_Keyword();
-        es_keyword2.keyword="经济";
-        es_keyword2.citedNum=7223;
-        ES_Keyword es_keyword3=new ES_Keyword();
-        es_keyword3.keyword="化学";
-        es_keyword3.citedNum=5187;
-        ES_Keyword es_keyword4=new ES_Keyword();
-        es_keyword4.keyword="治疗";
-        es_keyword4.citedNum=7472;
-        ES_Keyword es_keyword5=new ES_Keyword();
-        es_keyword5.keyword="工程";
-        es_keyword5.citedNum=4263;
-        ES_Keyword es_keyword6=new ES_Keyword();
-        es_keyword6.keyword="材料";
-        es_keyword6.citedNum=2845;
-        ES_Keyword es_keyword7=new ES_Keyword();
-        es_keyword7.keyword="计算机";
-        es_keyword7.citedNum=2333;
-        ES_Keyword es_keyword8=new ES_Keyword();
-        es_keyword8.keyword="糖尿病";
-        es_keyword8.citedNum=2131;
-        ES_Keyword es_keyword9=new ES_Keyword();
-        es_keyword9.keyword="电子";
-        es_keyword9.citedNum=1817;
-        ES_Keyword es_keyword10=new ES_Keyword();
-        es_keyword10.keyword="数学";
-        es_keyword10.citedNum=1523;
-
-        List<ES_Keyword> row = new ArrayList<>();
-        row.add(es_keyword);
-        row.add(es_keyword2);
-        row.add(es_keyword3);
-        row.add(es_keyword4);
-        row.add(es_keyword5);
-        row.add(es_keyword6);
-        row.add(es_keyword7);
-        row.add(es_keyword8);
-        row.add(es_keyword9);
-        row.add(es_keyword10);
-        Collections.sort(row);
-        return new Result("200", CodeEnum.success.toString(),row);
+//        ES_Keyword es_keyword=new ES_Keyword();
+//        es_keyword.keyword="治疗";
+//        es_keyword.citedNum=7472;
+//        ES_Keyword es_keyword2=new ES_Keyword();
+//        es_keyword2.keyword="经济";
+//        es_keyword2.citedNum=7223;
+//        ES_Keyword es_keyword3=new ES_Keyword();
+//        es_keyword3.keyword="化学";
+//        es_keyword3.citedNum=5187;
+//        ES_Keyword es_keyword4=new ES_Keyword();
+//        es_keyword4.keyword="治疗";
+//        es_keyword4.citedNum=7472;
+//        ES_Keyword es_keyword5=new ES_Keyword();
+//        es_keyword5.keyword="工程";
+//        es_keyword5.citedNum=4263;
+//        ES_Keyword es_keyword6=new ES_Keyword();
+//        es_keyword6.keyword="材料";
+//        es_keyword6.citedNum=2845;
+//        ES_Keyword es_keyword7=new ES_Keyword();
+//        es_keyword7.keyword="计算机";
+//        es_keyword7.citedNum=2333;
+//        ES_Keyword es_keyword8=new ES_Keyword();
+//        es_keyword8.keyword="糖尿病";
+//        es_keyword8.citedNum=2131;
+//        ES_Keyword es_keyword9=new ES_Keyword();
+//        es_keyword9.keyword="电子";
+//        es_keyword9.citedNum=1817;
+//        ES_Keyword es_keyword10=new ES_Keyword();
+//        es_keyword10.keyword="数学";
+//        es_keyword10.citedNum=1523;
+//        List<ES_Keyword> row = new ArrayList<>();
+//        row.add(es_keyword);
+//        row.add(es_keyword2);
+//        row.add(es_keyword3);
+//        row.add(es_keyword4);
+//        row.add(es_keyword5);
+//        row.add(es_keyword6);
+//        row.add(es_keyword7);
+//        row.add(es_keyword8);
+//        row.add(es_keyword9);
+//        row.add(es_keyword10);
+//        Collections.sort(row);
+//        return new Result("200", CodeEnum.success.toString(),row);
+        return new Result("200", CodeEnum.success.toString(),es_keywords.getContent());
     }
     public static List<Integer> getMax10Value(Map<String, Integer> map) {
         if (map == null)

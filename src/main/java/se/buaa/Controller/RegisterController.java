@@ -20,7 +20,7 @@ public class RegisterController {
             return Result.Error("201","用户名已被使用");
 
         }
-        else if (userRepository.findByUserName(email)!=null){
+        else if (userRepository.findByEmail(email)!=null){
             return Result.Error("201","邮箱已被使用");
         }
         else {
