@@ -743,7 +743,7 @@ public class AcademicController {
 //治疗 7472 Agents 989 Proteins 845
         Sort sort1 = getSort("view");
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withPageable(PageRequest.of(0, 20,sort1))
+                .withPageable(PageRequest.of(0, 20, sort1))
                 .build();
         Page<ES_Keyword> es_keywords = es_keywordDao.search(searchQuery);
         ES_Keyword es_keyword=new ES_Keyword();
@@ -788,38 +788,6 @@ public class AcademicController {
         row.add(es_keyword8);
         row.add(es_keyword9);
         row.add(es_keyword10);
-//        Map<String,Integer> map=new HashMap<>();
-//        for(int i=0;i<10;i++){
-//            int l=es_documentList.get(i).getKeywordList().size();
-//            List<String> keywordList=es_documentList.get(i).getKeywordList();
-//            for(int j=0;j<l;j++){
-//                if(map.containsKey(keywordList.get(j))){
-//                    int v=map.get(keywordList.get(j));
-//                    map.put(keywordList.get(j),v+1);
-//                }
-//                else {
-//                    map.put(keywordList.get(j),1);
-//                }
-//            }
-//        }
-//
-//        List<Integer> list=getMax10Value(map);
-//        List<ES_Keyword> row=new ArrayList<>();
-//        for(int i=0;i<10;i++){
-//            ES_Keyword es_keyword=new ES_Keyword();
-//            es_keyword.view=list.get(i);
-//            for(Map.Entry<String, Integer> entry : map.entrySet()){
-//                String mapKey = entry.getKey();
-//                Integer mapValue = entry.getValue();
-//                if(mapValue==es_keyword.view){
-//                    es_keyword.keyword=mapKey;
-//                    row.add(es_keyword);
-//                    map.remove(mapKey,mapValue);
-//                    break;
-//                }
-//            }
-//
-//        }
         return new Result("200", CodeEnum.success.toString(),row);
     }
     public static List<Integer> getMax10Value(Map<String, Integer> map) {
