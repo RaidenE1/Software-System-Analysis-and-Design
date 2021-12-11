@@ -1,19 +1,22 @@
 <template>
-<div>
-    <Header>
-    </Header>
-    <el-container>
-        <Aside>
-        </Aside>
-        <div id="historymain">
-            <div id="historytitle">
-                <span id="historyheader">浏览历史</span></div>
+<div class="background">
+    <navbar>
+    </navbar>
+    <div class="container">
+        <userinfo>
+        </userinfo>
+        <div class="maincontent">
+            <userheader>
+            </userheader>
+            <div class="pagetitle">
+                <span>浏览历史</span>
+            </div>
             <el-divider>
             </el-divider>
-            <div class="historycontent" v-if="history_list.length==0">
+            <div class="content" v-if="history_list.length==0">
                 暂无历史记录
             </div>
-            <div class="historycontent" v-else>
+            <div class="content" v-else>
                 <el-row v-for="(item,index) in history_to_show" :key="index">
                     <div class="singlehistory" @click="goArticle(item.id)" @mouseenter="highlight(item.id)" @mouseleave="unhighlight()" v-bind:class="{focus : focus == item.id}">
                         <el-row>
@@ -43,18 +46,20 @@
             <el-pagination @current-change="handleCurrentChange" :current-page="current_page" :page-size="page_size" layout="total, prev, pager, next, jumper" :total="history_list.length">
             </el-pagination>
         </div>
-    </el-container>
+    </div>
 </div>
 </template>
 
 <script>
-import Header from "@/components/header.vue";
-import Aside from "@/components/UserHeader.vue";
+import navbar from "@/components/header.vue"
+import userheader from "@/components/UserHeader.vue"
+import userinfo from "@/components/user/Information.vue"
 export default {
     name: "MyHistory",
     components: {
-        Header,
-        Aside,
+        navbar,
+        userheader,
+        userinfo
     },
     /*mounted() {
         this.history_list = JSON.parse(localStorage.getItem(sessionStorage.getItem("userID")));
@@ -126,86 +131,46 @@ export default {
 </script>
 
 <style lang="scss">
-#historymain {
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    width: 1400px;
-    margin-left: 5%;
-    margin-top: 50px;
-    padding-bottom: 50px;
-    background: #fafafa;
-    height: 750px;
+@import "@/css/user.scss";
 
-    .el-divider.el-divider--horizontal {
-        width: 96%;
-        align-self: center;
-        margin-left: 2%;
-    }
+.singlehistory {
+    border: 1px solid #99CCFF;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    height: auto;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 10px;
 
-    #historytitle {
-        margin-top: 20px;
-        margin-left: 2%;
-        margin-bottom: 30px;
+    .singletitle {
+        text-align: left;
+        height: 36px;
 
-        #historyheader {
-
-            margin-left: 10px;
-            display: flex;
+        span {
+            line-height: 36px;
             font-size: 24px;
         }
     }
 
-    .historycontent {
-        margin-left: 2%;
-        width: 96%;
-        height: 550px;
+    .singletime {
+        text-align: left;
+        height: 20px;
 
-        .focus {
-            background-color: #aaaaaa;
-            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
+        span {
+            font: 14px;
+            line-height: 20px;
+            color: #aeaeae;
+
         }
+    }
 
-        .singlehistory {
-            border: 1px solid #99CCFF;
-            margin-top: 2px;
-            margin-bottom: 2px;
-            height: auto;
-            padding-left: 10px;
-            padding-top: 3px;
-            padding-bottom: 3px;
-            padding-right: 10px;
+    .delbutton {
+        height: 56px;
+        line-height: 56px;
 
-            .singletitle {
-                text-align: left;
-                height: 36px;
-
-                span {
-                    line-height: 36px;
-                    font-size: 24px;
-                }
-            }
-
-            .singletime {
-                text-align: left;
-                height: 20px;
-
-                span {
-                    font: 14px;
-                    line-height: 20px;
-                    color: #aeaeae;
-
-                }
-            }
-
-            .delbutton {
-                height: 56px;
-                line-height: 56px;
-
-                button {
-                    width: 80%;
-                }
-            }
-
+        button {
+            width: 80%;
         }
     }
 

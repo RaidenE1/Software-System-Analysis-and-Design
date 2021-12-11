@@ -1,22 +1,22 @@
 <template>
-<div id="myachievement">
+<div class="background">
     <navbar>
     </navbar>
     <div class="container">
         <userinfo>
         </userinfo>
-        <div id="achievements">
+        <div class="maincontent">
         <userheader>
         </userheader>
-            <div id="achievementtitle">
-                <span id="achievementsheader">学术成果</span>
+            <div class="pagetitle">
+                <span>学术成果</span>
             </div>
             <el-divider>
             </el-divider>
-            <div class="achievementcontent" v-if="achievement.length==0">
+            <div class="content" v-if="achievement.length==0">
                 暂无学术成果
             </div>
-            <div class="achievementcontent" v-else>
+            <div class="content" v-else>
                 <el-row v-for="(achievement, i) in user_achievement" v-bind:key="i">
                     <achievement :achievement="achievement"></achievement>
                 </el-row>
@@ -102,39 +102,5 @@ export default {
 </script>
 
 <style lang="scss">
-#myachievement{
-    background-color:#f3f3f3;
-}
-.container {
-    text-align: center;
-}
-#achievements {
-    // border: 1px solid #e0e0e0;
-    border: 1px solid #e0e0e0;
-    width: 1000px;
-    margin: 0 auto;
-    padding-bottom: 50px;
-    background: #ffffff;
-    .el-divider.el-divider--horizontal {
-        width: 96%;
-        align-self: center;
-        margin-left: 2%;
-    }
-    #achievementtitle{
-        margin-top:20px;
-        margin-left: 2%;
-        margin-bottom: 30px;
-    }
-    .achievementcontent {
-        margin-left: 2%;
-        width: 96%;
-        height:550px;
-    }
-
-    &header {
-        margin-left: 10px;
-        display: flex;
-        font-size: 24px;
-    }
-}
+@import "@/css/user.scss";
 </style>
