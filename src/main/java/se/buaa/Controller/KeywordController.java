@@ -33,6 +33,10 @@ public class KeywordController {
     ES_KeywordDao es_keywordDao;
     @RequestMapping("set")
     public void setKeyword(){
+//        if(user_id == null)
+//            return new Result<>(CodeEnum.noUser.getCode(), CodeEnum.noUser.toString(),null);
+
+
         int i=0;
         while(true){
             NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()

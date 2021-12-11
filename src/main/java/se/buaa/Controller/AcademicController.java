@@ -743,7 +743,7 @@ public class AcademicController {
 //治疗 7472 Agents 989 Proteins 845
         Sort sort1 = getSort("view");
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withPageable(PageRequest.of(0, 20, sort1))
+                .withPageable(PageRequest.of(0, 20,sort1))
                 .build();
         Page<ES_Keyword> es_keywords = es_keywordDao.search(searchQuery);
         ES_Keyword es_keyword=new ES_Keyword();
