@@ -71,11 +71,6 @@ Vue.use(VueRouter)
       component: () => import('../views/404')
     },
     {
-      path: '/personalInfo',
-      name: 'personalInfo',
-      component: ()=> import('../views/user/PersonalInfo.vue')
-    },
-    {
       path: '/myAchievement',
       name :"myAchievement",
       component: ()=> import('../views/user/MyAchievement.vue')
@@ -88,7 +83,7 @@ Vue.use(VueRouter)
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  //mode: 'history',
   routes: routes
 })
 

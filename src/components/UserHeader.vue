@@ -1,10 +1,8 @@
 <template>
-<el-aside style="width: 200px">
-    <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-        <el-menu-item index="/personalInfo" @click="gotoPersonalInfo">
-            <i class="el-icon-user"></i>
-            <div class="title">个人信息</div>
-        </el-menu-item>
+<el-header >
+    
+    <el-menu :default-active="$route.path"  class="el-menu-demo" mode="horizontal" @open="handleOpen" @close="handleClose">
+        
         <el-menu-item index="/myAchievement" @click="gotoMyAchievement">
             <i class="el-icon-user"></i>
             <div class="title">我的成果</div>
@@ -13,10 +11,10 @@
             <i class="el-icon-collection-tag"></i>
             <div class="title">我的关注</div>
         </el-menu-item>
-        <el-menu-item index="/moments" @click="gotoMoments">
+        <!-- <el-menu-item index="/moments" @click="gotoMoments">
             <i class="el-icon-collection-tag"></i>
             <div class="title">学术动态</div>
-        </el-menu-item>
+        </el-menu-item> -->
         <el-menu-item index="/myCollection" @click="gotoMyCollection">
             <i class="el-icon-star-off"></i>
             <div class="title">我的收藏</div>
@@ -26,12 +24,12 @@
             <div class="title">浏览历史</div>
         </el-menu-item>
     </el-menu>
-</el-aside>
+</el-header>
 </template>
 
 <script>
 export default {
-    name: "userAside",
+    name: "UserHeader",
     data() {
         return {
 
@@ -82,10 +80,6 @@ export default {
 <style lang="scss">
 body {
     margin-left: 0;
-}
-.el-aside{
-    overflow: hidden;
-    margin-left:0;
 }
 .el-menu-item {
     font-size: 20px;

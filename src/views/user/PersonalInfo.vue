@@ -3,13 +3,12 @@
     <Navbar>
     </Navbar>
     <el-container>
-        <Aside>
-        </Aside>
         <div id="main">
+        <div>
             <div id="basicinfo">
                 <div id="headcontainer">
                     <div class="avatar">
-                        <el-avatar :size="240" :src="circleUrl"></el-avatar>
+                        <el-avatar :size="140" :src="circleUrl"></el-avatar>
                     </div>
                     <div id="changehead" v-if="changing_info">
                         <el-upload action="https://jsonplaceholder.typicode.com/posts/">
@@ -89,44 +88,24 @@
                     <span v-else>{{user_info.introduction}}</span>
                 </el-row>
             </div>
-            
         </div>
-        <!-- <div id="right">
-        <div id="recent_view_achievement">
-            <div class="recent_view_title">
-                <el-row>
-                    <el-col :span=21 class="mainastitle">最近浏览</el-col>
-                    <el-col :span=3>
-                        <el-button @click="viewAllRecent()" type="text">查看全部</el-button>
-                    </el-col>
-                </el-row>
-            </div>
-            <div class="nodata" v-if="recent_view_achievement.length==0">
-                <span>没有数据</span>
-            </div>
-            <div v-else>
-                <el-row v-for="(achievement, i) in associate_achievement_to_show" v-bind:key="i">
-                    <narrowachievement :achievement="achievement"></narrowachievement>
-                </el-row>
-            </div>
         </div>
-    </div> -->
     </el-container>
 </div>
 </template>
 
 <script>
-import Aside from "@/components/UserAside.vue"
+import userheader from "@/components/UserHeader.vue"
 import Navbar from "@/components/header.vue";
 export default {
     components: {
         Navbar,
-        Aside,
+        userheader,
     },
     data() {
         return {
             circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-            
+
             changing_info: false,
             user_info: {
                 username: "takanashi",
@@ -160,8 +139,7 @@ export default {
         };
     },
     computed: {
-        
-        
+
         associate_achievement_to_show: {
             get: function () {
                 if (this.recent_view_achievement.length < 5) {
@@ -253,25 +231,29 @@ export default {
 </script>
 
 <style lang="scss">
+.el-container {
+    text-align: center;
+}
 #main {
     border: 1px solid #e0e0e0;
     border-radius: 10px;
-    width: 1400px;
-    margin-left: 5%;
-    margin-top: 50px;
+    width: 1000px;
+    margin: 0 auto;
     padding-bottom: 50px;
     background: #fafafa;
-    height:750px;
+    height: 750px;
+
     #basicinfo {
         height: 350px;
         display: flex;
         flex-direction: row;
         margin-bottom: 10px;
         padding: 40px 20px 40px 40px;
+
         .el-divider--vertical {
-                    height: 300px;
-                    margin-right: 3%;
-                }
+            height: 300px;
+            margin-right: 3%;
+        }
 
         #headcontainer {
             align-items: center;

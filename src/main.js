@@ -9,7 +9,20 @@ import utils from './javascript/utils.js'
 import md5 from 'js-md5';
 import VueClipboard from 'vue-clipboard2';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+import {fas} from '@fortawesome/free-solid-svg-icons'
+
+import{far} from '@fortawesome/free-regular-svg-icons'
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(fas,far)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 Vue.use(utils);
+Vue.config.productionTip=false;
 
 import api from './http'
 Vue.use(utils);

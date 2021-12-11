@@ -347,7 +347,7 @@ export default {
       },
       isLogin:false,
       isAdmin:false,
-      userName:'',
+      userName:'taka',
       isRead: false,
       msgList:[],
       msgNum: 0,
@@ -437,7 +437,7 @@ export default {
     },
     goUser() {
       this.$router.push({
-        name:"PerInfo"
+        name:"myAchievement"
       })
     },
     goLogin() {
@@ -511,7 +511,7 @@ export default {
     /*position: absolute;*/
     min-width: 800px;
     /*width: 100%;*/
-    background-color: #336699;
+    background-color: #0099CC;
     margin: -10px -8px 0 -8px;
     padding: 0;
   }

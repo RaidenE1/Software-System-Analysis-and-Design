@@ -230,11 +230,11 @@ export default {
         _this.hotKeywords = res.data.slice(0, 10);
         console.log(res.data)
       }else {
-        // _this.$message({
-        //   message: res.msg,
-        //   type: "error"
-        // })
-        // console.log("Request => getSearchResult : not 200");
+        _this.$message({
+          message: res.msg,
+          type: "error"
+        })
+        console.log("Request => getSearchResult : not 200");
       }
     })
   }

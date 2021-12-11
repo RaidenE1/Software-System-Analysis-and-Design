@@ -27,7 +27,7 @@
 </template>
 <script>
     import Header from "@/components/header.vue";
-    import Aside from "@/components/UserAside.vue";
+    import Aside from "@/components/UserHeader.vue";
     export default {
         name: "MyCollection",
         components: {

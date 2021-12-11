@@ -2,10 +2,12 @@
 <div id="myachievement">
     <navbar>
     </navbar>
-    <el-container>
-        <myaside>
-        </myaside>
+    <div class="container">
+        <userinfo>
+        </userinfo>
         <div id="achievements">
+        <userheader>
+        </userheader>
             <div id="achievementtitle">
                 <span id="achievementsheader">学术成果</span>
             </div>
@@ -24,19 +26,21 @@
             <el-pagination @current-change="handleCurrentChange" :current-page="current_page" :page-size="page_size" layout="total, prev, pager, next, jumper" :total="achievement.length">
             </el-pagination>
         </div>
-    </el-container>
+    </div>
 </div>
 </template>
 
 <script>
 import navbar from "@/components/header.vue"
-import myaside from "@/components/UserAside.vue"
+import userheader from "@/components/UserHeader.vue"
 import achievement from "@/components/user/AchievementBasic.vue"
+import userinfo from "@/components/user/Information.vue"
 export default {
     components: {
         navbar,
-        myaside,
-        achievement
+        userheader,
+        achievement,
+        userinfo
     },
     data() {
         return {
@@ -98,16 +102,19 @@ export default {
 </script>
 
 <style lang="scss">
+#myachievement{
+    background-color:#f3f3f3;
+}
+.container {
+    text-align: center;
+}
 #achievements {
     // border: 1px solid #e0e0e0;
     border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    width: 1400px;
-    margin-left: 5%;
-    margin-top: 50px;
+    width: 1000px;
+    margin: 0 auto;
     padding-bottom: 50px;
-    background: #fafafa;
-    height:750px;
+    background: #ffffff;
     .el-divider.el-divider--horizontal {
         width: 96%;
         align-self: center;

@@ -271,7 +271,7 @@
           keywordList:["fds","kdfIFD","段通风户籍"],
           link: "this is the link",
           cited_quantity: 100,
-          time: 1990,
+          time: '1990',
           origin: "中国知网",
           views:123,
           is_favor:true,
@@ -481,6 +481,7 @@
             if(res.code == 200) {
               vue.academic = res.data;
               console.log(vue.academic);
+              console.log(typeof(vue.academic.time));
               
               var date = new Date();
               var history = [];

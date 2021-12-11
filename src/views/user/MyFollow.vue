@@ -30,7 +30,7 @@
 
 <script>
 import Header from "@/components/header.vue";
-import Aside from "@/components/UserAside.vue";
+import Aside from "@/components/UserHeader.vue";
 import person from "@/components/user/PersonBasic.vue"
 export default {
     name: "MyFollow",
@@ -141,72 +141,4 @@ export default {
         font-size: 24px;
     }
 }
-
-/* }
-.collection-sublist {
-    margin-top: 8px;
-    margin-bottom: -17px;
-    padding: 0 16px;
-}
-
-.collection-sublist li {
-    padding: 0;
-    position: relative;
-    margin-top: 0;
-    background: #fff;
-    border: 1px solid #ededed;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    height: 52px;
-    overflow: hidden;
-    line-height: 52px;
-}
-
-.collection-sublist li .collection-dir {
-    width: 89%;
-    font-size: 14px !important;
-    color: #555666;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.collection-sublist li .subtitle {
-    font-family: Helvetica !important;
-    color: #555666;
-    display: inline;
-    cursor: pointer;
-}
-
-.collection-sublist li .subtitle:hover {
-    font-family: Helvetica !important;
-    color: red;
-    display: inline;
-    cursor: pointer;
-}
-
-.collection-sublist li .collect-detail-right {
-    position: absolute;
-    right: 0;
-    width: 150px;
-    height: 100%;
-    top: 0px;
-    text-align: right;
-    line-height: 52px;
-    padding-right: 18px;
-}
-
-.delFollow {
-    border: 1px solid #999;
-    color: #999;
-    background-color: #fff;
-    border-radius: 16px;
-}
-
-.delFollow:hover {
-    border: 1px solid red;
-    color: red;
-    background-color: #fff;
-    border-radius: 16px;
-} */
 </style>
