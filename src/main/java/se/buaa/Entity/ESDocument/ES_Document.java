@@ -27,7 +27,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
+
+@Builder
 @Data
+@AllArgsConstructor
 @Document(indexName = "document3",indexStoreType = "doc")
 public class ES_Document {
     @Id
@@ -188,6 +191,10 @@ public class ES_Document {
 //    public Docu_ExpertRepository docu_expertRepository;
 //    @Transient
 //    public ES_ExpertDao es_expertDao;
+
+
+    public ES_Document() {
+    }
 
     @PersistenceConstructor
     public ES_Document(String dtype,String id, String title, String experts, String keywords, String summary,
