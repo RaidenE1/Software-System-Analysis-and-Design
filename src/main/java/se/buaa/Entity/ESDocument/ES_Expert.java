@@ -36,7 +36,7 @@ public class ES_Expert {
     @Field(analyzer = "ik_smart", type = FieldType.Text)
     private String domain;
     @Field
-    private int cooperationNum;
+    private Integer cooperationNum;
 
     public ES_Expert() {
     }

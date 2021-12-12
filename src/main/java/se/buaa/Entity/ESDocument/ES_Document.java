@@ -186,11 +186,6 @@ public class ES_Document {
     private List<ES_Expert> authors = new ArrayList<>();
     @Transient
     private List<String> keywordList = new ArrayList<>();
-//    @Transient
-//    public Docu_ExpertRepository docu_expertRepository;
-//    @Transient
-//    public ES_ExpertDao es_expertDao;
-
 
     public ES_Document() {
     }

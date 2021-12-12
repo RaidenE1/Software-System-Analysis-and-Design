@@ -700,6 +700,15 @@ public class AcademicController {
         if(es_document == null)
             return new Result<>(CodeEnum.documentNotExist.getCode(), CodeEnum.documentNotExist.toString(),null);
         else{
+            List<String> _keywords = es_document.getKeywordList();
+            System.out.println(_keywords);
+            for (String keyword : _keywords) {
+                ES_Keyword es_keyword = es_keywordDao.findByKeyword(keyword);
+                if(es_keyword != null){
+                    es_keyword.setView(es_keyword.getView() + 1);
+                    es_keywordDao.save(es_keyword);
+                }
+            }
             CollectionKey collectionKey;
             if(user_id!=-1){
                 collectionKey = new CollectionKey(user_id, document_id);
