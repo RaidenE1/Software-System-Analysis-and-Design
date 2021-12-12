@@ -80,6 +80,11 @@ Vue.use(VueRouter)
       name : 'Moments',
       component: ()=>import('../views/user/Moments.vue')
     },
+    // {
+    //   path: '/scholarPage',
+    //   name: 'ScholarPage',
+    //   component: () => import('../views/scholar/ScholarPage')
+    // },
     {
       path:"*",
       redirect:{
