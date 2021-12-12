@@ -7,7 +7,7 @@
           <span class="title-click" @click="toDetailPage">{{ item.title }}</span>
         </div>
         <!-- 摘要 -->
-        <div class="summary">{{ item.summary }}</div>
+        <div class="summary"><b>摘要:</b> {{ item.summary }}</div>
         <!-- 其他信息：所有作者/来源(期刊/出版社/或无)/被引量/年份-->
         <div class="info">
           <span v-for="(item, index) in item.authors" :key="index">
@@ -63,7 +63,6 @@
     methods: {
       toDetailPage() {
         console.log("跳转文章详情页！");
-        console.log(this.item)
         let url = window.location.origin + "/#/academicShow/"+this.item.id;
         if(window.open(url) === null){
           window.location.herf = url;
@@ -209,7 +208,7 @@
    margin-top: 15px;
  }
  .ext-button{
-   background-color: #f1f1f1;
+   background-color: #edf9ff;
    border-width: 0;
  }
 </style>

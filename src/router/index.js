@@ -15,6 +15,11 @@ Vue.use(VueRouter)
       component: () => import('../views/user/Register.vue')
     },
     {
+      path: '/perInfo',
+      name:'PerInfo',
+      component: () => import('../views/user/PerInfo.vue'),
+    },
+    {
       path: '/changeInfo',
       name:'ChangeInfo',
       component: () => import('../views/user/ChangeInfo.vue')
@@ -69,28 +74,11 @@ Vue.use(VueRouter)
       path: '/404',
       name: 'NotFound',
       component: () => import('../views/404')
-    },
-    {
-      path: '/myAchievement',
-      name :"myAchievement",
-      component: ()=> import('../views/user/MyAchievement.vue')
-    },
-    {
-      path:'/moments',
-      name : 'Moments',
-      component: ()=>import('../views/user/Moments.vue')
-    },
-    {
-      path:"*",
-      redirect:{
-        name:'NotFound'
-      }
     }
 ]
 
 const router = new VueRouter({
-  //mode: 'history',
-  routes: routes
+  routes
 })
 
 export default router

@@ -46,7 +46,7 @@
 </template>
 <script>
     import Header from "@/components/header.vue";
-    import Aside from "@/components/UserHeader.vue";
+    import Aside from "@/components/UserAside.vue";
     export default {
         name: "PerInfo",
         components: {

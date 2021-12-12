@@ -1,6 +1,7 @@
 <template>
+  <div>
+  <Header class="header_home"></Header>  
   <div class="wrapper">
-    <Header class="header_home"></Header>
     <div class="container">
       <!-- 右侧热门显示 -->
       <div class="content-right">
@@ -9,13 +10,13 @@
           <div>
             <h4 style="margin-top: 8px; margin-bottom: 10px">热门关键词</h4>
             <el-row class="keyword_list" v-for="(o, index) in this.hot_keywords" :key="index">
-              <el-link class="keyword" :underline="false" @click="searchWords(o)" style="line-height: 30px; font-weight: bold; font-size: 14px"><i class="el-icon-search" style="margin-right: 5px"></i>{{ o }}</el-link>
+              <el-link class="keyword" :underline="false" @click="searchWords(o)" style="line-height: 30px; font-weight: bold; font-size: 14px;"><i class="el-icon-search" style="margin-right: 5px"></i>{{ o }}</el-link>
             </el-row>
           </div>
           <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
           <!-- 热门文献 -->
           <div>
-            <h4 style="margin-top: 14px; margin-bottom: 10px">热门资源</h4>
+            <h4 style="margin-top: 14px; margin-bottom: 10px">热门文献</h4>
             <div class="hot_source">
               <div class="hot_source_item" v-for="(o, index) in this.hot_source" :key="index">
                 <div class="hot_title" @click="goArticle(o.id)" >{{ o.title }}</div>
@@ -101,13 +102,13 @@
       </div>
       <!-- 无结果tip -->
       <div class="no_result_tip" v-if="!has_result">
-        <p class="no_result_tip_warning">No Result</p>
-        <p style="margin-top: 8px">抱歉，没有找到与“{{ " " + search_words.searchWords + " " +search_words.title + " " +search_words.keyWords + " " + search_words.experts + " " + search_words.origin + " "}}”相关的学术结果</p>
+        <p class="no_result_tip_warning">No Results Found</p>
+        <p style="margin-top: 8px">没有找到与“{{ " " + search_words.searchWords + " " +search_words.title + " " +search_words.keyWords + " " + search_words.experts + " " + search_words.origin + " "}}”相关的学术结果</p>
         <p style="line-height: 26px">
-          <b style="font-size: 17px">建议：</b><br/>
-          1. 检查输入是否正确<br/>
+          <b style="font-size: 17px">请尝试：</b><br/>
+          1. 检查输入是否有误<br/>
           2. 简化输入词<br/>
-          3. 尝试其他相关词，如同义、近义词等<br/>
+          3. 更换相关词<br/>
         </p>
       </div>
     </div>
@@ -117,11 +118,11 @@
         :visible.sync="quotedialogVisible"
         width="40%">
       <div style="text-align: left">
-        <b>以下引用格式为GB/T7714，点击右侧按钮即可复制内容</b>
-        <el-button type="warning"
+        <b>GB/T7714</b>
+        <el-button 
                    size="mini"
                    icon="el-icon-document-copy"
-                   style="float: right"
+                   style="float: right; background-color: #00bcd4; color: #fff;"
                    v-clipboard:copy="quoteText"
                    v-clipboard:success="copySuccess"
                    v-clipboard:error="copyError"
@@ -139,6 +140,7 @@
         <el-button type="primary" @click="quotedialogVisible=false">确 定</el-button>
       </span>
     </el-dialog>
+  </div>
   </div>
 </template>
 
@@ -190,15 +192,15 @@
         quotedialogVisible:false,
         sp_result:{},
         hot_keywords:[
-          '计算机',
+          '神经网络',
+          '数据库',
+          'python',
+          '5G',
+          '大数据',
           '人工智能',
-          '航空',
-          '深度学习',
-          '合成生物学',
-          '糖尿病',
           '航天',
           '新冠',
-          '疫情',
+          '碳中和',
         ],
         hot_source: []
       }
@@ -542,10 +544,10 @@
 </script>
 
 <style scoped>
-  div{
-    display: block;
-  }
   .wrapper{
+    position: absolute;
+    top: 60px;
+    left: 150px;
     min-width: 1100px;
     text-align: center;
   }
@@ -661,7 +663,7 @@
     position: relative;
     right: 3px;
     color: #2c3e50;
-    font-size: 60px;
+    font-size: 40px;
     font-weight: bold;
     margin-bottom: 0;
   }
@@ -686,11 +688,9 @@
     max-width: 230px;
     margin: 0 10px 10px 0;
     padding: 4px 10px;
-    border: 1px solid #ccc;
+    border: 2px solid #0066cc;
     text-decoration: none;
     font-size: 14px;
-    background: #fff;
-    color: #333;
     pointer-events: all;
   }
   .keyword_list:hover{

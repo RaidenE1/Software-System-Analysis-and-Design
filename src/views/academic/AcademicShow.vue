@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div class="background">
+    </div>
     <br>
     <div style="width: 1150px; margin: 0 auto;">
       <el-col :span="17">
@@ -84,26 +86,31 @@
         </table>
         <el-row style="margin-top: 20px">
           <el-col :offset="1" :span="4">
-            <el-button size="medium" type="primary" plain @click="jumptoLink(academic.link)">查看全文</el-button>
+            <el-button size="medium" type="primary" @click="jumptoLink(academic.link)">查看全文</el-button>
           </el-col>
           <el-col :span="4">
-            <el-button v-if="academic.is_favor" size="medium" type="primary" @click="cancelFavorite" round>取消收藏</el-button>
-            <el-button v-else size="medium" type="primary" @click="favorite" round>收藏</el-button>
+            <el-button v-if="academic.is_favor" size="medium" type="warning" plain @click="cancelFavorite" >
+              <i class="el-icon-star-on"></i>
+              取消收藏</el-button>
+            <el-button v-else size="medium" type="primary" plain @click="favorite" >
+              <i class="el-icon-star-off"></i>
+              收藏
+              </el-button>
           </el-col>
           <el-col :span="4">
-            <el-button type="primary" size="medium" round @click="sharedialogVisible = true">
+            <el-button type="info" size="medium" plain @click="sharedialogVisible = true">
               <i class="el-icon-link"></i>
               分享
             </el-button>
           </el-col>
           <el-col :span="4">
-            <el-button type="primary" size="medium" round @click="showQuote">
+            <el-button type="info" plain size="medium" @click="showQuote">
               <i class="el-icon-position"></i>
               引用
             </el-button>
           </el-col>
           <el-col :span="4">
-            <el-button type="primary" size="medium" round @click="dialogVisible = true">
+            <el-button type="success" size="medium"  @click="dialogVisible = true">
               <i class="el-icon-trophy"></i>
               认领
             </el-button>
@@ -112,7 +119,7 @@
 
         <hr color="#9c9e9c">
         <div >
-          <p style="text-align: left;font-size: 25px">相关推荐</p>
+          <p style="text-align: left;font-size: 25px">相关文献</p>
           <div style="padding-left: 80px;" v-for="(result_item,index) in relation_list" v-bind:key="index">
             <academic-item :c_sc = result_item></academic-item>
           </div>
@@ -125,7 +132,7 @@
       </el-col>
       <el-col :offset="2" :span="5" align="left">
         <span style="font-size: 20px;">
-          研究热点分析
+          本篇关键词
         </span>
         <br>
         <br>
@@ -175,9 +182,6 @@
 <!--          </div>-->
 <!--        </el-row>-->
         <br>
-        <el-image :src="require('@/assets/广告.png')"
-                  style="cursor: pointer"
-                  @click="jumpToHome"></el-image>
 
       </el-col>
       <el-dialog
@@ -185,9 +189,10 @@
               :visible.sync="sharedialogVisible"
               width="30%">
         <el-row style="text-align: left">
-          复制下面链接，粘贴到浏览器即可
+          快把优质文献分享出去吧
           <el-button icon="el-icon-document-copy"
-                     style="float: right"
+                     style="float: right;"
+                     type='info'
                      v-clipboard:copy="url"
                      v-clipboard:success="copySuccess"
                      v-clipboard:error="copyError"
@@ -211,9 +216,10 @@
               :visible.sync="quotedialogVisible"
               width="30%">
         <el-row style="text-align: left">
-          以下引用格式为GB/T7714，点击按钮即可复制内容
+          引用格式为GB/T7714
           <el-button icon="el-icon-document-copy"
                      style="float: right"
+                     type='info'
                      v-clipboard:copy="getQuote(academic)"
                      v-clipboard:success="copySuccess"
                      v-clipboard:error="copyError"
@@ -232,11 +238,10 @@
         </span>
       </el-dialog>
       <el-dialog
-              title="提示"
+              title="认领文献"
               :visible.sync="dialogVisible"
               width="30%">
         <el-row style="text-align: left">
-          您确认要认领这篇文献吗？<br>
           请输入您的常用邮箱，管理员会在和您联系后审核您的申请。
         </el-row>
 
@@ -271,7 +276,7 @@
           keywordList:["fds","kdfIFD","段通风户籍"],
           link: "this is the link",
           cited_quantity: 100,
-          time: '1990',
+          time: 1990,
           origin: "中国知网",
           views:123,
           is_favor:true,
@@ -294,15 +299,15 @@
           endTime: '0'
         },
         hot_keywords:[
-          '计算机',
+          '神经网络',
+          '数据库',
+          'python',
+          '5G',
+          '大数据',
           '人工智能',
-          '航空',
-          '深度学习',
-          '合成生物学',
-          '糖尿病',
           '航天',
           '新冠',
-          '疫情',
+          '碳中和',
         ],
       }
     },
@@ -465,11 +470,9 @@
     },
     mounted() {
       let vue = this;
-      console.log(this.$route.params)
       this.academicID = this.$route.params.academicID
       console.log(this.academicID)
       let user_id = sessionStorage.getItem("userID")
-      console.log("userid is"+user_id);
       if(user_id == null){
         user_id = -1;
       }
@@ -480,11 +483,9 @@
           }
       ).then(
           res =>{
-
             if(res.code == 200) {
               vue.academic = res.data;
               console.log(vue.academic);
-              console.log(typeof(vue.academic.time));
               
               var date = new Date();
               var history = [];
@@ -501,14 +502,13 @@
               this.getRelation();
             }else{
               this.$message.error("文章不存在或已被删除")
-              this.$router.replace('/404')
+              this.$router.push('/404')
             }
           }
       ).catch(err=>{
         console.log(err)
         this.$message.error("文章不存在或已被删除")
-        this.$router.replace('/404')
-        // this.$router.push('/404')
+        this.$router.push('/404')
       })
     }
   }
@@ -526,22 +526,21 @@
     max-width: 230px;
     margin: 0 10px 10px 0;
     padding: 7px 14px;
-    border: 1px solid #ccc;
+    border: 1px solid #0066cc;
     text-decoration: none;
     font-size: 14px;
-    background: #fff;
     color: #333;
     pointer-events: all;
   }
   .search-word:hover{
     background-color: #f1f1f1;
+    color: #409eff;
   }
   .hotword{
     border:1px solid #409EFF;
     border-radius:12px;
     height: 40px;
     font-size: 18px;
-    background: #e0e0e0;
     text-align:center;
   }
   .expert{
@@ -566,5 +565,19 @@
     text-align: left;
     float: left;
     color: #9c9e9c;
+  }
+  .background{
+    background-image: url("../../assets/backgroud1.jpg");
+    top: 0;
+    left: 0;
+    z-index:-10;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-attachment: fixed;
+  }
+  .el-card{
+    background-color: transparent;
   }
 </style>

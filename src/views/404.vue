@@ -2,8 +2,8 @@
   <div class="site-wrapper site-page--not-found">
     <div class="site-content__wrapper">
       <div class="site-content">
-        <h2 class="not-found-title">404</h2>
-        <p class="not-found-desc">抱歉！您访问的页面<em>失联</em>啦 ...</p>
+        <img style="width: 200px; height: 200px;" src='../assets/404.jpeg'>
+        <p class="not-found-desc">抱歉！<em>找不到</em>该网页 ...</p>
       </div>
     </div>
   </div>
@@ -52,7 +52,7 @@ export default {
 }
 em {
   font-style: normal;
-  color: #ee8145;
+  color: #F90716;
   font-size: 150%;
   font-weight: bold;
 }

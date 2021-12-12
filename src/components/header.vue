@@ -1,10 +1,10 @@
 <template>
   <div>
     <el-header v-if="this.status == 1" class="header_1">
-      <span class="icon-home">
-        <i class="el-icon-s-home" @click="goHome"></i>
+      <span class="icon-home" @click="goHome">
+        HUI KE
       </span>
-      <el-input class="h_search" placeholder="请输入你要查找的内容" v-model="search_words.searchWords" @keyup.enter.native="goSearch(false)">
+      <el-input class="h_search" placeholder="请输入检索的内容..." v-model="search_words.searchWords" @keyup.enter.native="goSearch(false)">
         <el-button v-popover:search type="text" slot="prepend" icon="el-icon-caret-bottom">高级搜索</el-button>
         <el-button icon="el-icon-search" slot="append" @click="goSearch(false)"></el-button>
       </el-input>
@@ -39,19 +39,17 @@
             <el-col :span="11">
               <el-date-picker type="date" placeholder="选择截至日期" v-model="search_words.endTime" style="width: 90%"></el-date-picker>
             </el-col>
-          </el-form-item>
-
-          <el-form-item>
-            <el-button @click="goSearch(true)">搜索</el-button>
-          </el-form-item>
+          </el-form-item>       
         </el-form>
+        <div class="ad_button_div">
+          <el-button class="advance_button" @click="goSearch(true)">搜索</el-button>
+        </div>
       </el-popover>
 
       <div class="r_con">
-        <el-button v-if="isAdmin" class="r_con_admin" type="text" @click="goAdmin">管 理</el-button>
         <span v-if="isLogin">
           <el-badge  :value="msgList.length" :hidden="msgList.length == 0" class="newMsg">
-            <el-button v-popover:popover type="info" icon="el-icon-message" class="r_con_mess_1">消息</el-button>
+            <el-button v-popover:popover type='text' icon="el-icon-message" class="r_con_mess_2">消息</el-button>
           </el-badge>
           <el-popover
                 ref="popover"
@@ -179,161 +177,168 @@
 
           </el-popover>
         </span>
-
-        <el-button type="text" v-if="isLogin" class="r_con_user" @click="goUser()">{{this.userName}}</el-button>
-        <el-button type="text" v-if="isLogin" class="r_con_reLogin" @click="reLogin()">退出登录</el-button>
-        <el-button type="text" v-if="!isLogin" class="r_con_login" @click="goLogin()">登录</el-button>
-        <el-button type="text" v-if="!isLogin" class="r_con_Register" @click="goRegister()">注册</el-button>
-      </div>
-
-
-    </el-header>
-
-    <el-header v-if="this.status == 2" class="header_2">
-      <div class="r_con">
-        <el-button v-if="isAdmin" class="r_con_admin" type="text" @click="goAdmin">管 理</el-button>
-        <span v-if="isLogin">
-          <el-badge  :value="msgList.length" :hidden="msgList.length == 0" class="newMsg">
-            <el-button v-popover:popover type="text" icon="el-icon-message" class="r_con_mess_2">消息</el-button>
-          </el-badge>
-          <el-popover
-                ref="popover"
-                placement="bottom"
-                width="290"
-                trigger="click"
-                content="123456789"
-          >
-            <el-tabs>
-              <el-tab-pane class="MsgCol" label="未读消息">
-                <el-row v-for="(o, index) in this.msgList" :key="index" class="MsgRow">
-                  <el-card class="MsgCard">
-                    <div slot="header" class="clearfix">
-                      <span class="MsgTitle">{{o.type}}认领结果</span>
-                      <span class="Msg-time">{{ o.date.substring(0,10) }}</span>
-                    </div>
-                    <div class="MsgContent">
-                      <div v-if="o.type == '文献'">
-                        <div v-if="o.success">
-                          <span>您需要认领的文献</span>
-                          <span class="Msg-text-link" @click="jumpAcademic(o.objectID)">《{{o.objectName}}》</span>
-                          <span class="Msg-agree">已通过</span>
-                          <span>管理的审核</span>
-                        </div>
-                        <div v-else>
-                          <span>管理员已拒绝您认领文献</span>
-                          <span class="Msg-text-link" @click="jumpAcademic(o.objectID)">《{{o.objectName}}》</span>
-                          <span>具体原因为：</span>
-                          <p class="Msg-reject">{{o.reason}}</p>
-                        </div>
-
-                      </div>
-                      <div v-else>
-                        <div v-if="o.success">
-                          <span>恭喜您</span>
-                          <span class="Msg-agree">已通过</span>
-                          <span>管理员审核，您已认证成功{{o.type}}</span>
-                          <span class="Msg-text-link">{{o.objectName}}</span>
-                          <span>学者</span>
-                        </div>
-                        <div v-else>
-                          <span>经管理员审核，您未能认证成功</span>
-                          <span class="Msg-text-link">{{o.objectName}}</span>
-                          <span>身份，具体原因为：</span>
-                          <p class="Msg-reject">{{o.reason}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="button_block">
-                      <el-tooltip class="item" effect="dark" content="标记已读" placement="bottom-end">
-                        <el-button class="read_button" size="medium"
-                                   type="success" icon="el-icon-check"
-                                   @click="markMsg(o.msgid,true)"
-                                   plain circle></el-button>
-                      </el-tooltip>
-                      <el-tooltip class="item" effect="dark" content="删除消息" placement="bottom-end">
-                        <el-button class="del_button" size="medium"
-                                   type="danger" icon="el-icon-delete"
-                                   @click="deleteMsg(o.msgid)"
-                                   circle></el-button>
-                      </el-tooltip>
-                    </div>
-                  </el-card>
-                  <br>
-                </el-row>
-              </el-tab-pane>
-              <el-tab-pane class="MsgCol" label="已读消息">
-                <el-row v-for="(o, index) in this.read_msgList" :key="index" class="MsgRow">
-                  <el-card class="MsgCard">
-                    <div slot="header" class="clearfix">
-                      <span class="MsgTitle">{{o.type}}认领结果</span>
-                      <span class="Msg-time">{{ o.date.substring(0,10) }}</span>
-                    </div>
-                    <div class="MsgContent">
-                      <div v-if="o.type == '文献'">
-                        <div v-if="o.success">
-                          <span>您需要认领的文献</span>
-                          <span class="Msg-text-link" @click="jumpAcademic(o.objectID)">《{{o.objectName}}》</span>
-                          <span class="Msg-agree">已通过</span>
-                          <span>管理的审核</span>
-                        </div>
-                        <div v-else>
-                          <span>管理员已拒绝您认领文献</span>
-                          <span class="Msg-text-link" @click="jumpAcademic(o.objectID)">《{{o.objectName}}》</span>
-                          <span>具体原因为：</span>
-                          <p class="Msg-reject">{{o.reason}}</p>
-                        </div>
-
-                      </div>
-                      <div v-else>
-                        <div v-if="o.success">
-                          <span>恭喜您</span>
-                          <span class="Msg-agree">已通过</span>
-                          <span>管理员审核，您已认证成功{{o.type}}</span>
-                          <span class="Msg-text-link">{{o.objectName}}</span>
-                          <span>学者</span>
-                        </div>
-                        <div v-else>
-                          <span>经管理员审核，您未能认证成功</span>
-                          <span class="Msg-text-link">{{o.objectName}}</span>
-                          <span>身份，具体原因为：</span>
-                          <p class="Msg-reject">{{o.reason}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <br>
-                    <div class="button_block">
-                      <el-tooltip class="item" effect="dark" content="设为未读" placement="bottom-end">
-                        <el-button class="read_button" size="medium" type="primary"
-                                   @click="markMsg(o.msgid,false)"
-                                   icon="el-icon-arrow-left" plain circle></el-button>
-                      </el-tooltip>
-                      <el-tooltip class="item" effect="dark" content="删除消息" placement="bottom-end">
-                        <el-button size="medium" class="del_button" type="danger"
-                                   @click="deleteMsg(o.msgid)"
-                                   icon="el-icon-delete" circle></el-button>
-                      </el-tooltip>
-                    </div>
-                  </el-card>
-                  <br>
-                </el-row>
-              </el-tab-pane>
-            </el-tabs>
-
-          </el-popover>
-        </span>
-        <el-button v-if="isLogin" class="r_con_user" type="text" @click="goUser()">{{this.userName}}</el-button>
-        <el-button v-if="isLogin" class="r_con_reLogin" type="text" @click="reLogin()">退出登录</el-button>
-        <el-button v-if="!isLogin" class="r_con_login" type="text" @click="goLogin()">登录</el-button>
-        <el-button v-if="!isLogin" class="r_con_Register" type="text" @click="goRegister()">注册</el-button>
+        <el-button v-if="isAdmin" size='mini' class="r_con_login"  @click="goAdmin">管 理</el-button>
+        <el-button v-if="isLogin" size='mini' class="r_con_login" @click="goUser()">{{this.userName}}</el-button>
+        <el-button v-if="isLogin" size='mini' class="r_con_login" @click="reLogin()">退出</el-button>
+        <el-button v-if="!isLogin" size='mini' class="r_con_login" @click="goLogin()">登录</el-button>
+        <el-button v-if="!isLogin" size='mini' class="r_con_login" @click="goRegister()">注册</el-button>
       </div>
 
     </el-header>
+
+      <header v-if="this.status == 2" class="">
+        <div class="navbar navbar-expand-lg">
+          <div class="container">
+            <a class="navbar-brand" href="./"><h2>Hui <em>Ke</em></h2></a>
+            <div class="functional-buttons">
+              <ul>
+                <li v-if="isLogin">
+                  <el-badge  :value="msgList.length" :hidden="msgList.length == 0" class="newMsg">
+                    <el-button v-popover:popover type="text" icon="el-icon-message" class="r_con_mess_2">消息</el-button>
+                  </el-badge>
+                  <el-popover
+                        ref="popover"
+                        placement="bottom"
+                        width="290"
+                        trigger="click"
+                        content="123456789"
+                  >
+                    <el-tabs>
+                      <el-tab-pane class="MsgCol" label="未读消息">
+                        <el-row v-for="(o, index) in this.msgList" :key="index" class="MsgRow">
+                          <el-card class="MsgCard">
+                            <div slot="header" class="clearfix">
+                              <span class="MsgTitle">{{o.type}}认领结果</span>
+                              <span class="Msg-time">{{ o.date.substring(0,10) }}</span>
+                            </div>
+                            <div class="MsgContent">
+                              <div v-if="o.type == '文献'">
+                                <div v-if="o.success">
+                                  <span>您需要认领的文献</span>
+                                  <span class="Msg-text-link" @click="jumpAcademic(o.objectID)">《{{o.objectName}}》</span>
+                                  <span class="Msg-agree">已通过</span>
+                                  <span>管理的审核</span>
+                                </div>
+                                <div v-else>
+                                  <span>管理员已拒绝您认领文献</span>
+                                  <span class="Msg-text-link" @click="jumpAcademic(o.objectID)">《{{o.objectName}}》</span>
+                                  <span>具体原因为：</span>
+                                  <p class="Msg-reject">{{o.reason}}</p>
+                                </div>
+
+                              </div>
+                              <div v-else>
+                                <div v-if="o.success">
+                                  <span>恭喜您</span>
+                                  <span class="Msg-agree">已通过</span>
+                                  <span>管理员审核，您已认证成功{{o.type}}</span>
+                                  <span class="Msg-text-link">{{o.objectName}}</span>
+                                  <span>学者</span>
+                                </div>
+                                <div v-else>
+                                  <span>经管理员审核，您未能认证成功</span>
+                                  <span class="Msg-text-link">{{o.objectName}}</span>
+                                  <span>身份，具体原因为：</span>
+                                  <p class="Msg-reject">{{o.reason}}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="button_block">
+                              <el-tooltip class="item" effect="dark" content="标记已读" placement="bottom-end">
+                                <el-button class="read_button" size="medium"
+                                          type="success" icon="el-icon-check"
+                                          @click="markMsg(o.msgid,true)"
+                                          plain circle></el-button>
+                              </el-tooltip>
+                              <el-tooltip class="item" effect="dark" content="删除消息" placement="bottom-end">
+                                <el-button class="del_button" size="medium"
+                                          type="danger" icon="el-icon-delete"
+                                          @click="deleteMsg(o.msgid)"
+                                          circle></el-button>
+                              </el-tooltip>
+                            </div>
+                          </el-card>
+                          <br>
+                        </el-row>
+                      </el-tab-pane>
+                      <el-tab-pane class="MsgCol" label="已读消息">
+                        <el-row v-for="(o, index) in this.read_msgList" :key="index" class="MsgRow">
+                          <el-card class="MsgCard">
+                            <div slot="header" class="clearfix">
+                              <span class="MsgTitle">{{o.type}}认领结果</span>
+                              <span class="Msg-time">{{ o.date.substring(0,10) }}</span>
+                            </div>
+                            <div class="MsgContent">
+                              <div v-if="o.type == '文献'">
+                                <div v-if="o.success">
+                                  <span>您需要认领的文献</span>
+                                  <span class="Msg-text-link" @click="jumpAcademic(o.objectID)">《{{o.objectName}}》</span>
+                                  <span class="Msg-agree">已通过</span>
+                                  <span>管理的审核</span>
+                                </div>
+                                <div v-else>
+                                  <span>管理员已拒绝您认领文献</span>
+                                  <span class="Msg-text-link" @click="jumpAcademic(o.objectID)">《{{o.objectName}}》</span>
+                                  <span>具体原因为：</span>
+                                  <p class="Msg-reject">{{o.reason}}</p>
+                                </div>
+
+                              </div>
+                              <div v-else>
+                                <div v-if="o.success">
+                                  <span>恭喜您</span>
+                                  <span class="Msg-agree">已通过</span>
+                                  <span>管理员审核，您已认证成功{{o.type}}</span>
+                                  <span class="Msg-text-link">{{o.objectName}}</span>
+                                  <span>学者</span>
+                                </div>
+                                <div v-else>
+                                  <span>经管理员审核，您未能认证成功</span>
+                                  <span class="Msg-text-link">{{o.objectName}}</span>
+                                  <span>身份，具体原因为：</span>
+                                  <p class="Msg-reject">{{o.reason}}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="button_block">
+                              <el-tooltip class="item" effect="dark" content="设为未读" placement="bottom-end">
+                                <el-button class="read_button" size="medium" type="primary"
+                                          @click="markMsg(o.msgid,false)"
+                                          icon="el-icon-arrow-left" plain circle></el-button>
+                              </el-tooltip>
+                              <el-tooltip class="item" effect="dark" content="删除消息" placement="bottom-end">
+                                <el-button size="medium" class="del_button" type="danger"
+                                          @click="deleteMsg(o.msgid)"
+                                          icon="el-icon-delete" circle></el-button>
+                              </el-tooltip>
+                            </div>
+                          </el-card>
+                          <br>
+                        </el-row>
+                      </el-tab-pane>
+                    </el-tabs>
+
+                  </el-popover>
+                </li>
+                <li><a v-if="isLogin"   @click="goUser()"><i class="el-icon-user-solid">{{this.userName}}</i></a></li>
+                <li><a v-if="isAdmin"  @click="goAdmin()">Admin</a></li>             
+                <li><a v-if="isLogin" @click="reLogin()">exit</a></li>
+                <li><a v-if="!isLogin" @click="goLogin()">login</a></li>
+                <li><a v-if="!isLogin" @click="goRegister()">register</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
   </div>
 </template>
 
+<script src="../assets/js/custom.js"></script>
 <script>
 export default {
+  name: "header",
   data(){
     return {
       search_words: {
@@ -347,7 +352,7 @@ export default {
       },
       isLogin:false,
       isAdmin:false,
-      userName:'taka',
+      userName:'',
       isRead: false,
       msgList:[],
       msgNum: 0,
@@ -437,7 +442,7 @@ export default {
     },
     goUser() {
       this.$router.push({
-        name:"myAchievement"
+        name:"PerInfo"
       })
     },
     goLogin() {
@@ -491,33 +496,37 @@ export default {
         }
       })
     }
+
   }
 }
 </script>
+
+<style src='../vendor/bootstrap/css/bootstrap.min.css' scoped></style>
+<style src='../assets/css/homepage.css' scoped></style>
 
 <style scoped>
   .icon-home{
     color: white;
     cursor: pointer;
-    font-size: 30px;
-    position: absolute;
-    left: 10px;
-    top:10px;
+    font-size: 20px;
+    font-family: Roboto, sans-serif;
+    padding-right: 50px;
+    text-align: center;
   }
   .icon-home:hover{
     color: #e0e0e0;
   }
   .header_1 {
-    /*position: absolute;*/
+    position: fixed;
     min-width: 800px;
     /*width: 100%;*/
-    background-color: #0099CC;
-    padding: 0;
+    background-image: url("../assets/img/homepage_img/heading2.jpg") ;
   }
 
   .h_search {
     width: 400px;
     margin: 10px;
+    font-size: 14px;
   }
   .h_search >>> .el-input__inner {
     border-radius: 0 0 0 0;
@@ -550,62 +559,52 @@ export default {
     font-size: 15px;
     color: grey;
   }
-
+.ad_button_div{
+  display: flex; 
+  justify-content: center;
+  padding-bottom: 30px;
+}
+.advance_button{
+  background-color: #00bcd4; 
+  color: #fff;
+}
   @media screen and (min-width: 1400px){
     .h_search {
       width: 600px;
     }
   }
   .r_con {
-    /* position: absolute; */
+    /* //position: absolute; */
     margin-top: 12px;
-    width: 300px;
+    width: 500px;
     float: right;
     left: calc(100% - 200px);
   }
-  .r_con_mess_1 {
-    border-radius: 15px;
-    /*margin-right: 10px;*/
-    border:1px solid #66b1ff;
-    background: #2c3e50;
-    color: #66b1ff;
-    /*color: #8c939d;*/
-  }
-  .r_con_mess_1:hover{
-    background: #66b1ff;
-    color: #2c3e50;
-  }
   .r_con_mess_2 {
-    border-radius: 15px;
-    border:1px solid #66b1ff;
-    /*background: #2c3e50;*/
-    color: #66b1ff;
+    color: #fff;
     width: 70px;
-
     /*color: #8c939d;*/
   }
   .r_con_mess_2:hover{
-    background: #66b1ff;
-    color: white;
+    color: #00bcd4;
   }
   .newMsg {
     width: 77px;
     margin-right: 20px;
     /*height: 10px;*/
   }
-  .r_con_admin{
-    margin-right: 20px;
-  }
-  .r_con_user {
-    margin-right: 15px;
-    /*margin-left: 50px;*/
-  }
-  .r_con_reLogin {
-    left: 10px;
-  }
+
   .r_con_login {
+    background-color: transparent;
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
     margin-right: 10px;
-    margin-left: 35px;
+  }
+  .r_con_login:hover {
+      background-color: white;
+      color: #00bcd4;
+      border-color: #00bcd4;
   }
 
   .MsgTitle {
@@ -639,13 +638,13 @@ export default {
     /*bottom: 20px;*/
     width: 280px;
   }
-  /* .MsgCard {
-    height: 250px;
-  } */
-  /* .MsgContent {
-    height: 100px;
-    margin-bottom: 10px;
-  } */
+  .MsgCard {
+    /*height: 250px;*/
+  }
+  .MsgContent {
+    /*height: 100px;*/
+    /*margin-bottom: 10px;*/
+  }
 
   .Msg-text-link{
     color: #0066cc;
@@ -678,22 +677,16 @@ export default {
     top: -90px;
   }
 
-  /* .read_button {
-    right: 100px;
-  } */
+  .read_button {
+    /*right: 100px;*/
+  }
   .not_read_button {
     background: #409EFF;
     color: white;
     border-radius: 25px;
   }
 
-  /* .del_button {
-    float: right;
-  } */
-
-  .header_2 {
-    min-width: 800px;
-    margin: -10px -8px 0 -10px;
-    padding: 0;
+  .del_button {
+    /*float: right;*/
   }
 </style>
