@@ -517,9 +517,10 @@ export default {
     color: #e0e0e0;
   }
   .header_1 {
-    position: fixed;
+    position:relative;
     min-width: 800px;
-    /*width: 100%;*/
+    width: 100%;
+    background-size:100%;
     background-image: url("../assets/img/homepage_img/heading2.jpg") ;
   }
 
@@ -592,7 +593,7 @@ export default {
     width: 77px;
     margin-right: 20px;
     /*height: 10px;*/
-  }
+  }f
 
   .r_con_login {
     background-color: transparent;

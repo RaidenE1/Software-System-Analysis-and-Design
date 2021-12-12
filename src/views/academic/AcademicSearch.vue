@@ -545,9 +545,7 @@
 
 <style scoped>
   .wrapper{
-    position: absolute;
-    top: 60px;
-    left: 150px;
+    margin-top:50px;
     min-width: 1100px;
     text-align: center;
   }
@@ -555,7 +553,7 @@
     width: 1100px;
     min-height: 1000px;
     text-align: left;
-    margin: 5px auto auto;
+    margin:0 auto;
   }
   .content-right{
     width: 240px;

@@ -8,13 +8,11 @@ import VueAxios from 'vue-axios'
 import utils from './javascript/utils.js'
 import md5 from 'js-md5';
 import VueClipboard from 'vue-clipboard2';
-import VueParticles from 'vue-particles'  
 import api from './http'
 
 Vue.use(utils);
 Vue.use(api);
 Vue.use(utils);
-Vue.use(VueParticles)
 Vue.use(VueAxios,axios);
 Vue.prototype.$axios = axios;
 Vue.use(ElementUI);
