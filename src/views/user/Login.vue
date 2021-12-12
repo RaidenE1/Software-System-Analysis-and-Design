@@ -1,7 +1,7 @@
 <template>
   <div class="full">
     <el-menu router :default-active="$route.path" class="el-menu-demo" mode="horizontal">
-      <el-menu-item style="font-weight: bold">LinkedBrains</el-menu-item>
+      <el-menu-item style="font-weight: bold">Hui Ke</el-menu-item>
     </el-menu>
     <el-form  class="login-container" label-position="left"
               label-width="0px" v-loading="loading" style="margin-top: 7%">
@@ -14,9 +14,9 @@
       </el-form-item>
       <br>
       <el-form-item style="width: 100%">
-        <el-button type="primary" @click="submit" style="width: 50%">登录</el-button>
+        <el-button type="primary" @click="submit" style="width: 50%; background-color: #00bcd4;">登录</el-button>
       </el-form-item>
-      <el-button type="text" @click="gotoRegister">还没有账号?快来注册吧</el-button>
+      <el-button type="text" @click="gotoRegister">没有账号?立即注册</el-button>
       <!--    <router-link :to="{path:'/register'}" >还没有账号?快去注册</router-link>-->
     </el-form>
   </div>
@@ -99,7 +99,7 @@
     padding:0;
   }
   .full{
-    background:url("../../assets/backgroud1.jpg");
+    background: url("../../assets/img/homepage_img/heading-bg.jpg");
     width:100%;
     height:100%;
     position:fixed;

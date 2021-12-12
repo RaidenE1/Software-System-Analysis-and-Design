@@ -1,98 +1,137 @@
 <template>
-  <div class="page">
-    <div class="background"></div>
-    <div class="index"></div>
-    <Header status="2" class="header_home"></Header>
-    <el-image :src="require('@/assets/logo/logo5.png')" class="logo" :underline="false">
-      Logo
-    </el-image>
-    <el-input class="search" placeholder="请输入你要查找的内容" v-model="search_words.searchWords" @keyup.enter.native="goSearch(false)">
-      <el-button v-popover:popover type="text" class="h_button" slot="prepend" icon="el-icon-caret-bottom">高级搜索</el-button>
-      <el-button class="button" slot="append" @click="goSearch(false)">搜索</el-button>
-    </el-input>
-    <el-popover
-        ref="popover"
-        placement="bottom"
-        width="400"
-        :offset="170"
-        title="高级搜索"
-        trigger="click">
-      <el-form ref="search_words" :model="search_words" label-width="80px">
-        <el-form-item label="检索词">
-          <el-input v-model="search_words.searchWords" placeholder="多个检索词用空格分开"></el-input>
-        </el-form-item>
-        <el-form-item label="标题">
-          <el-input v-model="search_words.title" placeholder="输入标题检索"></el-input>
-        </el-form-item>
-        <el-form-item label="关键字">
-          <el-input v-model="search_words.keyWords" placeholder="多个关键字用空格分开"></el-input>
-        </el-form-item>
-        <el-form-item label="作者">
-          <el-input v-model="search_words.experts" placeholder="多个作者用空格分开"></el-input>
-        </el-form-item>
-        <el-form-item label="来源">
-          <el-input v-model="search_words.origin" placeholder="输入来源"></el-input>
-        </el-form-item>
-        <el-form-item label="发表时间">
-          <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择起始日期" v-model="search_words.startTime" style="width: 90%"></el-date-picker>
-          </el-col>
-          <!--          <el-col class="line" :span="1"> - </el-col>-->
-          <el-col :span="11">
-            <el-date-picker type="date" placeholder="选择截至日期" v-model="search_words.endTime" style="width: 90%"></el-date-picker>
-          </el-col>
-        </el-form-item>
+  <div>
+    <Header :status="2" class="header_home"></Header>
+    <div class="banner">
+      <div class="container">
+        <!-- <vue-particles color="#909399" :clickEffect="true"  :particlesNumber="40">
+      </vue-particles> -->
+        <el-image :src="require('@/assets/logo/HKW.png')" class="logo" :underline="false">
+        </el-image>
+        <div class="row">
+          <div class="col-md-2 advance">
+            <el-button v-popover:popover type="text" class="h_button" icon="el-icon-caret-bottom">高级搜索</el-button>
+                      <el-popover
+                        ref="popover"
+                        placement="bottom"
+                        width="400"
+                        :offset="170"
+                        title="高级搜索"
+                        trigger="click">
+                        <el-form ref="search_words" :model="search_words" label-width="80px">
+                          <el-form-item label="检索词">
+                            <el-input v-model="search_words.searchWords" placeholder="多个检索词用空格分开"></el-input>
+                          </el-form-item>
+                          <el-form-item label="标题">
+                            <el-input v-model="search_words.title" placeholder="输入标题检索"></el-input>
+                          </el-form-item>
+                          <el-form-item label="关键字">
+                            <el-input v-model="search_words.keyWords" placeholder="多个关键字用空格分开"></el-input>
+                          </el-form-item>
+                          <el-form-item label="作者">
+                            <el-input v-model="search_words.experts" placeholder="多个作者用空格分开"></el-input>
+                          </el-form-item>
+                          <el-form-item label="来源">
+                            <el-input v-model="search_words.origin" placeholder="输入来源"></el-input>
+                          </el-form-item>
+                          <el-form-item label="发表时间">
+                            <el-col :span="11">
+                              <el-date-picker type="date" placeholder="选择起始日期" v-model="search_words.startTime" style="width: 90%"></el-date-picker>
+                            </el-col>
+                            <!--          <el-col class="line" :span="1"> - </el-col>-->
+                            <el-col :span="11">
+                              <el-date-picker type="date" placeholder="选择截至日期" v-model="search_words.endTime" style="width: 90%"></el-date-picker>
+                            </el-col>
+                          </el-form-item>
+                          <div class="ad_button_div">
+                            <el-button class="advance_button" @click="goSearch(true)">搜索</el-button>
+                          </div>
+                        </el-form>
+                      </el-popover>
+          </div>
+          <div class="col-md-8">
+            <div class="header-text caption">
+                <h2></h2>
+                <div id="search-section">            
+                    <div class="searchText">            
+                      <input type="text" v-model="search_words.searchWords" @keyup.enter.native="goSearch(false)" class="searchText" placeholder="请输入查找内容...">
+                    </div>
+                      <span @click="goSearch(false)"><input type="submit" name="results" class="main-button" value="快速检索文献"></span>
+                </div>
+            </div>
+          </div>
+        </div>
 
-        <el-form-item>
-          <el-button @click="goSearch(true)">搜索</el-button>
-        </el-form-item>
-      </el-form>
-    </el-popover>
-    <div class="top_block">
-      <el-row>
-        <div class="top_title">
-          快捷搜索
-        </div>
-      </el-row>
-      <el-row class="top_card" :gutter="10">
-        <el-col :span="6" v-for="(o) in this.swList" :key="o">
-          <el-card class="card" shadow="hover" @click.native="goFastSearch(o.searchWords)">{{o.searchWords}}</el-card>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="middle_block">
-      <div class="left_block">
-        <h4>热门文献</h4>
-        <div class="list_left">
-          <el-row class="list_item" v-for="(o, index) in this.result_list.slice(0, 5)" :key="index">
-            <el-image :src="require('@/assets/home_icon/Num-'+(index+1)+'.png')" class="num-icon-ach"></el-image>
-            <el-link class="list_title" :underline="false" @click="goArticle(o.id)">{{ o.title }}</el-link>
-            <span class="list_cited" :underline="false">{{o.cited_quantity}}</span>
-            <br>
-            <span class="list_author" :underline="false">{{o.time}} {{o.experts}}</span>
-          </el-row>
-        </div>
-        <div class="list_right">
-          <el-row class="list_item" v-for="(o, index) in this.result_list.slice(5, 10)" :key="index">
-            <el-image :src="require('@/assets/home_icon/Num-'+(index+6)+'.png')" class="num-icon-ach"></el-image>
-            <el-link class="list_title" :underline="false" @click="goArticle(o.id)">{{ o.title }}</el-link>
-            <span class="list_cited" :underline="false">{{o.cited_quantity}}</span>
-            <br>
-            <span class="list_author" :underline="false">{{o.time}} {{o.experts}}</span>
-          </el-row>
-        </div>
-      </div>
-      <div class="right_block">
-        <h4>热门关键词</h4>
-        <el-row class="keyword_list" v-for="(o, index) in this.hotKeywords" :key="index">
-          <el-image :src="require('@/assets/home_icon/Num-'+(index+1)+'.png')" class="num-icon-kw"></el-image>
-          <el-link class="keyword" :underline="false" @click="goKwSearch(o.keyword)">{{o.keyword}}</el-link>
-          <span class="keyword_views">{{o.view}}</span>
+        <div class="top_block">
+        <el-row>
+          <div class="top_title">
+            快捷搜索
+          </div>
+        </el-row>
+        <el-row class="top_card" :gutter="10">
+          <el-col :span="6" v-for="(o) in this.swList" :key="o">
+            <el-card class="card" shadow="always" @click.native="goFastSearch(o.searchWords)">{{o.searchWords}}</el-card>
+          </el-col>
         </el-row>
       </div>
+      </div>     
     </div>
 
 
+      <div class="middle_block">
+        <el-row>
+        <el-col :span='21'>
+        <div class="left_block">
+          <h4>热门文献</h4>
+          <el-row>
+            <el-col :span='12'>
+          <div class="list_left">
+            <el-row class="list_item" v-for="(o, index) in this.result_list.slice(0, 5)" :key="index">
+              <el-image :src="require('@/assets/home_icon/Num-'+(index+1)+'.png')" class="num-icon-ach"></el-image>
+              <el-link class="list_title" :underline="false" @click="goArticle(o.id)">{{ o.title }}</el-link>
+              <span class="list_cited" :underline="false">{{o.cited_quantity}}</span>
+              <br>
+              <span class="list_author" :underline="false">{{o.time}} {{o.experts}}</span>
+            </el-row>
+          </div>
+            </el-col>
+            <el-col :span='12'>
+          <div class="list_right">
+            <el-row class="list_item" v-for="(o, index) in this.result_list.slice(5, 10)" :key="index">
+              <el-image :src="require('@/assets/home_icon/Num-'+(index+6)+'.png')" class="num-icon-ach"></el-image>
+              <el-link class="list_title" :underline="false" @click="goArticle(o.id)">{{ o.title }}</el-link>
+              <span class="list_cited" :underline="false">{{o.cited_quantity}}</span>
+              <br>
+              <span class="list_author" :underline="false">{{o.time}} {{o.experts}}</span>
+            </el-row>
+          </div>
+            </el-col>
+          </el-row>
+        </div>
+        </el-col>
+
+        <el-col :span='3'>
+        <div class="right_block">
+          <h4>热关键字</h4>
+          <el-row class="keyword_list" v-for="(o, index) in this.hotKeywords" :key="index">
+            <el-image :src="require('@/assets/home_icon/Num-'+(index+1)+'.png')" class="num-icon-kw"></el-image>
+            <el-link class="keyword" :underline="false" @click="goKwSearch(o.keyword)">{{o.keyword}}</el-link>
+            <span class="keyword_views">{{o.citedNum}}</span>
+          </el-row>
+        </div>
+        </el-col>
+        </el-row>
+      </div>
+<footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="sub-footer">
+              <p>group 17 works</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -230,31 +269,24 @@ export default {
         _this.hotKeywords = res.data.slice(0, 10);
         console.log(res.data)
       }else {
-        _this.$message({
-          message: res.msg,
-          type: "error"
-        })
-        console.log("Request => getSearchResult : not 200");
+        // _this.$message({
+        //   message: res.msg,
+        //   type: "error"
+        // })
+        // console.log("Request => getSearchResult : not 200");
       }
     })
   }
 }
 </script>
 
-<style scoped>
-  .page{
-    position: relative;
-    min-width: 920px;
-    /*max-width: 1500px;*/
-    min-height: 800px;
-    /*left: 10%;*/
-    //background-image: url("../assets/backgroud1.jpg");
-    //background-size: 1800px;
-  }
+<style src='../vendor/bootstrap/css/bootstrap.min.css' scoped></style>
+<style src='../assets/css/homepage.css' scoped></style>
 
+<style scoped>
   .background{
     position: fixed;
-    background-image: url("../assets/background/back4.jpg");
+    background-image: url("../assets/img/homepage_img/banner-bg.jpg");
     top: 0;
     left: 0;
     z-index:-10;
@@ -262,33 +294,19 @@ export default {
     width: 100%;
     height: 100%;
   }
-  .index {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index:-9;
-    width: 100%;
-    height: 100%;
-    background: white;
-    background-size: cover;
-    //filter:alpha(Opacity=50);
-    //-moz-opacity:0.5;
-    opacity: 0.6;
-  }
-
+  
   .logo {
     position: absolute;
     top: 40px;
     left: calc((100% - 600px)/2);
     width: 600px;
     font-size: 70px;
-
   }
   .search {
-    position: absolute;
-    top: 350px;
-    left: 25%;
-    width: 50%;
+    display: flex;
+    padding: 20px;;
+    left: 15%;
+    width: 70%;
   }
   .search >>> .el-input__inner {
     border-radius: 0 0 0 0;
@@ -348,7 +366,7 @@ export default {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #2461ea;
+    color: #FFF;
   }
   .top_card {
     top: 40px;
@@ -361,13 +379,18 @@ export default {
     width: 95%;
     height: 30%;
     cursor: pointer;
+    background-color: #fff;
+    color: #00bcd4;
+    border: 4px solid #00bcd4;
   }
-
+.card :hover {
+    background-color: #cccccc;
+  }
   .middle_block {
     /*background: red;*/
-    margin: -8px;
+    margin: 8px;
     padding: 0;
-    position: absolute;
+    position: relative;
     top: 75%;
     /*max-width: 1000px;*/
     left: calc((100% - 1000px)/2);
@@ -381,16 +404,14 @@ export default {
     /*background: black;*/
     /*margin: -8px;*/
     padding: 0;
-    position: absolute;
     /*top: 80%;*/
     left: 5%;
-    width: 100%;
-    height: 100%;
     /*max-width: 1200px;*/
+    margin-bottom: 40px;
   }
   .left_block h4 {
-    position: absolute;
-    //background: #005cd9;
+    /* background: #005cd9; */
+    padding: 20px;
     text-align: left;
     top: -25px;
     width: 20%;
@@ -398,35 +419,23 @@ export default {
   }
   .left_block .el-row {
     top: 5%;
-    left: -140px;
   }
 
 
   .list_left {
-    position: absolute;
     /*float: left;*/
     /*background-color: black;*/
     text-align: left;
-    //max-width: 400px;
+    /* max-width: 400px; */
     height: 70%;
-    width: 200px;
-    left: 150px;
   }
   .list_right {
-    position: absolute;
     /*float: left;*/
     /*background-color: red;*/
     text-align: left;
-    //max-width: 400px;
+    /* max-width: 400px; */
     height: 70%;
-    width: 200px;
-    left: 550px;
-  }
-  .list_item {
-    /*background: #9c9e9c;*/
-    height: 80px;
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
+
   }
   .num-icon-ach{
     width: 40px;
@@ -435,7 +444,7 @@ export default {
   }
   .list_title {
     /*background: #8c939d;*/
-    //position: absolute;
+    /* position: absolute; */
     font-size: 15px;
     font-weight: bold;
     color: #555666;
@@ -447,11 +456,11 @@ export default {
     -webkit-line-clamp: 1; /*显示的行数；如果要设置2行加...则设置为2*/
     overflow: hidden; /*超出的文本隐藏*/
     text-overflow: ellipsis; /* 溢出用省略号*/
-    //white-space: nowrap;
+    /* white-space: nowrap; */
     -webkit-box-orient: vertical
   }
   .list_author{
-    //background: #9fa19f;
+    /* background: #9fa19f; */
     position: absolute;
     color: grey;
     width: 160px;
@@ -462,7 +471,7 @@ export default {
     -webkit-line-clamp: 1; /*显示的行数；如果要设置2行加...则设置为2*/
     overflow: hidden; /*超出的文本隐藏*/
     text-overflow: ellipsis; /* 溢出用省略号*/
-  //white-space: nowrap;
+  /* white-space: nowrap; */
     -webkit-box-orient: vertical
   }
   .list_cited {
@@ -474,20 +483,16 @@ export default {
   }
 
   .right_block {
-    //background: blue;
+    /* background: blue; */
     /*margin: -8px;*/
     padding: 0;
-    position: absolute;
     top: -25px;
-    float: left;
     /*margin-left: 90%;*/
-    left: 770px;
-    width: 100px;
-    height: 100%;
+    margin-bottom: 150px;
   }
   .right_block h4 {
-    position: absolute;
-    //top: -25px;
+    /* top: -25px; */
+    padding: 20px 0;
     width: 100px;
     left: 45px;
   }
@@ -499,14 +504,13 @@ export default {
   .keyword_list {
     height: 45px;
     text-align: left;
-    top: 50px;
-    //width: 200px;
-    left: 50px;
+    /* //width: 200px; */
+
   }
   .keyword {
     font-size: 15px;
     color: black;
-    //width: 10px;
+    /* //width: 10px; */
     top: -20px;
     left: 40px;
     width: 80px;
@@ -514,16 +518,16 @@ export default {
     -webkit-line-clamp: 1; /*显示的行数；如果要设置2行加...则设置为2*/
     overflow: hidden; /*超出的文本隐藏*/
     text-overflow: ellipsis; /* 溢出用省略号*/
-  //white-space: nowrap;
+  /* //white-space: nowrap; */
     -webkit-box-orient: vertical
   }
   .keyword_views {
-    position: absolute;
+    position: relative;
     font-size: 15px;
     color: #245cc0;
     text-align: left;
-    top: 17px;
     left: 120px;
+    top: -40px;
   }
 
   @media screen and (min-width: 1400px){
@@ -551,7 +555,7 @@ export default {
     }
     .list_title {
       /*background: #8c939d;*/
-    //position: absolute;
+     /* position: absolute;  */
       font-size: 15px;
       /*height: 20px;*/
       width: 250px;
@@ -561,7 +565,7 @@ export default {
       -webkit-line-clamp: 1; /*显示的行数；如果要设置2行加...则设置为2*/
       overflow: hidden; /*超出的文本隐藏*/
       text-overflow: ellipsis; /* 溢出用省略号*/
-    //white-space: nowrap;
+    /* //white-space: nowrap; */
       -webkit-box-orient: vertical
     }
     .list_author{
@@ -575,4 +579,13 @@ export default {
       height: 100%;
     }
   }
+.ad_button_div{
+  display: flex; 
+  justify-content: center;
+  padding-bottom: 30px;
+}
+.advance_button{
+  background-color: #00bcd4; 
+  color: #fff;
+}
 </style>

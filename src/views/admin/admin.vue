@@ -1,9 +1,16 @@
 <template>
   <div>
-<!--    <Header status="2"></Header>-->
+    <el-container>
+      <el-header>
+      <Header status="2"></Header>
+      </el-header>
     <el-container>
       <el-aside style="width: 14%">
-        <el-menu default-active="2-1">
+        <el-menu default-active="2-1"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        >
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-message"></i>认领门户</template>
             <el-menu-item index="1-1" @click="changeState('1-1')">
@@ -92,6 +99,7 @@
         </div>
       </el-main>
     </el-container>
+    </el-container>
 
     <el-dialog
             title="提示"
@@ -112,11 +120,11 @@
 </template>
 
 <script>
-  // import Header from '@/components/header.vue';
+  import Header from '@/components/header.vue';
   export default {
     name: "admin",
     components: {
-      // Header
+      Header
     },
     data(){
       return {
@@ -270,6 +278,13 @@
 </script>
 
 <style scoped>
+header{
+  background-image: url("../../assets/img/homepage_img/heading2.jpg") ;
+}
+.el-side{
+  position: relative;
+  height: 500px;
+}
   .text-link{
     cursor: pointer;
   }

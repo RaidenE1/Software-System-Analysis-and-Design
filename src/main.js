@@ -8,33 +8,24 @@ import VueAxios from 'vue-axios'
 import utils from './javascript/utils.js'
 import md5 from 'js-md5';
 import VueClipboard from 'vue-clipboard2';
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-
-import {fas} from '@fortawesome/free-solid-svg-icons'
-
-import{far} from '@fortawesome/free-regular-svg-icons'
-
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(fas,far)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.use(utils);
-Vue.config.productionTip=false;
-
+import VueParticles from 'vue-particles'  
 import api from './http'
+
 Vue.use(utils);
 Vue.use(api);
-
+Vue.use(utils);
+Vue.use(VueParticles)
 Vue.use(VueAxios,axios);
 Vue.prototype.$axios = axios;
 Vue.use(ElementUI);
 Vue.prototype.$md5 = md5;
 Vue.use(VueClipboard)
 
-// Vue.prototype.requestUrl = "http://localhost:8082";
+Vue.prototype.requestUrl = "http://rap2api.taobao.org/app/mock/271178";
+/*Vue.config.productionTip = false;
+Vue.prototype.requestUrl = "http://localhost:8081";
+Vue.prototype.baseUrl = "http://39.97.126.242:8081/index.html#/";
+Vue.prototype.recentDoc = "";*/
 
 new Vue({
   el: '#app',

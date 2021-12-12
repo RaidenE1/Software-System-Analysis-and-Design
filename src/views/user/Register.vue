@@ -1,5 +1,8 @@
 <template>
   <div class="full">
+    <el-menu router :default-active="$route.path" class="el-menu-demo" mode="horizontal">
+      <el-menu-item style="font-weight: bold">Hui Ke</el-menu-item>
+    </el-menu>
     <el-form  class="Register-container" label-position="left"
               label-width="80px" v-loading="loading">
       <h3 class="Register_title">注册</h3>
@@ -14,15 +17,15 @@
       </el-form-item>
       <el-form-item prop="checkPass" label="邮箱">
         <el-input type="email" v-model="RegisterForm.email" auto-complete="off" placeholder="请输入您的邮箱" style="float:left;width: 160px"></el-input>
-        <el-button type="primary" v-show="show" style="float: right;font-size: 5px;width: 95px" @click="sendEmail">发送验证码</el-button>
-        <el-button type="primary" v-show="!show" style="float: right;font-size: 5px;width: 95px" disabled="disabled">{{count}}</el-button>
+        <el-button type="primary" v-show="show" style="float: right;font-size: 5px;width: 95px; background-color: #00bcd4;" @click="sendEmail">发送验证码</el-button>
+        <el-button type="primary" v-show="!show" style="float: right;font-size: 5px;width: 95px; background-color: #00bcd4;" disabled="disabled">{{count}}</el-button>
       </el-form-item>
       <el-form-item prop="checkPass" label="验证码">
         <el-input type="text" v-model="RegisterForm.code" auto-complete="off" placeholder="请输入验证码" ></el-input>
       </el-form-item>
       <br>
       <el-form-item style="width: 80%">
-        <el-button type="primary" @click="submit" style="width: 100%">注册</el-button>
+        <el-button type="primary" @click="submit" style="width: 100%; background-color: #00bcd4;">注册</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -120,10 +123,6 @@
                   });
                 }
           })
-          .catch(err=>{
-            console.log("网络问题")
-            console.log(err)
-          })
         }
       },
       sendEmail(){
@@ -137,7 +136,6 @@
         else {
           var _this = this
           const TIME_COUNT = 60
-          console.log(_this.RegisterForm.email)
           if(!this.timer) {
             this.$api.user.sendEmail({
               email: _this.RegisterForm.email
@@ -194,7 +192,7 @@
     text-align: left;
   }
   .full{
-    background:url("../../assets/backgroud1.jpg");
+    background:url("../../assets/img/homepage_img/heading-bg.jpg");
     width:100%;
     height:100%;
     position:fixed;

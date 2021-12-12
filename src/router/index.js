@@ -15,6 +15,11 @@ Vue.use(VueRouter)
       component: () => import('../views/user/Register.vue')
     },
     {
+      path: '/perInfo',
+      name:'PerInfo',
+      component: () => import('../views/user/PerInfo.vue'),
+    },
+    {
       path: '/changeInfo',
       name:'ChangeInfo',
       component: () => import('../views/user/ChangeInfo.vue')
@@ -94,8 +99,7 @@ Vue.use(VueRouter)
 ]
 
 const router = new VueRouter({
-  //mode: 'history',
-  routes: routes
+  routes
 })
 
 export default router
