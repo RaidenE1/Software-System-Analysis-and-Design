@@ -4,15 +4,14 @@
       <el-header>
       <Header status="2"></Header>
       </el-header>
-    <el-container>
-      <el-aside style="width: 14%">
+    <el-container class="container2">
+      <el-aside style="width: 14%;">
         <el-menu default-active="2-1"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
+          background-color="transparent"
+          active-text-color="#00bcd4"
         >
           <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message"></i>认领门户</template>
+            <template slot="title"><i class="el-icon-s-custom"></i>认领门户</template>
             <el-menu-item index="1-1" @click="changeState('1-1')">
               <template slot="title">待处理申请</template>
             </el-menu-item>
@@ -21,7 +20,7 @@
             </el-menu-item>
           </el-submenu>
           <el-submenu index="2">
-            <template slot="title"><i class="el-icon-message"></i>认领文献</template>
+            <template slot="title"><i class="el-icon-document"></i>认领文献</template>
             <el-menu-item index="2-1" @click="changeState('2-1')">
               <template slot="title">待处理申请</template>
             </el-menu-item>
@@ -36,7 +35,8 @@
                 :data="showApp.rows">
           <el-table-column
                   prop="userName"
-                  label="用户名">
+                  label="用户名"
+                  min-width="10vw">
 <!--            <template slot-scope="scope" >-->
 <!--              <p style=" cursor: pointer; " @click="checkUser(scope.row.userID)">-->
 <!--                {{scope.row.userName}}-->
@@ -45,7 +45,8 @@
           </el-table-column>
           <el-table-column
                   prop="objectName"
-                  :label="openExperts?'学者名':'文献标题'">
+                  :label="openExperts?'学者名':'文献标题'"
+                  min-width="10vw">
             <template slot-scope="scope" >
               <p class="text-link" @click="checkObject(scope.row)">
                 {{scope.row.objectName}}
@@ -54,15 +55,18 @@
           </el-table-column>
           <el-table-column
                   prop="email"
-                  label="联系邮箱">
+                  label="联系邮箱"
+                  min-width="10vw">
           </el-table-column>
           <el-table-column
                   prop="time"
-                  label="时间">
+                  label="时间"
+                  min-width="10vw">
           </el-table-column>
           <el-table-column
                   prop="result"
-                  label="状态">
+                  label="状态"
+                  min-width="10vw">
             <template slot-scope="scope">
               {{scope.row.result===0?'未审核':'已审核'}}
             </template>
@@ -70,19 +74,19 @@
           <el-table-column
                   prop="msg"
                   label="审批意见"
-                  width="300">
+                  min-width="20vw">
           </el-table-column>
-          <el-table-column v-if="openTodeal"  width="80">
+          <el-table-column v-if="openTodeal"  min-width="6vw">
             <template  slot-scope="scope">
               <el-button v-if="openTodeal" type="primary" plain @click="agreeSubmit(scope.row)">通过</el-button>
             </template>
           </el-table-column>
-          <el-table-column v-if="openTodeal" width="80">
+          <el-table-column v-if="openTodeal" min-width="6vw">
             <template slot-scope="scope">
               <el-button type="danger" plain @click="reject(scope.row)">拒绝</el-button>
             </template>
           </el-table-column>
-          <el-table-column v-if="!openTodeal" width="100">
+          <el-table-column v-if="!openTodeal" min-width="6vw">
             <template  slot-scope="scope">
               <div v-if="scope.row.result==1" class="my-button my-button-primary-plain" >已通过</div>
               <div v-if="scope.row.result==2" class="my-button my-button-danger-plain" >未通过</div>
@@ -280,10 +284,17 @@
 <style scoped>
 header{
   background-image: url("../../assets/img/homepage_img/heading2.jpg") ;
+  background-size: 100%;
 }
-.el-side{
-  position: relative;
-  height: 500px;
+.container2{
+  padding-top: 20px;
+  height: 88vh;
+}
+.el-aside{
+  border-right: solid 1px #e6e6e6;
+}
+.el-menu{
+  border-right: none;
 }
   .text-link{
     cursor: pointer;
