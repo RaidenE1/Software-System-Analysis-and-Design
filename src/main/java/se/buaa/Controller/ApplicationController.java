@@ -54,6 +54,8 @@ public class ApplicationController {
         applicationForm.userID = userID;
         applicationForm.userName = userRepository.findByUserID(userID).userName;
         User user = userRepository.findByUserID(applicationForm.userID);
+        System.out.print("object ID : ");
+        System.out.println(objectID);
         if (flag == 1){//门户
             Expert expert = expertRepository.findByExpertID(objectID);
             if(expert==null)
@@ -65,9 +67,11 @@ public class ApplicationController {
             }
             applicationForm.objectName = expertRepository.findByExpertID(objectID).getName();
         }
-
         else if (flag==0){
-            ES_Document es_document = es_documentDao.findByDocumentid(objectID);
+//            ES_Document es_document = es_documentDao.findByDocumentid(objectID);
+            ES_Document es_document = es_documentDao.findById(objectID).get();
+            System.out.print("doc : ");
+            System.out.println(es_document);
             if(es_document==null)
                 return Result.Error("201","文献不存在");
             if (user.isVerified!=1){
