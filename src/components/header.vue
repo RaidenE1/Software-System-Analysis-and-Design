@@ -405,7 +405,7 @@ export default {
         },
         goUser() {
             this.$router.push({
-                name: "PerInfo"
+                name: "myAchievement"
             })
         },
         goLogin() {
@@ -544,7 +544,7 @@ export default {
 
 .r_con {
     /* //position: absolute; */
-    margin-top: 12px;
+    margin-top: 6px;
     width: 500px;
     float: right;
     left: calc(100% - 200px);
@@ -558,6 +558,7 @@ export default {
 
 .r_con_mess_2:hover {
     color: #00bcd4;
+    transition: color .5s;
 }
 
 .newMsg {
@@ -566,18 +567,22 @@ export default {
     /*height: 10px;*/
 }
 
-f .r_con_login {
+.r_con_login {
     background-color: transparent;
     color: white;
     font-weight: 400;
     font-size: 14px;
+    margin-top:5px;
     margin-right: 10px;
+    height:35px;
+    line-height:14px;
 }
 
 .r_con_login:hover {
     background-color: white;
     color: #00bcd4;
     border-color: #00bcd4;
+    transition: background-color .5s, color .5s, border-color .5s;
 }
 
 .MsgTitle {

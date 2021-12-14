@@ -22,7 +22,6 @@ export default {
         return {
             count: 0,
             no_more: false,
-            to_show: [],
             used_component: null,
         }
     },
@@ -35,8 +34,7 @@ export default {
     },
     methods: {
         chooseComponent() {
-            // this.used_component = () => import('./user/Achievement.vue');
-            this.used_component = () => import(''+this.component);
+            this.used_component = () => import('' + this.component);
         },
         handleScroll() {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -47,6 +45,7 @@ export default {
             }
         },
         load() {
+            console.log("now load");
             if (this.no_more) {
                 return;
             }
@@ -55,12 +54,15 @@ export default {
                 this.no_more = true;
                 this.count = this.list.length;
             }
-            for (var i = 0; i < this.count; i++) {
-                this.to_show.push(this.list[i]);
-            }
-        }
+        },
     },
 
+    computed: {
+        to_show() {
+
+            return this.list.slice(0, this.count);
+        }
+    },
     destroyed() {
         window.removeEventListener('scroll', this.handleScroll)
     },
@@ -69,13 +71,14 @@ export default {
 
 <style lang="scss">
 .nomore {
-    margin-top:30px;
-    margin-bottom:20px;
-    color:#3b3b3b;
-    span{
-        line-height:30px;
-        font-size:24px;
-        font-weight:700;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #3b3b3b;
+
+    span {
+        line-height: 30px;
+        font-size: 24px;
+        font-weight: 700;
     }
 }
 </style>

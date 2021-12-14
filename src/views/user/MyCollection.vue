@@ -14,7 +14,7 @@
             <el-divider>
             </el-divider>
             <div class="content" v-if="collection_list.length==0">
-                暂无收藏
+                <span class="emptycontent">暂无收藏</span>
             </div>
             <div class="content" v-else>
                 <el-row v-for="(item,index) in collection_list" :key="index">

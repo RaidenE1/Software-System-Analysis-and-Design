@@ -643,11 +643,11 @@ export default {
             message: res.message,
             type: "error"
           })
-          _this.$router.push('/404')
+          _this.$router.replace('/404')
         }
       }).catch(err => {
         console.log(err)
-        this.$router.push('/404')
+        this.$router.replace('/404')
       })
     },
     loadRelateSc(){

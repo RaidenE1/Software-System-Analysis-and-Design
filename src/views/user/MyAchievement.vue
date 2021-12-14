@@ -14,7 +14,7 @@
             <el-divider>
             </el-divider>
             <div class="content" v-if="achievement.length==0">
-                暂无学术成果
+                <span class="emptycontent">暂无学术成果</span>
             </div>
             <div class="content" v-else>
                 <infinityscroll :list="achievement" :component="'./user/Achievement.vue'">
@@ -40,100 +40,7 @@ export default {
     },
     data() {
         return {
-            achievement: [{
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },{
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },{
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
-                {
-                    title: "aa",
-                    date: "2020.03.01",
-                },
-                {
-                    title: "bb",
-                    date: "2021.05.02",
-                },
+            achievement: [
             ],
         }
     },

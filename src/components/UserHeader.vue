@@ -1,8 +1,8 @@
 <template>
-<el-header >
-    
-    <el-menu :default-active="$route.path"  class="el-menu-demo" mode="horizontal" @open="handleOpen" @close="handleClose">
-        
+<div>
+
+    <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" @open="handleOpen" @close="handleClose">
+
         <el-menu-item index="/myAchievement" @click="gotoMyAchievement">
             <i class="el-icon-user"></i>
             <div class="title">我的成果</div>
@@ -23,8 +23,12 @@
             <i class="el-icon-view"></i>
             <div class="title">浏览历史</div>
         </el-menu-item>
+        <el-menu-item index="/mySecurity" @click="gotoMySecurity">
+            <i class="el-icon-setting"></i>
+            <div class="title">安全设置</div>
+        </el-menu-item>
     </el-menu>
-</el-header>
+</div>
 </template>
 
 <script>
@@ -71,7 +75,13 @@ export default {
             this.$router.push({
                 path: '/myHistory'
             });
+        },
+        gotoMySecurity(){
+            this.$router.push({
+                path:'/mySecurity'
+            })
         }
+        
     }
 
 }
@@ -81,21 +91,23 @@ export default {
 body {
     margin-left: 0;
 }
+
 .el-menu-item {
     font-size: 20px;
     height: 72px;
     line-height: 72px;
 
     span {
-        width:90px;
+        width: 90px;
         text-align: justify;
         text-align-last: justify;
     }
+
     .title {
         display: inline-block;
-        width:90px;
+        width: 90px;
         text-align: justify;
-        text-align-last: justify;        
-        }
+        text-align-last: justify;
+    }
 }
 </style>

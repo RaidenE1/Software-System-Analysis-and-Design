@@ -421,6 +421,7 @@
       },
       claimSubmit(){
         let vue = this;
+        console.log("objectid is "+vue.academicID);
         this.$api.application.create({
           token: sessionStorage.getItem("token"),
           userID: sessionStorage.getItem("userID"),
@@ -491,11 +492,12 @@
               var history = [];
               var userID = sessionStorage.getItem("userID");
               if(!localStorage.getItem(userID)) {
-                history = [{id:vue.academicID, title:vue.academic.title, time:date.toLocaleDateString()}];
+                history = [{id:vue.academicID, title:vue.academic.title, time:date.toLocaleDateString(),h_id:0}];
                 localStorage.setItem(userID,JSON.stringify(history));
               } else {
                 history = JSON.parse(localStorage.getItem(userID));
-                history.push({id:vue.academicID, title:vue.academic.title, time:date.toLocaleDateString()});
+                var hid=history[-1].h_id+1;
+                history.push({id:vue.academicID, title:vue.academic.title, time:date.toLocaleDateString(),h_id:hid});
                 localStorage.setItem(userID,JSON.stringify(history));
               }
 

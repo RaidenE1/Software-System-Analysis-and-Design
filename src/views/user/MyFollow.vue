@@ -14,10 +14,10 @@
             <el-divider>
             </el-divider>
             <div class="content" v-if="follow.length==0">
-                暂无关注
+                <span class="emptycontent">暂无关注</span>
             </div>
             <div class="content" v-else>
-                <infinityscroll :list="follow" :component="'Person'"></infinityscroll>
+                <infinityscroll :list="follow" :component="'./user/Person.vue'"></infinityscroll>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@ export default {
     },
     data() {
         return {
-            follow: [{
+            follow: [/*{
                     expertId: '1111',
                     name: 'ggg',
                     
@@ -60,7 +60,7 @@ export default {
                 {
                     expertId: '1222',
                     name: 'fff',
-                }
+                }*/
             ],
         };
     },

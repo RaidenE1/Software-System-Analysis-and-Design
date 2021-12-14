@@ -56,6 +56,7 @@
               sessionStorage.setItem("userName",_this.user.userName);
               sessionStorage.setItem("userID",res.data.userID);
               sessionStorage.setItem("token",res.data.token);
+              console.log(res.data.token);
               sessionStorage.setItem("is_admin",res.data.is_admin);
               _this.$router.push("/");
             }

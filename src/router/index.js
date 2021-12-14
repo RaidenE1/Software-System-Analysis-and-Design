@@ -76,6 +76,11 @@ Vue.use(VueRouter)
       component: ()=> import('../views/user/MyAchievement.vue')
     },
     {
+      path: '/mySecurity',
+      name: "Security",
+      component: () =>import('../views/user/MySecurity.vue')
+    },
+    {
       path:'/moments',
       name : 'Moments',
       component: ()=>import('../views/user/Moments.vue')
@@ -85,6 +90,7 @@ Vue.use(VueRouter)
     //   name: 'ScholarPage',
     //   component: () => import('../views/scholar/ScholarPage')
     // },
+
     {
       path:"*",
       redirect:{

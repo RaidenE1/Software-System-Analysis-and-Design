@@ -14,10 +14,12 @@
             <el-divider>
             </el-divider>
             <div class="content" v-if="history_list.length==0">
-                暂无历史记录
+                <span class="emptycontent">暂无历史记录</span>
             </div>
             <div class="content" v-else>
-                <el-row v-for="(item,index) in history_to_show" :key="index">
+                <infinityscroll :list="history_list" :component="'./user/History.vue'">
+                </infinityscroll>
+                <!-- <el-row v-for="(item,index) in history_to_show" :key="index">
                     <div class="singlehistory" @click="goArticle(item.id)" @mouseenter="highlight(item.id)" @mouseleave="unhighlight()" v-bind:class="{focus : focus == item.id}">
                         <el-row>
                             <el-col :span=20>
@@ -39,12 +41,8 @@
                             </el-col>
                         </el-row>
                     </div>
-                </el-row>
+                </el-row> -->
             </div>
-            <el-divider>
-            </el-divider>
-            <el-pagination @current-change="handleCurrentChange" :current-page="current_page" :page-size="page_size" layout="total, prev, pager, next, jumper" :total="history_list.length">
-            </el-pagination>
         </div>
     </div>
 </div>
@@ -54,63 +52,66 @@
 import navbar from "@/components/header.vue"
 import userheader from "@/components/UserHeader.vue"
 import userinfo from "@/components/user/Information.vue"
+
+import infinityscroll from "@/components/InfinityScroll.vue"
 export default {
     name: "MyHistory",
     components: {
         navbar,
         userheader,
-        userinfo
+        userinfo,
+        infinityscroll
     },
-    /*mounted() {
-        this.history_list = JSON.parse(localStorage.getItem(sessionStorage.getItem("userID")));
+    mounted() {
+       this.history_list = JSON.parse(localStorage.getItem(sessionStorage.getItem("userID")));
         if (this.history_list==null){
             this.history_list=[];
         }
         console.log(this.history_list);
-    },*/
+    },
     data() {
         return {
             current_page: 1,
             page_size: 15,
             focus: '',
-            history_list: [{
+           history_list:[],
+          /* history_list: [{
                     id: 1,
                     title: "title1",
-                    time: "2020.12.5"
+                    time: "2020.12.5",
+                    h_id: 1,
                 },
                 {
                     id: 2,
                     title: "title2",
-                    time: "2020.12.4"
+                    time: "2020.12.4",
+                    h_id:2,
                 },
                 {
                     id: 3,
                     title: "title3",
                     time: "2020.12.3",
+                    h_id:3,
                 },
                 {
                     id: 4,
                     title: "title4",
-                    time: "2020.12.2"
+                    time: "2020.12.2",
+                    h_id:4,
                 }
-            ]
+            ]*/
         };
     },
-    computed: {
-        history_to_show() {
-            let historys = [];
-            for (var i = (this.current_page - 1) * this.page_size; i < this.history_list.length && i < this.current_page * this.page_size; i++) {
-                historys.push(this.history_list[i])
-            }
-            return historys;
-        }
-    },
     methods: {
-        delHistory(index, event) {
+        delHistory(h_id) {
             this.$message('删除成功');
-            this.history_list.splice(index, 1);
+            for(var i=0;i<this.history_list.length;i++){
+                if(this.history_list[i].h_id==h_id){
+                    this.history_list.splice(i, 1);
+                    break;
+                }
+            }
             localStorage.setItem(sessionStorage.getItem("userID"), JSON.stringify(this.history_list));
-            event.stopPropagation();
         },
         goArticle(id) {
             this.$router.push({

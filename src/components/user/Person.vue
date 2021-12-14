@@ -8,7 +8,7 @@
             <span>{{show_info.name}}</span>
         </el-col>
         <el-col :span=7 id="operatesub">
-            <el-button v-if="is_subscribe" type="info" @click="cancelFollow"><i class="el-icon-finished"></i>取消关注</el-button>
+            <el-button v-if="is_subscribe" type="info" @click="cancelFollow($event)"><i class="el-icon-finished"></i>取消关注</el-button>
             <!-- <el-button v-else type="primary" @click="subscribe"><i class="el-icon-plus"></i>&#8194;关&#12288;注&#8194;</el-button> -->
         </el-col>
     </el-row>
@@ -43,7 +43,8 @@ export default {
     //     }
     // },
     methods:{
-        cancelFollow() {
+        cancelFollow(event) {
+            event.stopPropagation();
             var _this = this
             this.$api.scholar.focusScholar({
                 scholar_id: _this.show_info.expertId,
@@ -53,6 +54,9 @@ export default {
                     _this.$message("取消关注成功");
                     // _this.follow_list.splice(index, 1);
                 }
+            })
+            .catch(error =>{
+                console.log(error)
             })
         },
         goScholar() {
