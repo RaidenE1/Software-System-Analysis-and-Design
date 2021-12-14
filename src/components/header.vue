@@ -4,7 +4,7 @@
         <span class="icon-home" @click="goHome">
             HUI KE
         </span>
-        <el-input class="h_search" placeholder="请输入检索的内容..." v-model="search_words.searchWords" @keyup.enter.native="goSearch(false)">
+        <el-input class="h_search" placeholder="请输入检索的内容..." v-model="search_words.searchWords" @keyup.enter="goSearch(false)">
             <el-button v-popover:search type="text" slot="prepend" icon="el-icon-caret-bottom">高级搜索</el-button>
             <el-button icon="el-icon-search" slot="append" @click="goSearch(false)"></el-button>
         </el-input>
@@ -301,7 +301,7 @@
 
 <script src="../assets/js/custom.js"></script><script>
 export default {
-    name: "header",
+    name: "navbar",
     data() {
         return {
             search_words: {

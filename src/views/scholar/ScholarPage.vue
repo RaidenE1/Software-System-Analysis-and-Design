@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <Header class="header_home"></Header>
+    <navbar class="header_home"></navbar>
     <div class="container">
       <div id="main-content">
         <!--科研人员信息-->
@@ -246,14 +246,14 @@
 
 <script>
 import AcademicItem from "@/components/AcademicItem";
-import Header from "@/components/header";
+import navbar from "@/components/header";
 // import SeeksRelationGraph from 'relation-graph'
 
 export default {
   name: "ScholarPage",
   components: {
     AcademicItem,
-    Header,
+    navbar,
     // SeeksRelationGraph
   },
   data() {

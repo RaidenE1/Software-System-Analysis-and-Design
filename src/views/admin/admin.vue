@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-header>
-      <Header status="2"></Header>
+      <navbar status="2"></navbar>
       </el-header>
     <el-container class="container2">
       <el-aside style="width: 14%;">
@@ -124,11 +124,11 @@
 </template>
 
 <script>
-  import Header from '@/components/header.vue';
+  import navbar from '@/components/header.vue';
   export default {
     name: "admin",
     components: {
-      Header
+      navbar
     },
     data(){
       return {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :status="2" class="header_home"></Header>
+    <navbar :status="2" class="header_home"></navbar>
     <div class="banner">
       <div class="container">
         <!-- <vue-particles color="#909399" :clickEffect="true"  :particlesNumber="40">
@@ -53,7 +53,7 @@
                 <h2></h2>
                 <div id="search-section">            
                     <div class="searchText">            
-                      <input type="text" v-model="search_words.searchWords" @keyup.enter.native="goSearch(false)" class="searchText" placeholder="请输入查找内容...">
+                      <input type="text" v-model="search_words.searchWords" @keyup.enter="goSearch(false)" class="searchText" placeholder="请输入查找内容...">
                     </div>
                       <span @click="goSearch(false)"><input type="submit" name="results" class="main-button" value="快速检索文献"></span>
                 </div>
@@ -68,8 +68,8 @@
           </div>
         </el-row>
         <el-row class="top_card" :gutter="10">
-          <el-col :span="6" v-for="(o) in this.swList" :key="o">
-            <el-card class="card" shadow="always" @click.native="goFastSearch(o.searchWords)">{{o.searchWords}}</el-card>
+          <el-col :span="6" v-for="o in this.swList" :key="o.index">
+            <el-card class="card" shadow="always" @click="goFastSearch(o.searchWords)">{{o.searchWords}}</el-card>
           </el-col>
         </el-row>
       </div>
@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import Header from "@/components/header";
+import navbar from "@/components/header";
 export default {
   name:"homePage",
   data() {
@@ -221,7 +221,7 @@ export default {
     },
   },
   components:{
-    Header,
+    navbar,
   },
   mounted() {
     let _this = this;

@@ -1,6 +1,6 @@
 <template>
   <div>
-  <Header class="header_home"></Header>  
+  <navbar class="header_home"></navbar>  
   <div class="wrapper">
     <div class="container">
       <!-- 右侧热门显示 -->
@@ -147,11 +147,11 @@
 <script>
   import AcademicItem from "@/components/AcademicItem";
   import FilterItem from "@/components/FilterItem";
-  import Header from "@/components/header";
+  import navbar from "@/components/header";
   export default {
     name: "AcademicSearch",
     components: {
-      Header,
+      navbar,
       FilterItem,
       AcademicItem
     },

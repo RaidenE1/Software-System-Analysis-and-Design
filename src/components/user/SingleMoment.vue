@@ -17,7 +17,7 @@
                 <el-col :span=16><el-button>评论</el-button></el-col>
             </el-row>
             <el-row>
-                <div v-for="i in moment.submoment" v-bind:key=i.index>
+                <div v-for="i in moment.submoment" v-bind:key='i.index'>
                     <submoment :submoment=i>
                     </submoment>
                 </div>

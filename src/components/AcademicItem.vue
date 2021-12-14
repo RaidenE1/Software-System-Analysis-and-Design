@@ -10,8 +10,8 @@
         <div class="summary"><b>摘要:</b> {{ item.summary }}</div>
         <!-- 其他信息：所有作者/来源(期刊/出版社/或无)/被引量/年份-->
         <div class="info">
-          <span v-for="(item, index) in item.authors" :key="index">
-            <span class="name-click" @click="toAuthorPage(item)">{{ item.name }} </span>
+          <span v-for="(i, index) in item.authors" :key="index">
+            <span class="name-click" @click="toAuthorPage(i)">{{ i.name }} </span>
           </span>
           <span> - </span>
           <span class="source-click" @click="toSourcePage(item.origin)">{{ item.origin }}</span>
@@ -53,7 +53,7 @@
     },
     data() {
       return {
-        item: {},
+        item: this.c_sc,
         is_favor: false,
         SetWidth: {
           width: '610px'
@@ -153,8 +153,9 @@
       }
     },
     mounted() {
-      this.item = this.c_sc
+      //this.item = this.c_sc
       this.is_favor = this.item.is_favor
+      console.log(this.item.time);
       console.log("before" + this.$data.SetWidth.width)
       this.$data.SetWidth.width = this.length + "px"
       console.log("after" + this.$data.SetWidth.width)
