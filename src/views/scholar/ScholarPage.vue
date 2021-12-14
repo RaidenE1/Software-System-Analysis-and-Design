@@ -479,6 +479,10 @@ export default {
     },
     authen(value){
       var _this = this
+      console.log('token is '+sessionStorage.getItem("token"))
+      console.log('userID is '+sessionStorage.getItem("userID"))
+      console.log('objID is '+_this.scholar_id)
+      console.log("email is "+value)
       this.$api.application.create({
         token: sessionStorage.getItem("token"),
         userID: sessionStorage.getItem("userID"),
@@ -486,6 +490,7 @@ export default {
         flag: 1,
         email: value
       }).then(res => {
+        console.log(res);
         if (res.code === "200"){
           _this.$message({
             type: "success",
@@ -619,7 +624,9 @@ export default {
       console.log("第一作者文章：" + this.result_list_first)
     },
     loadInfo(){
+      
       var _this = this
+      console.log("scholar id is"+this.scholar_id);
       this.$api.scholar.getInfo({
         scholar_id: _this.scholar_id,
         user_id: sessionStorage.getItem("userID") === null ? -1 : sessionStorage.getItem("userID")
