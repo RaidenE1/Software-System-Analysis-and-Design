@@ -57,7 +57,7 @@ public class ES_Document {
     private String origin;
     @Field(analyzer = "ik_smart", type = FieldType.Integer)//link
     private Integer views;
-
+    @Field(analyzer = "ik_smart", type = FieldType.Keyword)
     private String time;
     private boolean is_favor=false;
 

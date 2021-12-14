@@ -171,11 +171,18 @@ public class AcademicController {
         Data data = new Data();
         String searchWords1 = searchWords.getSearchWords();
         String title = searchWords.getTitle();
+        System.out.print("title : " + title);
         String keywords = searchWords.getKeyWords();
+        System.out.print("key : " + keywords);
         String startYear = searchWords.getStartTime();
+        System.out.print("start : " + startYear);
         String endYear = searchWords.getEndTime();
+        System.out.print("end : " + endYear);
         String experts = searchWords.getExperts();
+        System.out.print("experts : " + experts);
         String origin = searchWords.getOrigin();
+        System.out.print("origin : " + origin);
+        System.out.print("sort : " + sort);
         int i=0;
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
 //        System.out.println(searchWords.toString());

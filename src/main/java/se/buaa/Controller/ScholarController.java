@@ -159,7 +159,8 @@ public class ScholarController {
     public Result getScholarInfo(@RequestParam(value = "scholar_id") String scholar_id
                                     , @RequestParam(value = "user_id") String user_id) {
         Expert expert = expertRepository.findByExpertID(scholar_id);
-
+        System.out.println(scholar_id);
+        System.out.println(expert);
         // 错误处理，类型码在 ErrorConfig.xml 文件中，类型码要和创建的 Exception 类关联
         // Exception 类的创建方法详见 ScholarException
         if (expert == null) return Result.Error(new ScholarException("00"));
@@ -170,7 +171,10 @@ public class ScholarController {
         scholarInfo.volume = expert.getViews();
         scholarInfo.scholar_id = expert.getExpertID();
         scholarInfo.affiliate = expert.getOrg();
-        scholarInfo.isVerified = expert.getIsVerified() == 1;
+        scholarInfo.isVerified = false;
+        if(expert.getIsVerified() != null && expert.getIsVerified() == 1){
+            scholarInfo.isVerified = true;
+        }
 
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher("expertid", ExampleMatcher.GenericPropertyMatcher::exact)

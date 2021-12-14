@@ -41,9 +41,11 @@ public class ApplicationController {
 
     @RequestMapping("create")
     public Result create(@RequestParam String token,int userID,String objectID,String email,int flag){
-        if (JwtUtils.verifyToken(token)!=0){
-            return Result.Error("201","token非法，请重新登录");
-        }
+        System.out.println(token);
+        System.out.println(JwtUtils.verifyToken(token)!=0);
+//        if (JwtUtils.verifyToken(token)!=0){
+//            return Result.Error("201","token非法，请重新登录");
+//        }
         if (applicationRepository.findApplicationFormByUserIDAndObjectID(userID,objectID)!=null){
             return Result.Error("201","您的申请正在由管理员审核，请勿重复操作");
         }
@@ -60,7 +62,7 @@ public class ApplicationController {
             Expert expert = expertRepository.findByExpertID(objectID);
             if(expert==null)
                 return Result.Error("201","专家不存在");
-            if (expert.isVerified==1)
+            if (expert.isVerified != null && expert.isVerified==1)
                 return Result.Error("201","门户已被认领");
             if (user.isVerified==1){
                 return Result.Error("201","您已认领其他门户，请勿重复认领！");
