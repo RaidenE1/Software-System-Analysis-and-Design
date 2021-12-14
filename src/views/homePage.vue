@@ -69,7 +69,7 @@
         </el-row>
         <el-row class="top_card" :gutter="10">
           <el-col :span="6" v-for="o in this.swList" :key="o.index">
-            <el-card class="card" shadow="always" @click="goFastSearch(o.searchWords)">{{o.searchWords}}</el-card>
+            <el-card class="card" shadow="always" @click.native="goFastSearch(o.searchWords)">{{o.searchWords}}</el-card>
           </el-col>
         </el-row>
       </div>
