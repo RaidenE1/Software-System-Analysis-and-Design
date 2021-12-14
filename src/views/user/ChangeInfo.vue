@@ -98,6 +98,7 @@ export default {
             }).then(res => {
                 if (Number(res.code) === 200) {
                     _this.$message.success("修改头像成功");
+                    sessionStorage.setItem("userAvatar",this.perInfo.url)
                 } else {
                     _this.$message.error(res.msg);
                 }
