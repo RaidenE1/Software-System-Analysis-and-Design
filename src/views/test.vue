@@ -1,11 +1,11 @@
 <template>
-  <Header>
-
-  </Header>
+  <div>
+    <input value="3">
+    ????
+  </div>
 </template>
 
 <script>
-import Header from '@/components/header.vue';
 
 export default {
   name: "test",
@@ -15,16 +15,9 @@ export default {
     }
   },
   components: {
-    Header
   },
 }
 </script>
 
 <style scoped>
-  .head {
-    //margin: -10px;
-    //padding: 0;
-    //width: 100%;
-    //height: 100%;
-  }
 </style>

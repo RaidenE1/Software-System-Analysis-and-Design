@@ -50,5 +50,16 @@ export default {
 </script>
 
 <style>
-
+.singlehistory{
+     border: 1px solid #99CCFF;
+    margin-top:2px;
+    margin-bottom:2px;
+    padding: 5px;
+    background-color: #ffffff;
+}
+.singlehistory:hover{
+    background-color:#e0e0e0;
+    box-shadow: 1px 2px 3px rgba(48,48,48,0.6);
+    transition:box-shadow .2s,background-color .2s;
+}
 </style>
