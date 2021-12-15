@@ -30,8 +30,12 @@ export default {
     methods: {
         delHistory(h_id, event) {
             console.log(h_id);
-            this.$message('删除成功');
-            
+            this.$message({
+                message: '删除成功',
+                type: 'success',
+                offset: 100,
+            });
+
             this.$parent.$parent.delHistory(h_id);
             event.stopPropagation();
         },

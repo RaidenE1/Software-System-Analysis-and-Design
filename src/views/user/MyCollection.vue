@@ -53,7 +53,11 @@ export default {
             if (Number(res.code) === 200) {
                 _this.collection_list = res.data;
             } else {
-                _this.$message.error(res.msg);
+                this.message({
+                    message: res.msg,
+                    type: 'error',
+                    offset: 100,
+                });
             }
         })
     },
@@ -71,7 +75,11 @@ export default {
                 token: sessionStorage.getItem("token")
             }).then(res => {
                 if (Number(res.code) === 200) {
-                    _this.$message("取消收藏成功");
+                    this.message({
+                        message: "取消收藏成功",
+                        type: 'success',
+                        offset: 100,
+                    });
                     _this.collection_list.splice(index, 1);
                 }
             })

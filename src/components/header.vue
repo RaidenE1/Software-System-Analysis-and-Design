@@ -339,7 +339,11 @@ export default {
                 if (res.code == 200) {
                     this.getAllMessage()
                 } else {
-                    this.$message.error(res.msg);
+                    this.$message({
+                        message: res.msg,
+                        type: 'error',
+                        offset: 100,
+                    });
                 }
             })
 
@@ -352,7 +356,11 @@ export default {
                 if (res.code == 200) {
                     this.getAllMessage()
                 } else {
-                    this.$message.error(res.msg);
+                    this.$message({
+                        message: res.msg,
+                        type: 'error',
+                        offset: 100,
+                    });
                 }
             })
         },
@@ -435,10 +443,11 @@ export default {
                     _this.msgNum = _this.msgList.length;
                     console.log(_this.read_msgList)
                 } else {
-                    // _this.$message({
-                    //   message: res.msg,
-                    //   type: "error"
-                    // })
+                    this.$message({
+                        message: res.msg,
+                        type: "error",
+                        offset: 100,
+                    })
                 }
             })
         }
@@ -572,10 +581,10 @@ export default {
     color: white;
     font-weight: 400;
     font-size: 14px;
-    margin-top:5px;
+    margin-top: 5px;
     margin-right: 10px;
-    height:35px;
-    line-height:14px;
+    height: 35px;
+    line-height: 14px;
 }
 
 .r_con_login:hover {

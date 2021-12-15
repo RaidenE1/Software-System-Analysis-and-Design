@@ -47,9 +47,13 @@ export default {
                 _this.perInfo.email = res.data.email;
                 _this.perInfo.phoneNum = res.data.phoneNum;
                 _this.perInfo.url = res.data.url;
-                sessionStorage.setItem("userAvatar",_this.perInfo.url);
+                sessionStorage.setItem("userAvatar", _this.perInfo.url);
             } else {
-                _this.$message.error(res.msg);
+                this.message({
+                    message: res.msg,
+                    type: 'error',
+                    offset: 100,
+                });
             }
         })
     },
@@ -77,9 +81,17 @@ export default {
                 url: _this.perInfo.url
             }).then(res => {
                 if (Number(res.code) === 200) {
-                    _this.$message.success("修改头像成功");
+                    this.$message({
+                        message: "修改头像成功",
+                        type: 'success',
+                        offset: 100,
+                    });
                 } else {
-                    _this.$message.error(res.msg);
+                    this.$message({
+                        message: res.msg,
+                        type: 'error',
+                        offset: 100,
+                    });
                 }
             })
         },
@@ -88,10 +100,18 @@ export default {
             const isLt2M = file.size / 1024 / 1024 < 2;
 
             if (!isJPG) {
-                this.$message.error('上传头像图片只能是 JPG 格式!');
+                this.$message({
+                    message: '上传头像图片只能是 JPG 格式!',
+                    type: 'error',
+                    offset: 100,
+                });
             }
             if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2MB!');
+                this.$message({
+                    message: '上传头像图片大小不能超过 2MB!',
+                    type: 'error',
+                    offset: 100,
+                });
             }
             return isJPG && isLt2M;
         },

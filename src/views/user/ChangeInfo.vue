@@ -37,9 +37,9 @@
                         <el-input type="textarea" v-model="perInfo.introduction" :rows="4"></el-input>
                     </el-form-item>
                 </el-form>
-                
-                <el-button type="primary"  @click="preserveInfo">保&#12288;存</el-button>
-                
+
+                <el-button type="primary" @click="preserveInfo">保&#12288;存</el-button>
+
             </div>
             <div class="returnbutton">
                 <el-button @click="returnback" type="text">
@@ -71,7 +71,11 @@ export default {
                 _this.perInfo.phoneNum = res.data.phoneNum;
                 _this.perInfo.url = res.data.url;
             } else {
-                _this.$message.error(res.msg);
+                this.message({
+                    message: res.msg,
+                    type: 'error',
+                    offset: 100,
+                });
             }
         })
     },
@@ -97,10 +101,18 @@ export default {
                 url: _this.perInfo.url
             }).then(res => {
                 if (Number(res.code) === 200) {
-                    _this.$message.success("修改头像成功");
-                    sessionStorage.setItem("userAvatar",this.perInfo.url)
+                    this.message({
+                        message: "修改头像成功",
+                        type: 'success',
+                        offset: 100,
+                    });
+                    sessionStorage.setItem("userAvatar", this.perInfo.url)
                 } else {
-                    _this.$message.error(res.msg);
+                    this.message({
+                        message: res.msg,
+                        type: 'error',
+                        offset: 100,
+                    });
                 }
             })
         },
@@ -109,10 +121,18 @@ export default {
             const isLt2M = file.size / 1024 / 1024 < 2;
 
             if (!isJPG) {
-                this.$message.error('上传头像图片只能是 JPG 格式!');
+                this.$message({
+                    message: '上传头像图片只能是 JPG 格式!',
+                    type: 'error',
+                    offset: 100,
+                });
             }
             if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2MB!');
+                this.$message({
+                    message: '上传头像图片大小不能超过 2MB!',
+                    type: 'error',
+                    offset: 100,
+                });
             }
             return isJPG && isLt2M;
         },
@@ -122,17 +142,20 @@ export default {
             if (!this.perInfo.realName || !this.perInfo.email || !this.perInfo.phoneNum) {
                 this.$message({
                     message: '信息不能为空',
-                    type: 'warning'
+                    type: 'warning',
+                    offset: 100,
                 });
             } else if (!emailPattern.test(this.perInfo.email)) {
                 this.$message({
                     message: '请输入正确的邮箱',
-                    type: 'warning'
+                    type: 'warning',
+                    offset: 100,
                 });
             } else if (!phoneNumPattern.test(this.perInfo.phoneNum)) {
                 this.$message({
                     message: '请输入正确的电话号码',
-                    type: 'warning'
+                    type: 'warning',
+                    offset: 100,
                 });
             } else {
                 var _this = this
@@ -144,16 +167,26 @@ export default {
                     phoneNum: _this.perInfo.phoneNum
                 }).then(res => {
                     if (Number(res.code) === 200) {
-                        _this.$message.success("信息修改成功");
+                        this.message({
+                            message: "信息修改成功",
+                            type: 'success',
+                            offset: 100,
+                        });
                     } else {
-                        _this.$message.error(res.msg);
+                        this.message({
+                            message: res.msg,
+                            type: 'error',
+                            offset: 100,
+                        });
                     }
                 })
             }
         },
-        
+
         returnback() {
-            this.$router.push({ path:'/myAchievement'})
+            this.$router.push({
+                path: '/myAchievement'
+            })
         }
     }
 }
@@ -162,13 +195,14 @@ export default {
 <style lang="scss">
 .allcontainer {
     text-align: center;
-    margin-top:130px;
-    }
+    margin-top: 130px;
+}
+
 .allcontent {
     border: 1px solid #e0e0e0;
-            width: 1000px;
-            margin: 0 auto;
-            background: #ffffff;
+    width: 1000px;
+    margin: 0 auto;
+    background: #ffffff;
     padding-top: 50px;
     padding-bottom: 50px;
     display: flex;
@@ -214,7 +248,7 @@ export default {
 
                 span {
                     line-height: 100px;
-                    font-size:18px;
+                    font-size: 18px;
                 }
             }
         }
@@ -222,8 +256,9 @@ export default {
 
     .formcontainer {
         margin-left: 60px;
-        width:560px;
+        width: 560px;
         text-align: center;
+
         .el-form-item__label {
             font-size: 18px;
             font-weight: 600;
@@ -236,26 +271,28 @@ export default {
             font-size: 18px;
             white-space: nowrap;
             text-align: left;
-            width:400px;
+            width: 400px;
         }
 
         .el-form-item__content::before {
             content: " ";
-            width:20px;
+            width: 20px;
             font-weight: 600;
             display: inline-block;
             margin-right: 10px;
         }
+
         .el-button {
-            width:120px;
-            height:44px;
-            margin:0 auto;
-            font-size:20px;
+            width: 120px;
+            height: 44px;
+            margin: 0 auto;
+            font-size: 20px;
         }
     }
-    .returnbutton{
-        margin-left:85px;
-        margin-top:-45px;
+
+    .returnbutton {
+        margin-left: 85px;
+        margin-top: -45px;
     }
 }
 

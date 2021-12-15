@@ -63,9 +63,9 @@ export default {
         infinityscroll
     },
     mounted() {
-       this.history_list = JSON.parse(localStorage.getItem(sessionStorage.getItem("userID")));
-        if (this.history_list==null){
-            this.history_list=[];
+        this.history_list = JSON.parse(localStorage.getItem(sessionStorage.getItem("userID")));
+        if (this.history_list == null) {
+            this.history_list = [];
         }
         console.log(this.history_list);
     },
@@ -74,39 +74,43 @@ export default {
             current_page: 1,
             page_size: 15,
             focus: '',
-           history_list:[],
-          /* history_list: [{
-                    id: 1,
-                    title: "title1",
-                    time: "2020.12.5",
-                    h_id: 1,
-                },
-                {
-                    id: 2,
-                    title: "title2",
-                    time: "2020.12.4",
-                    h_id:2,
-                },
-                {
-                    id: 3,
-                    title: "title3",
-                    time: "2020.12.3",
-                    h_id:3,
-                },
-                {
-                    id: 4,
-                    title: "title4",
-                    time: "2020.12.2",
-                    h_id:4,
-                }
-            ]*/
+            history_list: [],
+            /* history_list: [{
+                      id: 1,
+                      title: "title1",
+                      time: "2020.12.5",
+                      h_id: 1,
+                  },
+                  {
+                      id: 2,
+                      title: "title2",
+                      time: "2020.12.4",
+                      h_id:2,
+                  },
+                  {
+                      id: 3,
+                      title: "title3",
+                      time: "2020.12.3",
+                      h_id:3,
+                  },
+                  {
+                      id: 4,
+                      title: "title4",
+                      time: "2020.12.2",
+                      h_id:4,
+                  }
+              ]*/
         };
     },
     methods: {
         delHistory(h_id) {
-            this.$message('删除成功');
-            for(var i=0;i<this.history_list.length;i++){
-                if(this.history_list[i].h_id==h_id){
+            this.$message({
+                message: '删除成功',
+                type: 'success',
+                offset: 100,
+            });
+            for (var i = 0; i < this.history_list.length; i++) {
+                if (this.history_list[i].h_id == h_id) {
                     this.history_list.splice(i, 1);
                     break;
                 }

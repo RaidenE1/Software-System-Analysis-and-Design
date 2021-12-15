@@ -46,26 +46,31 @@ export default {
                 _this.follow = res.data;
                 console.log(res.data);
             } else {
-                _this.$message.error(res.msg);
+                this.message({
+                    message: res.msg,
+                    type: 'error',
+                    offset: 100,
+                });
             }
         })
     },
     data() {
         return {
-            follow: [/*{
-                    expertId: '1111',
-                    name: 'ggg',
-                    
-                },
-                {
-                    expertId: '1222',
-                    name: 'fff',
-                }*/
+            follow: [
+                /*{
+                                    expertId: '1111',
+                                    name: 'ggg',
+
+                                },
+                                {
+                                    expertId: '1222',
+                                    name: 'fff',
+                                }*/
             ],
         };
     },
     methods: {
-       
+
     }
 }
 </script>

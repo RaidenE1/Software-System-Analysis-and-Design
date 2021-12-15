@@ -20,7 +20,7 @@ export default {
     data() {
         return {
             circleUrl: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
-            is_subscribe:true,
+            is_subscribe: true,
         }
     },
     props: {
@@ -42,22 +42,26 @@ export default {
     //         }
     //     }
     // },
-    methods:{
+    methods: {
         cancelFollow(event) {
             event.stopPropagation();
             var _this = this
             this.$api.scholar.focusScholar({
-                scholar_id: _this.show_info.expertId,
-                user_id: sessionStorage.getItem("userID")
-            }).then(res => {
-                if (Number(res.code) === 200) {
-                    _this.$message("取消关注成功");
-                    // _this.follow_list.splice(index, 1);
-                }
-            })
-            .catch(error =>{
-                console.log(error)
-            })
+                    scholar_id: _this.show_info.expertId,
+                    user_id: sessionStorage.getItem("userID")
+                }).then(res => {
+                    if (Number(res.code) === 200) {
+                        this.message({
+                            message: "取消关注成功",
+                            type: 'success',
+                            offset: 100,
+                        });
+                        // _this.follow_list.splice(index, 1);
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
         },
         goScholar() {
             this.$router.push({
@@ -74,16 +78,18 @@ export default {
 
 <style lang="scss" scoped>
 #person {
-    margin-top:2px;
+    margin-top: 2px;
     margin-bottom: 2px;
     border: 1px solid #99CCFF;
     padding-bottom: 5px;
-    &content{
+
+    &content {
         margin-top: 10px;
     }
 }
+
 #person:hover {
-    box-shadow: 1px 2px 3px rgba(48,48,48,0.6);
-    transition:box-shadow .2s;
+    box-shadow: 1px 2px 3px rgba(48, 48, 48, 0.6);
+    transition: box-shadow .2s;
 }
 </style>

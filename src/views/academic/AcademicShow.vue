@@ -334,15 +334,24 @@ export default {
                 if (res.code == 200) {
                     this.$message({
                         message: '收藏成功',
-                        type: 'success'
+                        type: 'success',
+                        offset: 100,
                     });
                     vue.academic.is_favor = true;
                 } else {
-                    this.$message.error(res.msg)
+                    this.$message({
+                        message: res.msg,
+                        type: 'error',
+                        offset: 100,
+                    })
                 }
 
             }).catch(err => {
-                this.$message.error("请先登录")
+                this.$message({
+                    message: "请先登录",
+                    type: 'error',
+                    offset: 100,
+                })
                 console.log(err)
             })
         },
@@ -356,26 +365,36 @@ export default {
                 if (res.code == 200) {
                     this.$message({
                         message: '取消收藏成功',
-                        type: 'success'
+                        type: 'success',
+                        offset: 100,
                     });
                     vue.academic.is_favor = false;
                 } else {
                     this.$message.error(res.msg)
                 }
             }).catch(err => {
-                this.$message.error("请先登录")
+                this.$message({
+                    message: "请先登录",
+                    type: 'error',
+                    offset: 100,
+                })
                 console.log(err)
             })
         },
         copySuccess() {
             this.$message({
                 message: '复制成功',
-                type: 'success'
+                type: 'success',
+                offset: 100,
             });
             this.sharedialogVisible = false;
         },
         copyError() {
-            this.$message.error('您的浏览器不支持该功能，请自行复制链接内容');
+            this.$message({
+                message: '您的浏览器不支持该功能，请自行复制链接内容',
+                type: 'info',
+                offset: 100,
+            });
         },
         claimSubmit() {
             let vue = this;
@@ -388,11 +407,16 @@ export default {
                 email: vue.email
             }).then(res => {
                 if (res.code !== "200") {
-                    this.$message.error(res.msg);
+                    this.$message({
+                        message: res.msg,
+                        type: 'error',
+                        offset: 100,
+                    });
                 } else {
                     this.$message({
                         message: '认领申请成功',
-                        type: 'success'
+                        type: 'success',
+                        offset: 100,
                     });
                 }
             }).catch(err => {
@@ -467,7 +491,7 @@ export default {
                             localStorage.setItem(userID, JSON.stringify(history));
                         } else {
                             console.log(history)
-                            var hid = history[history.length-1].h_id + 1;
+                            var hid = history[history.length - 1].h_id + 1;
                             history.push({
                                 id: vue.academicID,
                                 title: vue.academic.title,
@@ -480,13 +504,22 @@ export default {
 
                     this.getRelation();
                 } else {
-                    this.$message.error("文章不存在或已被删除")
+                    this.$message({
+                        message: "文章不存在或已被删除",
+                        type: 'error',
+                        
+                        offset: 100,
+                    })
                     this.$router.replace('/404')
                 }
             }
         ).catch(err => {
             console.log(err)
-            this.$message.error("文章不存在或已被删除")
+            this.$message({
+                message: "文章不存在或已被删除",
+                type: 'error',
+                offset: 100,
+            })
             this.$router.replace('/404')
         })
     }

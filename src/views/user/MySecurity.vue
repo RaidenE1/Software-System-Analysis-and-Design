@@ -66,27 +66,36 @@ export default {
             if (!this.perInfo.oldPasswd || !this.perInfo.passwd1) {
                 this.$message({
                     message: '密码不能为空',
-                    type: 'warning'
+                    type: 'warning',
+                    offset: 100,
                 });
             } else if (this.perInfo.passwd1 !== this.perInfo.passwd2) {
                 this.$message({
                     message: '两次密码不一致，请重新输入',
-                    type: 'warning'
+                    type: 'warning',
+                    offset: 100,
                 });
             } else {
                 var encryptionPasswd1 = this.$md5(this.perInfo.oldPasswd)
                 var encryptionPasswd2 = this.$md5(this.perInfo.passwd1)
-                var _this = this
                 this.$api.user.changePasswd({
                     userID: sessionStorage.getItem("userID"),
                     oldPasswd: encryptionPasswd1,
                     newPasswd: encryptionPasswd2
                 }).then(res => {
                     if (Number(res.code) === 200) {
-                        _this.$message.success("密码修改成功");
+                        this.message({
+                            message: "密码修改成功",
+                            type: 'success',
+                            offset: 100,
+                        });
                         this.activeName = '';
                     } else {
-                        _this.$message.error(res.msg);
+                        this.message({
+                            message: res.msg,
+                            type: 'error',
+                            offset: 100,
+                        });
                     }
                 })
             }
@@ -123,12 +132,13 @@ export default {
         display: inline-block;
         margin-right: 10px;
     }
+
     .savebutton {
-    width: 120px;
-    height: 44px;
-    margin: 0 auto;
-    font-size: 20px;
-}
+        width: 120px;
+        height: 44px;
+        margin: 0 auto;
+        font-size: 20px;
+    }
 
 }
 
