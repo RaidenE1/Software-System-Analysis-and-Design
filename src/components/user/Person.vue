@@ -51,7 +51,7 @@ export default {
                     user_id: sessionStorage.getItem("userID")
                 }).then(res => {
                     if (Number(res.code) === 200) {
-                        this.message({
+                        this.$message({
                             message: "取消关注成功",
                             type: 'success',
                             offset: 100,

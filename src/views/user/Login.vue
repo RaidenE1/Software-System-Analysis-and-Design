@@ -60,7 +60,7 @@ export default {
                     sessionStorage.setItem("is_admin", res.data.is_admin);
                     _this.$router.push("/");
                 } else {
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: 'error',
                         offset: 100,

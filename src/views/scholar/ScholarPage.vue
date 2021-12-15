@@ -483,20 +483,20 @@ export default {
                 if (res.code === "200") {
                     _this.scholar_info.isFocus = res.data
                     if (_this.scholar_info.isFocus) {
-                        this.message({
+                        this.$message({
                             message: "成功关注该门户！",
                             type: "success",
                             offset: 100,
                         })
                     } else {
-                        this.message({
+                        this.$message({
                             message: "成功取消关注该门户！",
                             type: "success",
                             offset: 100,
                         })
                     }
                 } else {
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: 'error',
                         offset: 100,
@@ -561,7 +561,7 @@ export default {
                     _this.has_result = false;
                 } else {
                     _this.has_result = false;
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: "error",
                         offset: 100,
@@ -618,7 +618,7 @@ export default {
                     // this.loadCoAuthorsList()
                     this.loadCoAffList()
                 } else {
-                    this.message({
+                    this.$message({
                         message: res.message,
                         type: "error",
                         offset: 100,
@@ -677,7 +677,7 @@ export default {
                     _this.has_result = false;
                 } else {
                     _this.has_result = false;
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: "error",
                         offset: 100,
@@ -737,7 +737,7 @@ export default {
                         // }
                     }
                 } else {
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: "error",
                         offset: 100,
@@ -759,7 +759,7 @@ export default {
                         _this.has_co_aff = true;
                     }
                 } else {
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: "error",
                         offset: 100,

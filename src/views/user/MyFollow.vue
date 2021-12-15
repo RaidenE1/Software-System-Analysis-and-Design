@@ -46,7 +46,7 @@ export default {
                 _this.follow = res.data;
                 console.log(res.data);
             } else {
-                this.message({
+                this.$message({
                     message: res.msg,
                     type: 'error',
                     offset: 100,

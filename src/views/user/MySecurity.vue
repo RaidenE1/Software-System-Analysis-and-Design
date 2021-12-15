@@ -84,14 +84,14 @@ export default {
                     newPasswd: encryptionPasswd2
                 }).then(res => {
                     if (Number(res.code) === 200) {
-                        this.message({
+                        this.$message({
                             message: "密码修改成功",
                             type: 'success',
                             offset: 100,
                         });
                         this.activeName = '';
                     } else {
-                        this.message({
+                        this.$message({
                             message: res.msg,
                             type: 'error',
                             offset: 100,

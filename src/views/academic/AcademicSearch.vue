@@ -340,7 +340,7 @@ export default {
                     _this.has_result = false
                 } else {
                     _this.has_result = false
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: "error",
                         offset: 100,
@@ -369,7 +369,7 @@ export default {
                 if (res.code === "200") {
                     _this.hot_source = res.data.result_list
                 } else {
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: "error",
                         offset: 100,
@@ -414,7 +414,7 @@ export default {
                     _this.has_result = false
                 } else {
                     _this.has_result = false
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: "error",
                         offset: 100,
@@ -446,7 +446,7 @@ export default {
                     _this.has_result = false
                 } else {
                     _this.has_result = false
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: "error",
                         offset: 100,
@@ -479,7 +479,7 @@ export default {
                         _this.has_result = false
                     } else {
                         _this.has_result = false
-                        this.message({
+                        this.$message({
                             message: res.msg,
                             type: "error",
                             offset: 100,

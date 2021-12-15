@@ -49,7 +49,7 @@ export default {
                 _this.perInfo.url = res.data.url;
                 sessionStorage.setItem("userAvatar", _this.perInfo.url);
             } else {
-                this.message({
+                this.$message({
                     message: res.msg,
                     type: 'error',
                     offset: 100,

@@ -53,7 +53,7 @@ export default {
             if (Number(res.code) === 200) {
                 _this.collection_list = res.data;
             } else {
-                this.message({
+                this.$message({
                     message: res.msg,
                     type: 'error',
                     offset: 100,
@@ -75,7 +75,7 @@ export default {
                 token: sessionStorage.getItem("token")
             }).then(res => {
                 if (Number(res.code) === 200) {
-                    this.message({
+                    this.$message({
                         message: "取消收藏成功",
                         type: 'success',
                         offset: 100,

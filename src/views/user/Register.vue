@@ -109,14 +109,14 @@ export default {
                     if (Number(res.code) === 200) {
                         sessionStorage.setItem("userName", _this.RegisterForm.userName);
                         sessionStorage.setItem("userID", res.data.userID);
-                        this.message({
+                        this.$message({
                             message: "注册成功",
                             type: 'success',
                             offset: 100,
                         });
                         _this.$router.push("/login");
                     } else {
-                        this.message({
+                        this.$message({
                             message: res.msg,
                             type: 'error',
                             offset: 100,
@@ -143,13 +143,13 @@ export default {
                         if (Number(res.code) === 200) {
                             _this.verification = res.data.verification
                             //console.log(_this.verification)
-                            this.message({
+                            this.$message({
                                 message: '已发送',
                                 type: 'success',
                                 offset: 100,
                             });
                         } else {
-                            this.message({
+                            this.$message({
                                 message: "发送失败",
                                 type: 'error',
                                 offset: 100,

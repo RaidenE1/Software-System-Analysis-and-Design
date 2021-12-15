@@ -254,7 +254,7 @@ export default {
           // console.log(_this.result_list[i].time)
         }
       }else {
-        // this.message({
+        // this.$message({
         //   message: res.msg,
         //   type: "error"
         // })
@@ -269,7 +269,7 @@ export default {
         _this.hotKeywords = res.data.slice(0, 10);
         console.log(res.data)
       }else {
-        // this.message({
+        // this.$message({
         //   message: res.msg,
         //   type: "error"
         // })

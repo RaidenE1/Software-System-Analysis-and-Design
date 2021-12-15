@@ -68,7 +68,7 @@ export default {
                 _this.perInfo.phoneNum = res.data.phoneNum;
                 _this.perInfo.url = res.data.url;
             } else {
-                this.message({
+                this.$message({
                     message: res.msg,
                     type: 'error',
                     offset: 100,

@@ -71,7 +71,7 @@ export default {
                 _this.perInfo.phoneNum = res.data.phoneNum;
                 _this.perInfo.url = res.data.url;
             } else {
-                this.message({
+                this.$message({
                     message: res.msg,
                     type: 'error',
                     offset: 100,
@@ -101,14 +101,14 @@ export default {
                 url: _this.perInfo.url
             }).then(res => {
                 if (Number(res.code) === 200) {
-                    this.message({
+                    this.$message({
                         message: "修改头像成功",
                         type: 'success',
                         offset: 100,
                     });
                     sessionStorage.setItem("userAvatar", this.perInfo.url)
                 } else {
-                    this.message({
+                    this.$message({
                         message: res.msg,
                         type: 'error',
                         offset: 100,
@@ -167,13 +167,13 @@ export default {
                     phoneNum: _this.perInfo.phoneNum
                 }).then(res => {
                     if (Number(res.code) === 200) {
-                        this.message({
+                        this.$message({
                             message: "信息修改成功",
                             type: 'success',
                             offset: 100,
                         });
                     } else {
-                        this.message({
+                        this.$message({
                             message: res.msg,
                             type: 'error',
                             offset: 100,
