@@ -1,7 +1,7 @@
 <template>
 <div class="full">
     <el-menu router :default-active="$route.path" class="el-menu-demo" mode="horizontal">
-        <el-menu-item style="font-weight: bold">Hui Ke</el-menu-item>
+        <el-menu-item style="font-weight: bold" @click="goHome()">Hui Ke</el-menu-item>
     </el-menu>
     <el-form class="Register-container" label-position="left" label-width="80px" v-loading="loading">
         <h3 class="Register_title">注册</h3>
@@ -169,7 +169,10 @@ export default {
                     }, 1000)
                 }
             }
-        }
+        },
+        goHome() {
+            this.$router.push('/');
+        },
     }
 }
 </script>
