@@ -14,7 +14,6 @@ package se.buaa.Controller;
 //500 （internal server error）- 通用错误响应
 //503 （Service Unavailable）- 服务当前无法处理请求
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.BeanUtils;
@@ -32,7 +31,6 @@ import se.buaa.Dao.ES_KeywordDao;
 import se.buaa.Entity.Collection;
 import se.buaa.Entity.CollectionKey;
 import se.buaa.Entity.Data.Data;
-import se.buaa.Entity.Data.SearchResultData;
 import se.buaa.Entity.Document;
 import se.buaa.Entity.ESDocument.ES_Document;
 import se.buaa.Entity.ESDocument.ES_Expert;

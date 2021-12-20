@@ -247,21 +247,28 @@ public class ScholarController {
         Data data = new Data();
         int num = 0;
         List<ES_Expert> es_expertList = new ArrayList<>();
-
         for(ES_Document es_document : es_documents){
             for(ES_Expert es_expert : es_document.getAuthors()){
-                System.out.println(es_document.getAuthors());
                 if(es_expert.getName() != null && !Pattern.matches("\\s*",es_expert.getName())
                         && !es_expert.getName().equals(name)){
                     List<ES_Expert> es_expertList1 = es_expertDao.findByName(es_expert.getName());
-                    if(es_expertList1 != null) {
+                    if(es_expertList1 != null && es_expertList1.size() != 0) {
                         ES_Expert es_expert1 = es_expertList1.get(0);
                         if(es_expert1.getCooperationNum() == 0) {
                             es_expert1.setCooperationNum((int) (Math.random() * 10));
                             es_expertDao.save(es_expert1);
                         }
-                        es_expertList.add(es_expert1);
-                        num++;
+                        boolean flag = false;
+                        for(ES_Expert _expert : es_expertList){
+                            if(_expert.getId().equals(es_expert1.getId())){
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if(flag == false){
+                            es_expertList.add(es_expert1);
+                            num++;
+                        }
                         if (num == 10) {
                             data.setExpert_list(es_expertList);
                             data.setTotal(10);

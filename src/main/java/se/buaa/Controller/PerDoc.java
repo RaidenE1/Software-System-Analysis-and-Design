@@ -17,6 +17,7 @@ import se.buaa.Repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -33,13 +34,14 @@ public class PerDoc {
     {
         List<Collection> collections=collectionRepository.findCollectionsByCollectionKey_Userid(id);
         List<CoFile> CoFileList= new ArrayList<>();
-        ES_Document tmp;
+        Optional<ES_Document> tmp;
         for(Collection collection:collections)
         {
-            tmp = es_documentDao.findByDocumentid(collection.getCollectionKey().getDocumentid());
+            tmp = es_documentDao.findById(collection.getCollectionKey().getDocumentid());
             if(tmp == null)
                 continue;
-            CoFileList.add(new CoFile(tmp.getDocumentid(),tmp.getTitle()));
+            ES_Document doc = tmp.get();
+            CoFileList.add(new CoFile(doc.getDocumentid(),doc.getTitle()));
         }
         return Result.Success(CoFileList);
     }
