@@ -57,15 +57,15 @@ export default {
     data() {
         return {
             follow: [
-                /*{
-                                    expertId: '1111',
-                                    name: 'ggg',
+                // {
+                //                     expertId: '1111',
+                //                     name: 'ggg',
 
-                                },
-                                {
-                                    expertId: '1222',
-                                    name: 'fff',
-                                }*/
+                //                 },
+                //                 {
+                //                     expertId: '1222',
+                //                     name: 'fff',
+                //                 }
             ],
         };
     },

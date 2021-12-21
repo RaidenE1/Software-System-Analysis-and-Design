@@ -5,7 +5,7 @@
 
         <el-menu-item index="/myAchievement" @click="gotoMyAchievement">
             <i class="el-icon-user"></i>
-            <div class="title">我的成果</div>
+            <div class="title">我的门户</div>
         </el-menu-item>
         <el-menu-item index="/myFollow" @click="gotoMyFollow">
             <i class="el-icon-collection-tag"></i>

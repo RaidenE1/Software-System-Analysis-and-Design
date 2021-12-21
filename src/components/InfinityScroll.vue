@@ -5,6 +5,7 @@ component:一个String，为需要无限滚动的组件的url,!!!注意，无法
 <div>
     <div v-for="i in to_show" v-bind:key="i.index">
         <component :is="used_component" :show_info="i"></component>
+        <el-divider></el-divider>
     </div>
     <div v-if="no_more" class="nomore">
         <span>没有更多了</span>
@@ -70,6 +71,10 @@ export default {
 </script>
 
 <style lang="scss">
+.el-divider{
+    margin-top:5px;
+    margin-bottom: 5px;
+}
 .nomore {
     margin-top: 30px;
     margin-bottom: 20px;
@@ -77,8 +82,8 @@ export default {
 
     span {
         line-height: 30px;
-        font-size: 24px;
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: 400;
     }
 }
 </style>

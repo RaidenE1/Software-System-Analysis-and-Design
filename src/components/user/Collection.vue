@@ -9,13 +9,13 @@
             </el-row>
             <el-row class="singletime">
                 <span>
-                    上次浏览:{{show_info.time}}
+                    发表日期:{{show_info.time}}
                 </span>
             </el-row>
         </el-col>
         <el-col :span=4>
             <div class="delbutton">
-                <el-button @click="delHistory(show_info.h_id,$event)">删除</el-button>
+                <i class="el-icon-star-on" style="font-size:25px;color:orange;cursor:pointer" @click="delCollection(show_info.id,$event)"></i>
             </div>
         </el-col>
     </el-row>
@@ -39,6 +39,12 @@ export default {
             this.$parent.$parent.delHistory(h_id);
             event.stopPropagation();
         },
+        delCollection(id,event) {
+            this.$parent.$parent.delCollection(id);
+
+            event.stopPropagation();
+        },
+
         goArticle(id) {
             this.$router.push({
                 path: "/academicShow/" + id,
@@ -50,19 +56,20 @@ export default {
 </script>
 
 <style lang="scss">
-.singlehistory{
-     /* border: 1px solid #99CCFF; */
-    margin-top:2px;
-    margin-bottom:2px;
+.singlehistory {
+    /* border: 1px solid #99CCFF; */
+    margin-top: 2px;
+    margin-bottom: 2px;
     padding: 5px;
     background-color: #ffffff;
-    width:920px;
-    margin-left:20px;
+    width: 920px;
+    margin-left: 20px;
     height: 74px;
     padding-left: 0px;
     padding-top: 3px;
     padding-bottom: 3px;
-    padding-right:0px;
+    padding-right: 0px;
+
     .singletitle {
         text-align: left;
         height: 54px;
@@ -95,14 +102,10 @@ export default {
     }
 
 }
-.singlehistory:hover{
-    background-color:#e0e0e0;
-    box-shadow: 1px 2px 3px rgba(48,48,48,0.6);
-    transition:box-shadow .2s,background-color .2s;
+
+.singlehistory:hover {
+    background-color: #e0e0e0;
+    box-shadow: 1px 2px 3px rgba(48, 48, 48, 0.6);
+    transition: box-shadow .2s, background-color .2s;
 }
-
-    
-
-    
-
 </style>

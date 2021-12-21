@@ -138,46 +138,4 @@ export default {
 <style lang="scss">
 @import "@/css/user.scss";
 
-.singlehistory {
-    border: 1px solid #99CCFF;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    height: auto;
-    padding-left: 10px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-right: 10px;
-
-    .singletitle {
-        text-align: left;
-        height: 36px;
-
-        span {
-            line-height: 36px;
-            font-size: 24px;
-        }
-    }
-
-    .singletime {
-        text-align: left;
-        height: 20px;
-
-        span {
-            font: 14px;
-            line-height: 20px;
-            color: #aeaeae;
-
-        }
-    }
-
-    .delbutton {
-        height: 56px;
-        line-height: 56px;
-
-        button {
-            width: 80%;
-        }
-    }
-
-}
 </style>

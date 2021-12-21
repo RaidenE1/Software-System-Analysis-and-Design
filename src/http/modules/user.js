@@ -89,3 +89,12 @@ export const isadmin = params => {
     params
   })
 }
+
+//获取学术成果
+export const getAchievement = params =>{
+  return axios({
+    url: '/user/myAchievement',
+    method :'get',
+    params
+  })
+}

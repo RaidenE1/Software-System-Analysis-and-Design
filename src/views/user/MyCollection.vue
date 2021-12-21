@@ -17,18 +17,8 @@
                 <span class="emptycontent">暂无收藏</span>
             </div>
             <div class="content" v-else>
-                <el-row v-for="(item,index) in collection_list" :key="index">
-                    <div>
-                        <span class="collection-dir" @click="goArticle(item.id)">
-                            <span class="subtitle">
-                                {{item.title}}
-                            </span>
-                        </span>
-                        <div class="collect-detail-right">
-                            <i class="el-icon-star-on" style="font-size:25px;color:orange;cursor:pointer" @click="delCollection(index)"></i>
-                        </div>
-                    </div>
-                </el-row>
+                <infinity-scroll :list='collection_list' :component="'./user/Collection.vue'">
+                </infinity-scroll>
             </div>
         </div>
     </div>
@@ -39,11 +29,13 @@
 import navbar from "@/components/header.vue"
 import userheader from "@/components/UserHeader.vue"
 import userinfo from "@/components/user/Information.vue"
+import InfinityScroll from '../../components/InfinityScroll.vue'
 export default {
     components: {
         navbar,
         userheader,
-        userinfo
+        userinfo,
+        InfinityScroll
     },
     mounted() {
         var _this = this
@@ -52,6 +44,7 @@ export default {
         }).then(res => {
             if (Number(res.code) === 200) {
                 _this.collection_list = res.data;
+                console.log(res)
             } else {
                 this.$message({
                     message: res.msg,
@@ -67,10 +60,9 @@ export default {
         };
     },
     methods: {
-        delCollection(index) {
-            var _this = this
+        delCollection(id) {
             this.$api.academic.favorSc({
-                document_id: _this.collection_list[index].id,
+                document_id: id,
                 user_id: sessionStorage.getItem("userID"),
                 token: sessionStorage.getItem("token")
             }).then(res => {
@@ -80,7 +72,12 @@ export default {
                         type: 'success',
                         offset: 100,
                     });
-                    _this.collection_list.splice(index, 1);
+                    for (var i = 0; i < this.collection_list.length; i++) {
+                        if (this.collection_list[i].id == id) {
+                            this.collection_list.splice(i, 1);
+                            break;
+                        }
+                    }
                 }
             })
         },

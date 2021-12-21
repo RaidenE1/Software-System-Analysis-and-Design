@@ -108,14 +108,14 @@
           if (res.code === "200"){
             _this.is_favor = res.data;
             if (_this.is_favor === true){
-              this.message({
+              this.$message({
                 message: "成功收藏该资源！",
                 type: "success",
                 offset:100,
               })
             }
             else {
-              this.message({
+              this.$message({
                 message: "成功取消收藏该资源！",
                 type: "success",
                 offset:100,
@@ -123,7 +123,7 @@
             }
 
           }else{
-            this.message({
+            this.$message({
               message: res.msg,
               type: "error",
                 offset:100,
