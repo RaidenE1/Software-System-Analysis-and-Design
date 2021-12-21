@@ -7,9 +7,9 @@
     </div>
     <!-- filter_itemList -->
     <div class="nav-list" v-if="isVisible">
-        <div class="nav-list-item is-hover" v-for="(item, index) in this.showList" :key="index" @click="clickFilter(item.content)">
-            <span>{{ item.content }}</span>
-            <span id="item-nums">( {{ item.count }} )</span>
+        <div class="nav-list-item is-hover" v-for="(item, index) in this.showList" :key="index" @click="clickFilter(item.content, item.count)">
+                <span>{{ item.content }}</span>
+                <span id="item-nums">( {{ item.count }} )</span>
         </div>
     </div>
     <!--选中某一项-->
@@ -43,9 +43,13 @@ export default {
         }
     },
     methods: {
-        clickFilter(val) {
-            console.log("点击了" + val);
-            this.$emit("getFilter", val, this.filter_item.filter_name);
+        clickFilter(content, count) {        
+            if(count=='0'){
+               window.alert("该筛选项没有结果");
+               return 
+            }
+            console.log("点击了" + content);
+            this.$emit("getFilter", content, this.filter_item.filter_name);
         },
         clickCancel() {
             console.log("取消了筛选")
