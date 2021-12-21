@@ -5,4 +5,5 @@ import se.buaa.Entity.Expert;
 
 public interface ExpertRepository extends JpaRepository<Expert,String> {
     Expert findByExpertID(String id);
+    Expert findByUserID(String id);
 }

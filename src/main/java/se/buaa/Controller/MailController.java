@@ -25,7 +25,6 @@ public class MailController {
 
     @RequestMapping("/user/sendEmail")
     public Result verifyFunc(@RequestParam String email) {
-        System.out.println(email);
         int verification = 1921;
         try {
             verification = (int) Math.round((Math.random()) * 10000);
@@ -44,4 +43,6 @@ public class MailController {
         public String verification;
 
     }
+
+
 }

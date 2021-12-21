@@ -1,14 +1,30 @@
 package se.buaa.Controller;
 
 import io.jsonwebtoken.Jwt;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.web.bind.annotation.*;
 import se.buaa.Config.JwtUtils;
+import se.buaa.Dao.ES_DocumentDao;
+import se.buaa.Entity.Data.Achievement;
 import se.buaa.Entity.Data.FollowedExpertInfo;
+import se.buaa.Entity.Data.ScholarInfo;
+import se.buaa.Entity.ESDocument.ES_Document;
+import se.buaa.Entity.Enumeration.CodeEnum;
 import se.buaa.Entity.Expert;
+import se.buaa.Entity.Relation.Document_Expert;
 import se.buaa.Entity.Response.Result;
 import se.buaa.Entity.User;
 import se.buaa.Entity.User_Expert;
+import se.buaa.Repository.Docu_ExpertRepository;
 import se.buaa.Repository.ExpertRepository;
 import se.buaa.Repository.UserRepository;
 import se.buaa.Repository.User_ExpertRepository;
@@ -28,6 +44,10 @@ public class PerInfo {
     ExpertRepository expertRepository;
     @Autowired
     User_ExpertRepository user_expertRepository;
+    @Autowired
+    Docu_ExpertRepository docu_expertRepository;
+    @Autowired
+    ES_DocumentDao es_documentDao;
 
     @RequestMapping("/user/getPerInfo")
     @ResponseBody
@@ -125,6 +145,53 @@ public class PerInfo {
         public String email;
         public String phoneNum;
         public String url;
+    }
+
+    @RequestMapping("/user/myAchievement")
+    @ResponseBody
+    public Result getAchievements(@RequestParam String userId){
+        User user = userRepository.findByUserID(Integer.valueOf(userId));
+        if(user == null || user.expertID == null){
+            return Result.Error();
+        }
+        Expert expert = expertRepository.findByExpertID(user.expertID);
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("expertid", ExampleMatcher.GenericPropertyMatcher::exact)
+                .withIgnorePaths("id").withIgnorePaths("documentid");
+        Document_Expert tmpRelation = new Document_Expert();
+        tmpRelation.setExpertID(expert.getExpertID());
+
+        ScholarInfo scholarInfo = new ScholarInfo();
+
+        scholarInfo.name = expert.getName();
+        scholarInfo.volume = expert.getViews();
+        scholarInfo.scholar_id = expert.getExpertID();
+        scholarInfo.affiliate = expert.getOrg();
+        scholarInfo.isVerified = false;
+        if(expert.getIsVerified() != null && expert.getIsVerified() == 1){
+            scholarInfo.isVerified = true;
+        }
+        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+        QueryBuilder queryBuilder = QueryBuilders.matchPhrasePrefixQuery("experts",expert.getName()).slop(0);
+        boolQueryBuilder.must(queryBuilder);
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(boolQueryBuilder)
+                .build();
+//        System.out.println(searchQuery.toString());
+        Page<ES_Document> es_documents = es_documentDao.search(searchQuery);
+        List<ES_Document> es_documentList = es_documents.toList();
+        System.out.println(es_documentList);
+
+        for (ES_Document doc : es_documentList) {
+            scholarInfo.achList.add(new Achievement(doc.getTitle(), doc.getCited_quantity(), doc.getId(), doc.getTime()));
+        }
+
+        List<User_Expert> list = user_expertRepository.findByUserIdAndExpertId(Integer.parseInt(userId), expert.getExpertID());
+
+        scholarInfo.isFocus = list.size() != 0;
+
+        return Result.Success(scholarInfo);
+
     }
 
 

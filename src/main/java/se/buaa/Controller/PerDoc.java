@@ -38,10 +38,10 @@ public class PerDoc {
         for(Collection collection:collections)
         {
             tmp = es_documentDao.findById(collection.getCollectionKey().getDocumentid());
-            if(tmp == null)
+            if(!tmp.isPresent())
                 continue;
             ES_Document doc = tmp.get();
-            CoFileList.add(new CoFile(doc.getDocumentid(),doc.getTitle()));
+            CoFileList.add(new CoFile(doc.getDocumentid(),doc.getTitle(), doc.getTime(), doc.getCited_quantity()));
         }
         return Result.Success(CoFileList);
     }
@@ -49,11 +49,16 @@ public class PerDoc {
     public class CoFile{
         public String id;
         public String title;
-        public CoFile(String tid,String ttitle)
+        public String time;
+        public Integer cite;
+        public CoFile(String tid, String ttitle, String time, Integer cite)
         {
             this.id=tid;
             this.title=ttitle;
+            this.time=time;
+            this.cite=cite;
         }
+
     }
 
 }
