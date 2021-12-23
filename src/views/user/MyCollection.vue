@@ -38,6 +38,12 @@ export default {
         InfinityScroll
     },
     mounted() {
+        if(sessionStorage.getItem("userID")==null){
+            this.$router.replace({
+                path:'/'
+            })
+            return;
+        }
         var _this = this
         this.$api.user.getCollectionList({
             userID: sessionStorage.getItem("userID")

@@ -38,6 +38,12 @@ export default {
         userinfo,
     },
     mounted() {
+        if(sessionStorage.getItem("userID")==null){
+            this.$router.replace({
+                path:'/'
+            })
+            return;
+        }
         var _this = this
         this.$api.user.getFollowList({
             userID: sessionStorage.getItem("userID")

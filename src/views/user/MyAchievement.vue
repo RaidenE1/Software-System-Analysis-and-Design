@@ -13,7 +13,10 @@
             </div>
             <el-divider>
             </el-divider>
-            <div class="expertinfo">
+            <div class="content" v-if="name==''">
+                <span class="emptycontent">未认领门户</span>
+            </div>
+            <div class="expertinfo" v-if="name!=''">
                 <div class="p-name">{{ this.name }}</div>
                 <div class="p-scholarID">
                     <div class="p-scholarID-all c-grey">
@@ -24,12 +27,9 @@
                 </div>
                 <div class="p-affiliate">{{ this.affiliate }}</div>
             </div>
-            <el-divider>
+            <el-divider v-if="name!=''">
             </el-divider>
-            <div class="content" v-if="name==''">
-                <span class="emptycontent">未认领门户</span>
-            </div>
-            <div class="content" v-else>
+            <div class="content" v-if="name!=''">
                 <div class="subtitile">
                     学术成果
                 </div>
@@ -66,16 +66,7 @@ export default {
             name: '',
             affiliate: '',
             scholar_id: '',
-            achievement: [{
-                    title: '关于一眼顶针是顶针顶不顶针的顶针证明',
-                    time: '2018-01-01',
-                    num: 1919810,
-                },
-                {
-                    title: '关于一眼顶针是顶针顶不顶针的顶针证明',
-                    time: '2018-01-01',
-                    num: 1919810,
-                }
+            achievement: [
             ],
         }
     },
@@ -90,18 +81,17 @@ export default {
                     this.affiliate = res.data.affiliate;
                     this.achievement = res.data.achList;
                     console.log(res)
-                } else {
-                    console.log(res)
-                    this.$message({
-                        message: res.msg,
-                        type: 'error',
-                        offset: 100,
-                    });
                 }
             })
         }
     },
     mounted() {
+        if(sessionStorage.getItem("userID")==null){
+            this.$router.replace({
+                path:'/'
+            })
+            return;
+        }
         this.getAchievement()
     }
 

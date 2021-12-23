@@ -35,6 +35,9 @@ export default {
     //   userinfo: Object,
     // },
     mounted() {
+        if(sessionStorage.getItem("userID")==null){
+            return;
+        }
         var _this = this
         this.$api.user.getPerInfo({
             userID: sessionStorage.getItem("userID"),

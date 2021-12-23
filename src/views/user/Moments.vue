@@ -34,6 +34,12 @@ export default {
         }
     },
     mounted() {
+        if(sessionStorage.getItem("userID")==null){
+            this.$router.replace({
+                path:'/'
+            })
+            return;
+        }
         this.load();
         window.addEventListener('scroll', this.handleScroll, true)
     },

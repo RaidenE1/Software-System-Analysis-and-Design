@@ -63,6 +63,12 @@ export default {
         infinityscroll
     },
     mounted() {
+        if(sessionStorage.getItem("userID")==null){
+            this.$router.replace({
+                path:'/'
+            })
+            return;
+        }
         this.history_list = JSON.parse(localStorage.getItem(sessionStorage.getItem("userID")));
         if (this.history_list == null) {
             this.history_list = [];

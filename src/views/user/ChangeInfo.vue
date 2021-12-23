@@ -12,9 +12,9 @@
             </div>
             <div class="formcontainer">
                 <el-form label-width="90px" id="infoform">
-                    <el-form-item label="用户名">
+                    <!-- <el-form-item label="用户名">
                         <el-input type="text" v-model="perInfo.nickName"></el-input>
-                    </el-form-item>
+                    </el-form-item> -->
                     <!-- <el-form-item label="隶属单位">
                                 <el-input type="text" v-model="user_info.organazition"></el-input>
                             </el-form-item> -->
@@ -33,9 +33,9 @@
                     <el-form-item label="电话">
                         <el-input type="text" v-model="perInfo.phoneNum" auto-complete="off"></el-input>
                     </el-form-item>
-                    <el-form-item label="个人简介">
+                    <!-- <el-form-item label="个人简介">
                         <el-input type="textarea" v-model="perInfo.introduction" :rows="4"></el-input>
-                    </el-form-item>
+                    </el-form-item> -->
                 </el-form>
 
                 <el-button type="primary" @click="preserveInfo">保&#12288;存</el-button>
@@ -60,6 +60,13 @@ export default {
         navbar,
     },
     mounted() {
+        if(sessionStorage.getItem("userID")==null){
+            this.$router.replace({
+                path:'/'
+            })
+            return;
+        }
+        
         var _this = this
         this.$api.user.getPerInfo({
             userID: sessionStorage.getItem("userID"),
