@@ -8,9 +8,9 @@
                 <div style="margin-left: 20px">
                     <!-- 热门关键词 -->
                     <div>
-                        <h4 style="margin-top: 8px; margin-bottom: 10px">热门关键词</h4>
+                        <h4 style="margin-top: 8px; margin-bottom: 10px">热门关键字</h4>
                         <el-row class="keyword_list" v-for="(o, index) in this.hot_keywords" :key="index">
-                            <el-link class="keyword" :underline="false" @click="searchWords(o)" style="line-height: 30px; font-weight: bold; font-size: 14px;"><i class="el-icon-search" style="margin-right: 5px"></i>{{ o }}</el-link>
+                            <el-link class="keyword" :underline="false" @click="searchWords(o)" style="line-height: 30px; font-weight: bold; font-size: 14px;"><i class="el-icon-search" style="margin-right: 5px"></i>{{ o.keyword }}</el-link>
                         </el-row>
                     </div>
                     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -159,7 +159,7 @@ export default {
             quotedialogVisible: false,
             sp_result: {},
             hot_keywords: [
-                '神经网络',
+                /*'神经网络',
                 '数据库',
                 'python',
                 '5G',
@@ -167,7 +167,7 @@ export default {
                 '人工智能',
                 '航天',
                 '新冠',
-                '碳中和',
+                '碳中和',*/
             ],
             hot_source: []
         }
@@ -517,6 +517,26 @@ export default {
         // 加载检索数据
         this.loadSearchSc()
         this.loadHotSource()
+        this.$api.academic.getHotKeywords({
+            code: 1
+        }).then(res => {
+            if (res.code === "200") {
+                // alert(200)
+                this.hot_keywords = res.data.slice(0, 5);
+                for(var i=0;i<this.hot_keywords.length;i++){
+                    this.hot_keywords[i].keyword=this.hot_keywords[i].keyword.split("；")[0];
+                }
+                console.log("hot keyword is:")
+                console.log(this.hot_keywords)
+                console.log(res.data)
+            } else {
+                // this.$message({
+                //   message: res.msg,
+                //   type: "error"
+                // })
+                // console.log("Request => getSearchResult : not 200");
+            }
+        })
     }
 }
 </script>
