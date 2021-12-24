@@ -108,7 +108,7 @@
                     <el-row class="keyword_list" v-for="(o, index) in this.hotKeywords" :key="index">
                         <el-image :src="require('@/assets/home_icon/Num-'+(index+1)+'.png')" class="num-icon-kw"></el-image>
                         <el-link class="keyword" :underline="false" @click="goKwSearch(o.keyword)">{{o.keyword}}</el-link>
-                        <span class="keyword_views">{{o.citedNum}}</span>
+                        <span class="keyword_views">{{o.view}}</span>
                     </el-row>
                 </div>
             </el-col>
