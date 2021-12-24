@@ -10,7 +10,7 @@
                     <div>
                         <h4 style="margin-top: 8px; margin-bottom: 10px">热门关键字</h4>
                         <el-row class="keyword_list" v-for="(o, index) in this.hot_keywords" :key="index">
-                            <el-link class="keyword" :underline="false" @click="searchWords(o)" style="line-height: 30px; font-weight: bold; font-size: 14px;"><i class="el-icon-search" style="margin-right: 5px"></i>{{ o.keyword }}</el-link>
+                            <el-link class="keyword" :underline="false" @click="searchWords(o.keyword)" style="line-height: 30px; font-weight: bold; font-size: 14px;"><i class="el-icon-search" style="margin-right: 5px"></i>{{ o.keyword }}</el-link>
                         </el-row>
                     </div>
                     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
