@@ -16,7 +16,7 @@
             <div class="content" v-if="name==''">
                 <span class="emptycontent">未认领门户</span>
             </div>
-            <div class="expertinfo" v-if="name!=''">
+            <div class="expertinfo" v-if="name!=''" @click="gotoScholar">
                 <div class="p-name">{{ this.name }}</div>
                 <div class="p-scholarID">
                     <div class="p-scholarID-all c-grey">
@@ -83,6 +83,11 @@ export default {
                     console.log(res)
                 }
             })
+        },
+        gotoScholar(){
+            this.$router.push({
+                path:'/scholarPage/'+this.scholar_id
+            })
         }
     },
     mounted() {
@@ -100,6 +105,16 @@ export default {
 
 <style lang="scss">
 @import "@/css/user.scss";
+.expertinfo{
+    height: 80px;
+    width:94%;
+    margin-left:3%;
+    padding-top:15px;
+}
+.expertinfo:hover{
+    background-color:#e0e0e0;
+    transition:background-color .2s;
+}
 
 .p-name {
     display: inline-block;
@@ -137,7 +152,7 @@ export default {
 
 .p-affiliate {
     text-align: left;
-    margin-left: 55px;
+    margin-left: 25px;
 }
 
 .c-grey {

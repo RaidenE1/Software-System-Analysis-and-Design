@@ -76,7 +76,7 @@ export default {
                 _this.perInfo.realName = res.data.realName;
                 _this.perInfo.email = res.data.email;
                 _this.perInfo.phoneNum = res.data.phoneNum;
-                _this.perInfo.url = res.data.url;
+                _this.perInfo.url = res.data.url||'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png';
             } else {
                 this.$message({
                     message: res.msg,
