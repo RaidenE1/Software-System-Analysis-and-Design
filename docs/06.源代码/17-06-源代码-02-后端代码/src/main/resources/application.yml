@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:mysql://124.70.63.71:3306/scholar?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  mail:
+    host: smtp.163.com
+    port:
+    username: buaa_tech@163.com
+    password: GAQPXBEZGFAPGBXJ
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.fallback: false
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+  main:
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8082
