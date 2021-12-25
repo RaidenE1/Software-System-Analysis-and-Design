@@ -791,6 +791,7 @@ public class AcademicController {
 //        row.add(es_keyword10);
 //        Collections.sort(row);
 //        return new Result("200", CodeEnum.success.toString(),row);
+        System.out.println(es_keywords);
         return new Result("200", CodeEnum.success.toString(),es_keywords.getContent());
     }
     public static List<Integer> getMax10Value(Map<String, Integer> map) {
