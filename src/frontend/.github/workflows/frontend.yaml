@@ -1,0 +1,40 @@
+name: GitHub Actions Build and Deploy Demo
+on:
+  push:
+    branches:
+      - frontend
+    paths-ignore:
+      - README.md
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        ref: frontend
+
+    - name: Use Node.js ${{ matrix.node-version }} 
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+    - name: Deploy  # rsync推送文件
+      uses: AEnterprise/rsync-deploy@v1.0  
+      env:
+        DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        ARGS: '-avz --delete'   # rsync参数
+        SERVER_PORT: '22'  # SSH端口
+        FOLDER: dist/*  # 文件夹，路径相对于代码仓库的根目录
+        SERVER_IP: ${{ secrets.SSH_HOST }}
+        USERNAME: root
+        SERVER_DESTINATION: ${{ secrets.SERVER_DESTINATION }}
